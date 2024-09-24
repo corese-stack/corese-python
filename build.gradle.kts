@@ -15,15 +15,15 @@ repositories {
 }
 
 dependencies {
-    api(libs.net.sf.py4j.py4j)
-    api(libs.fr.inria.corese.corese.core)
-    api(libs.jakarta.activation.jakarta.activation.api)
-    api(libs.info.picocli.picocli)
-    testImplementation(libs.junit.junit)
+    api("net.sf.py4j:py4j:0.10.9")
+    api("fr.inria.corese:corese-core:5.0.0-SNAPSHOT")
+    api("jakarta.activation:jakarta.activation-api:2.1.2")
+    api("info.picocli:picocli:4.7.5")
+    testImplementation("junit:junit:4.13.2")
 }
 
 group = "fr.inria.corese"
-version = "4.5.0"
+version = "5.0.0-SNAPSHOT"
 description = "corese-python"
 java.sourceCompatibility = JavaVersion.VERSION_11
 
