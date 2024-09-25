@@ -9,6 +9,10 @@ import getopt
 import os
 import sys
 
+# import corese-python
+sys.path.append(os.path.abspath(os.path.join(__file__,'..', '..','src')))
+from  pycorese.api import CoreseAPI
+
 
 # path to the RDF file
 data_path = os.path.abspath(os.path.join('data', 'beatles.rdf'))
@@ -30,10 +34,6 @@ bridge = 'py4j'
 for opt, arg in opts:
     if opt == '-b':
         bridge = arg
-
-# import corese-python
-sys.path.append(os.path.abspath(os.path.join(__file__,'..', '..','src')))
-from  pycorese.api import CoreseAPI
 
 corese = CoreseAPI(java_bridge=bridge)
 corese.loadCorese()
