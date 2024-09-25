@@ -26,8 +26,7 @@ def artifact2filename(artifact,
 
     filename = maven_repository.joinpath(artifact.artifact_id + "-" + artifact.version + "." + artifact.extension)
 
-    print(f"filename={filename}")
-    ######## expected "/Users/jls/.m2/repository/fr/inria/corese/corese-core/4.5.0/corese-core-4.5.0.jar"
+    #print(f"filename1={filename}")
 
     return filename
 
@@ -56,7 +55,6 @@ def package2filename(package: str,
     filename = maven_repository.joinpath(jar)
 
     print(f"filename={filename}")
-    ######## expected "/Users/jls/.m2/repository/fr/inria/corese/corese-core/4.5.0/corese-core-4.5.0.jar"
 
     return filename
 
@@ -83,7 +81,7 @@ def maven_download(package: str = 'corese-core',
 
     jar = package + "-" + version + ".jar"
     try:
-        if dl.download(artifact, filename, "md5"):
+        if dl.download(artifact, filename):
             logging.info(f"jar {jar} downloaded")
             return True
         else:

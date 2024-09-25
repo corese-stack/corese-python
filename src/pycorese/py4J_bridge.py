@@ -10,13 +10,10 @@ import logging
 
 from py4j.java_gateway import JavaGateway
 
+import pycorese.maven_tools as pmt
+
 #from . import configure_logging
 #configure_logging()
-
-_CORESE_LIBRARY_PATH = Path(resources.files(__package__))\
-                       .joinpath('jars/corese-library-python-4.5.0.jar')\
-                       .resolve()
-                       
 
 class Py4JBridge:
     """
@@ -25,27 +22,36 @@ class Py4JBridge:
     Parameters
     ----------
     corese_path : str, optional
-        Path to the Corese-Python library. Default is None. If None, use the library 
+        Path to the Corese-Python library. Default is None. If None, use the library
         downloaded during package installation.
 
     """
 
-    def __init__(self, corese_path: str|None =None):
+    def __init__(self,
+                 corese_path: str|None =None,
+                 version: str = "4.5.0"):
 
-        self.corese_path = corese_path or _CORESE_LIBRARY_PATH
+        if corese_path:
+            if not os.path.exists(self.corese_path):
+                msg = f'given CORESE library is not found at {corese_path}.'
+                loging.critical(msg)
+                raise FileNotFoundError(
+                    '\n'+msg)
 
-        self.java_gateway = None
+
+        self.corese_path = pmt.package2filename("corese-python",
+                                                version)
 
         if not os.path.exists(self.corese_path):
-            raise FileNotFoundError(
-                '\n'.join([f'CORESE library is not found at {self.corese_path}.',
-                           f'Reinstall the {__package__} package.'])
-            )
+            pmt.maven_download("corese-python",
+                               version)
+
+        self.java_gateway = None
 
         # Register exit handler
         import atexit
         _ = atexit.register(self._exit_handler)
-        
+
     def _exit_handler(self) -> None:
         if self.java_gateway is not None:
             self.java_gateway.shutdown()
@@ -66,13 +72,13 @@ class Py4JBridge:
                 java_args.extend(f'-Xmx{memory_allocation}')
 
             if True:
-                self.java_gateway = JavaGateway.launch_gateway(classpath=str(self.corese_path), 
+                self.java_gateway = JavaGateway.launch_gateway(classpath=str(self.corese_path),
                                                                javaopts=java_args,
                                                                die_on_exit=True)
-                #sleep(1.0)  
+                #sleep(1.0)
             else:
 
-                java_args.extend(['-jar', self.corese_path])    
+                java_args.extend(['-jar', self.corese_path])
                 #subprocess.Popen(['java', '-Dfile.encoding=UTF8', '-jar', self.corese_path])
                 subprocess.Popen(['java'] + java_args )
                 sleep(.0)
@@ -94,14 +100,11 @@ class Py4JBridge:
 
             self.Shacl  = self.java_gateway.jvm.fr.inria.corese.core.shacl.Shacl
             self.Loader = self.java_gateway.jvm.fr.inria.corese.core.api.Loader
-            
-            
+
+
             logging.info('Py4J: CORESE is loaded')
 
         except Exception as e:
-            logging.error('Py4J: CORESE failed to load: %s', str(e)) 
+            logging.error('Py4J: CORESE failed to load: %s', str(e))
 
         return self.java_gateway
-
-
-		
