@@ -1,15 +1,15 @@
 """Implementation of the JPype bridge to Corese API in Java."""
 
+
 import logging
 import os
 
-from importlib import resources
-from pathlib import Path
+#from pathlib import Path
 
-# Importing jpype.imports enables the functionality to import Java classes as 
+# Importing jpype.imports enables the functionality to import Java classes as
 # if they were Python modules, e.g. from fr.inria.corese.core import Graph
 # Importing all classes from jpype.types enables the functionality to use Java
-# types in Python, e.g. JArray, JClass, JBoolean, JByte, JChar, JShort, JInt, 
+# types in Python, e.g. JArray, JClass, JBoolean, JByte, JChar, JShort, JInt,
 #                       JLong, JFloat, JDouble, JString, JObject, JException
 # https://jpype.readthedocs.io/en/latest/userguide.html#importing-java-classes
 
@@ -17,13 +17,12 @@ import jpype
 import jpype.imports
 from jpype.types import *
 
+import pycorese.maven_tools as pmt
+
+
 #from . import configure_logging
 #configure_logging()
 
-
-_CORESE_LIBRARY_PATH = Path(resources.files(__package__))\
-                       .joinpath('jars/corese-core-4.5.0-jar-with-dependencies.jar')\
-                       .resolve()
 
 class JPypeBridge:
     """
@@ -32,31 +31,40 @@ class JPypeBridge:
     Parameters
     ----------
     corese_path : str, optional
-        Path to the Corese-core library. Default is None. If None, use the library 
+        Path to the Corese-core library. Default is None. If None, use the library
         downloaded during package installation.
-  
+
     """
 
-    def __init__(self, corese_path=None): 
+    def __init__(self,
+                 corese_path=None,
+                 version: str = "4.5.0"):
 
-        self.corese_path = corese_path or (_CORESE_LIBRARY_PATH)
+        if corese_path:
+            if not os.path.exists(self.corese_path):
+                msg = f'given CORESE library is not found at {corese_path}.'
+                loging.critical(msg)
+                raise FileNotFoundError(
+                    '\n'+msg)
+
+
+        self.corese_path = pmt.package2filename("corese-core",
+                                                version)
 
         if not os.path.exists(self.corese_path):
-            raise FileNotFoundError(
-                '\n'.join([f'CORESE library is not found at {self.corese_path}.',
-                           f'Reinstall the {__package__} package.'])
-            )
+            pmt.maven_download("corese-core",
+                               version)
 
         # Register exit handler
         import atexit
         _ = atexit.register(self._exit_handler)
-       
+
     def _exit_handler(self):
         jpype.shutdownJVM()
         logging.info('CORESE is stopped')
-		
+
     def loadCorese(self,  memory_allocation=None) -> jpype:
-        """Load Corese library into context of JPype."""  
+        """Load Corese library into context of JPype."""
         # NOTE: Because of lack of JVM support, you cannot shutdown the JVM and then restart it.
         # Nor can you start more than one copy of the JVM.
         # https://jpype.readthedocs.io/en/latest/install.html#known-bugs-limitations
@@ -88,11 +96,11 @@ class JPypeBridge:
 
             from fr.inria.corese.core.shacl import Shacl # type: ignore
             from fr.inria.corese.core.api import Loader # type: ignore
-            
+
             self.DataManager = DataManager
             self.CoreseGraphDataManager = CoreseGraphDataManager
             self.CoreseGraphDataManagerBuilder = CoreseGraphDataManagerBuilder
-            
+
             self.Graph = Graph
             self.Load = Load
             self.QueryProcess = QueryProcess
@@ -100,7 +108,7 @@ class JPypeBridge:
             self.RDF = RDF
             self.RuleEngine = RuleEngine
             self.Transformer = Transformer
-            
+
             self.Shacl = Shacl
             self.Loader = Loader
 
@@ -108,10 +116,7 @@ class JPypeBridge:
 
 
         except Exception as e:
-            logging.error('JPype: CORESE failed to load: %s', str(e)) 
-     
+            logging.error('JPype: CORESE failed to load: %s', str(e))
+
 
         return jpype
-    
-
-		

@@ -1,11 +1,11 @@
 """Implementation of the Py4J bridge to Corese API in Java."""
 
+
 import os
 import subprocess
 #import urllib.request
 from time import sleep
-from importlib import resources
-from pathlib import Path
+#from pathlib import Path
 import logging
 
 from py4j.java_gateway import JavaGateway
