@@ -32,7 +32,7 @@ for opt, arg in opts:
         bridge = arg
 
 # import corese-python
-sys.path.append(os.path.abspath(os.path.join('..', 'src')))
+sys.path.append(os.path.abspath(os.path.join(__file__,'..', '..','src')))
 from  pycorese.api import CoreseAPI
 
 corese = CoreseAPI(java_bridge=bridge)

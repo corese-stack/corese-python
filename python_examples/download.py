@@ -5,9 +5,13 @@
 
 
 import getopt
+import os
 import sys
-import pycorese.maven_tools as pmt
+#import pycorese.maven_tools as pmt
 
+# import corese-python
+sys.path.append(os.path.abspath(os.path.join(__file__,'..', '..','src')))
+import pycorese.maven_tools as pmt
 
 # global vars
 package = "corese-core"
