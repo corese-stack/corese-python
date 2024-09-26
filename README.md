@@ -12,11 +12,12 @@ at the moment, the jar file is tagged as '5.0.0-SNAPSHOT'
 
 ## Conda environment
 
-For conda users: 
+For conda users:
 ```bash
 conda env update -f pkg/env/corese-python.yaml
 conda activate corese-python
 ```
+
 Makes available the python libraries: `pandas`, `py4j`, `jpype1`, `maven-artifact`.
 
 ## test py4j bridge example in python
@@ -28,7 +29,7 @@ Makes available the python libraries: `pandas`, `py4j`, `jpype1`, `maven-artifac
 
 ## test jpype bridge example in python
 
-May work but not garanteed !!!
+May work but not garanteed !!! You need a corese-core jar file **with dependancies** !!!
 
 ```
 ./python_examples/simple_query.py -b jpype -j /somewhere/corese-core-5.0.0-SNAPSHOT-jar-with-dependencies.jar
