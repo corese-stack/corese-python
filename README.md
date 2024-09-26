@@ -10,6 +10,15 @@ at the moment, the jar file is tagged as '5.0.0-SNAPSHOT'
 ./gradlew clean publishToMavenLocal
 ```
 
+## Conda environment
+
+For conda users: 
+```bash
+conda env update -f pkg/env/corese-python.yaml
+conda activate corese-python
+```
+Makes available the python libraries: `pandas`, `py4j`, `jpype1`, `maven-artifact`.
+
 ## test py4j bridge example in python
 
 ```

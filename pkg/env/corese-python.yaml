@@ -1,0 +1,11 @@
+name: corese-python
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - pandas
+  - py4j
+  - pip
+  - pip:
+       - maven-artifact
+       - jpype1
