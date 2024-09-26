@@ -33,19 +33,21 @@ class Py4JBridge:
                  version: str = "4.5.0"):
 
         if corese_path:
-            if not os.path.exists(self.corese_path):
+            self.corese_path = corese_path
+            if not os.path.exists(corese_path):
                 msg = f'given CORESE library is not found at {corese_path}.'
                 loging.critical(msg)
                 raise FileNotFoundError(
                     '\n'+msg)
 
+        else:
+            # use maven to load the jar file
+            self.corese_path = pmt.package2filename("corese-python",
+                                                    version)
 
-        self.corese_path = pmt.package2filename("corese-python",
-                                                version)
-
-        if not os.path.exists(self.corese_path):
-            pmt.maven_download("corese-python",
-                               version)
+            if not os.path.exists(self.corese_path):
+                pmt.maven_download("corese-python",
+                                   version)
 
         self.java_gateway = None
 
@@ -93,6 +95,7 @@ class Py4JBridge:
             if memory_allocation:
                 java_args.extend(f'-Xmx{memory_allocation}')
 
+            print(f"DEBUG= {self.corese_path}")
             self.java_gateway = JavaGateway.launch_gateway(classpath=str(self.corese_path),
                                                             javaopts=java_args,
                                                             die_on_exit=True)
@@ -104,6 +107,7 @@ class Py4JBridge:
             # them without listing every single one of them here
 
             self.Graph = self.java_gateway.jvm.fr.inria.corese.core.Graph
+            print(f"DEBUG= {self.Graph}")
             self.Load = self.java_gateway.jvm.fr.inria.corese.core.load.Load
             self.QueryProcess = self.java_gateway.jvm.fr.inria.corese.core.query.QueryProcess
             self.ResultFormat = self.java_gateway.jvm.fr.inria.corese.core.print.ResultFormat

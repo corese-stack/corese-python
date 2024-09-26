@@ -46,19 +46,23 @@ class JPypeBridge:
                  version: str = "4.5.0"):
 
         if corese_path:
-            if not os.path.exists(self.corese_path):
+            self.corese_path = corese_path
+            if not os.path.exists(corese_path):
                 msg = f'given CORESE library is not found at {corese_path}.'
                 loging.critical(msg)
                 raise FileNotFoundError(
                     '\n'+msg)
 
+        else:
+            # use maven to load the jar file
+            self.corese_path = pmt.package2filename("corese-python",
+                                                    version)
 
-        self.corese_path = pmt.package2filename("corese-core",
-                                                version)
+            if not os.path.exists(self.corese_path):
+                pmt.maven_download("corese-core",
+                                   version)
 
-        if not os.path.exists(self.corese_path):
-            pmt.maven_download("corese-core",
-                               version)
+        self.java_gateway = None
 
         # Register exit handler
         import atexit

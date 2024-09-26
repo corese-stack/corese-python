@@ -9,11 +9,16 @@ class CoreseAPI:
       :param bridge: Bridge name to use for Java integration ('py4j' or 'jpype'). Default is 'py4j'.
     """
 
-    def __init__(self, java_bridge: str = 'jpype'):
-        
+    def __init__(self,
+                 java_bridge: str = 'py4j',
+                 corese_path: str = None,
+                 version: str = "4.5.0"):
+
         if java_bridge.lower() not in ['py4j', 'jpype']:
             raise ValueError('Invalid java bridge. Only "py4j" and "jpype" are supported.')
 
+        self.corese_path = corese_path
+        self.version = version
         self.java_bridge = java_bridge.lower()
         self.java_gateway = None
 
@@ -25,7 +30,7 @@ class CoreseAPI:
     def unloadCorese(self):
         """
         Explicitly unload Corese library.
-        
+
         It's not necessary to call this method, as the library is automatically
         unloaded when the Python interpreter exits.
 
@@ -36,16 +41,18 @@ class CoreseAPI:
     def loadCorese(self) -> None:
         """Load Corese library into JVM and expose the Corese classes."""
         if self.java_bridge == 'py4j':
-           
+
             from .py4J_bridge import Py4JBridge
 
-            self._bridge = Py4JBridge()
+            self._bridge = Py4JBridge(corese_path = self.corese_path,
+                                      version = self.version)
             self.java_gateway = self._bridge.loadCorese()
         else:
 
             from .jpype_bridge import JPypeBridge
 
-            self._bridge = JPypeBridge()
+            self._bridge = JPypeBridge(corese_path = self.corese_path,
+                                       version = self.version)
             self.java_gateway =self._bridge.loadCorese()
 
 
@@ -75,7 +82,7 @@ class CoreseAPI:
         self.RDF = self._bridge.RDF
         self.RuleEngine = self._bridge.RuleEngine
         self.Transformer = self._bridge.Transformer
-        
+
         # Classes to manage Graph(s) with different storage options
         self.DataManager = self._bridge.DataManager
         self.CoreseGraphDataManager = self._bridge.CoreseGraphDataManager
@@ -83,11 +90,11 @@ class CoreseAPI:
 
         self.Shacl  = self._bridge.Shacl
         self.Loader = self._bridge.Loader
-        
+
     def loadRDF(self, rdf_file: str, graph=None)-> object:
         """
         Load RDF file into Corese graph.
-        
+
         Parameters
         ----------
         rdf_file : str
@@ -95,7 +102,7 @@ class CoreseAPI:
         graph : object (fr.inria.corese.core.Graph or
                         fr.inria.corese.core.storage.CoreseGraphDataManager), optional
             Corese graph object. Default is None.
-            
+
         Returns
         -------
         object (fr.inria.corese.core.Graph or fr.inria.core.storage.CoreseGraphDataManager)
@@ -148,14 +155,14 @@ class CoreseAPI:
 
             if replace:
                 self.resetRuleEngine(graph)
-            
+
             rule_engine = self.RuleEngine.create(graph)
 
             rule_engine.setProfile(profile)
             rule_engine.process()
 
             return rule_engine
-    
+
     def resetRuleEngine(self, graph: object)-> None:
         """
         Reset the rule engine for the given graph.
@@ -172,16 +179,16 @@ class CoreseAPI:
         assert self.RuleEngine, 'Corese classes are not loaded properly.'
         assert graph, 'Graph object is required.'
 
-        rule_engine = self.RuleEngine.create(graph.getGraph())    
+        rule_engine = self.RuleEngine.create(graph.getGraph())
         rule_engine.remove()
 
     def sparqlSelect(self, graph: object,
                     prefixes: str|list|None = None,
                     query: str ='SELECT * WHERE {?s ?p ?o} LIMIT 5',
-                    return_dataframe: bool =True)-> object:    
-        """ 
+                    return_dataframe: bool =True)-> object:
+        """
         Execute SPARQL SELECT or ASK query on Corese graph.
-        
+
         Parameters
         ----------
         graph : object (fr.inria.corese.core.Graph)
@@ -190,20 +197,20 @@ class CoreseAPI:
             SPARQL prefixes. Default is None.
         query : str
             SPARQL query. Default is 'SELECT * WHERE {?s ?p ?o} LIMIT 5'.
-        return_dataframe : bool, optional. Default is True. 
-        
+        return_dataframe : bool, optional. Default is True.
+
         Returns
         -------
         object (fr.inria.core.print.ResultFormat)
             Result of the SPARQL
 
         """
-        assert self.QueryProcess, 'Corese classes are not loaded properly.'    
+        assert self.QueryProcess, 'Corese classes are not loaded properly.'
         assert self.ResultFormat, 'Corese classes are not loaded properly.'
 
         if not graph:
             raise ValueError('Graph object is required.')
-        
+
         if not prefixes:
             prefixes = ''
         if isinstance(prefixes, list):
@@ -224,15 +231,15 @@ class CoreseAPI:
                             dtypes: list|dict|None = None)-> pd.DataFrame:
         """
         Convert Corese ResultFormat object to pandas DataFrame.
-        
+
         Parameters
         ----------
-        queryResult : csv resultFormat object (fr.inria.core.print.ResultFormat) 
+        queryResult : csv resultFormat object (fr.inria.core.print.ResultFormat)
             ResultFormat object.
         dtypes : list or dict, optional
-            Data types for the columns in the format required by Pandas 
+            Data types for the columns in the format required by Pandas
             read_csv method https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html.
-            Default is None.     
+            Default is None.
 
         Returns
         -------
@@ -240,7 +247,7 @@ class CoreseAPI:
             Result in DataFrame format.
         """
         #assert isinstance(queryResult, self.ResultFormat), 'Invalid query result object.'
-                 
+
         df = pd.read_csv(StringIO(str(queryResult)),
                             skipinitialspace=True,
                             dtype=dtypes)
@@ -282,7 +289,7 @@ class CoreseAPI:
 
         if not graph:
             raise ValueError('Graph object is required.')
-        
+
         if not prefixes:
             prefixes = ''
         if isinstance(prefixes, list):
@@ -293,7 +300,7 @@ class CoreseAPI:
 
         if merge:
             graph.getGraph().merge(map.getGraph())
-        
+
         result = self.ResultFormat.create(map, self.ResultFormat.DEFAULT_CONSTRUCT_FORMAT)
 
         return result
@@ -316,7 +323,7 @@ class CoreseAPI:
 
         # TODO: ASk Remi about getGraph, the Graph and the right way to do the transformation
         ttl = self.Transformer.create(rdf.getMappings().getGraph(), self.Transformer.TURTLE)
-        
+
         return ttl.toString()
 
     def shaclValidate(self, graph, shacl_shape_ttl, is_file_name=False):
@@ -333,7 +340,17 @@ if __name__ == "__main__":
     cr.loadCorese()
 
     # Load RDF file
-    gr = cr.loadRDF('C:\\Users\\abobashe\\Documents\\P16\\PyCorese\\examples\\data\\beatles.rdf')
+    data_path = os.path.abspath(os.path.join(
+        __file__,
+        '..',
+        '..',
+        '..',
+        'python_examples',
+        'data',
+        'beatles.rdf'))
+
+    #gr = cr.loadRDF('C:\\Users\\abobashe\\Documents\\P16\\PyCorese\\examples\\data\\beatles.rdf')
+    gr = cr.loadRDF(data_path)
     print("Graph size: ", gr.graphSize())
 
     # Load Rule Engine OwlRL
@@ -349,7 +366,7 @@ if __name__ == "__main__":
     print("Graph size: ", gr.graphSize())
 
     # Execute SPARQL SELECT query
-    res = cr.sparqlSelect(gr, query='select * where {?s ?p ?o} limit 5')   
+    res = cr.sparqlSelect(gr, query='select * where {?s ?p ?o} limit 5')
 
     # Convert the result to DataFrame
     print(cr.toDataFrame(res))

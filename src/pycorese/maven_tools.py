@@ -54,7 +54,7 @@ def package2filename(package: str,
 
     filename = maven_repository.joinpath(jar)
 
-    print(f"filename={filename}")
+    #print(f"filename={filename}")
 
     return filename
 
