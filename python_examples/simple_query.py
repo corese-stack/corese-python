@@ -9,39 +9,58 @@ import getopt
 import os
 import sys
 
+# import corese-python
+sys.path.append(os.path.abspath(os.path.join(__file__,'..', '..','src')))
+from  pycorese.api import CoreseAPI
+
 
 # path to the RDF file
-data_path = os.path.abspath(os.path.join('data', 'beatles.rdf'))
+data_path = os.path.abspath(os.path.join(os.path.dirname(__file__),
+                                         'data',
+                                         'beatles.rdf'))
 
-usage = """simple_query.py [-b bridge]
+usage = """simple_query.py [-b bridge] [-j file.jar] [-v X.Y.Z]
 
--b bridge | --bridge=bridge   choose beetwen py4j and (experimental) jpype bridge
+-b bridge   | --bridge=bridge      choose beetwen py4j and (experimental) jpype bridge
+-j file.jar | --javalib=file.jar   specify a jar file to bridge to
+-v X.Y.Z    | --version=X.Y.Z      specify a given version (-j/-v not compatible)
+
+ex:
+  simple_query.py -v 5.0.0-SNAPSHOT
+  simple_query.py -j /tmp/core-library.jar
+  simple_query.py -b jpype
 """
 
 # simple user interface
 try:
-    opts, args = getopt.getopt(sys.argv[1:],"b:",["bridge="])
+    opts, args = getopt.getopt(sys.argv[1:],"b:j:v:",["bridge=", "javalib=", "version="])
 except getopt.GetoptError:
     print(usage)
     sys.exit(-1)
 
 # bridget selection
 bridge = 'py4j'
+javalib = None
+ver = "5.0.0-SNAPSHOT"
 for opt, arg in opts:
     if opt == '-b':
         bridge = arg
+    if opt == '-j':
+        javalib = arg
+    if opt == '-v':
+        ver = arg
 
-# import corese-python
-sys.path.append(os.path.abspath(os.path.join('..', 'src')))
-from  pycorese.api import CoreseAPI
-
-corese = CoreseAPI(java_bridge=bridge)
+print(f"version = {ver}")
+corese = CoreseAPI(java_bridge=bridge,
+                   corese_path=javalib,
+                   version=ver)
 corese.loadCorese()
 
 graph = corese.loadRDF(data_path)
-results = corese.sparqlSelect(graph)
+print("Graph size: ", graph.graphSize())
 
-print(results)
+#results = corese.sparqlSelect(graph)
+#print(results)
 
 sys.exit(0)
 
