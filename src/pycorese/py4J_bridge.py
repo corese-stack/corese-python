@@ -21,7 +21,7 @@ class Py4JBridge:
     ----------
     corese_path : str, optional
         Path to the Corese-Python library. Default is None.
-        If None, download the default version (4.5.0) from maven
+        If None, download the default version (5.0.0) from maven
         If provided, use it instead of maven versions (useful for debug)
     version: str, optional
         version which will be downloaded
@@ -30,7 +30,7 @@ class Py4JBridge:
 
     def __init__(self,
                  corese_path: str|None =None,
-                 version: str = "4.5.0"):
+                 version: str = "5.0.0"):
 
         if corese_path:
             self.corese_path = corese_path

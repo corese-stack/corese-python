@@ -23,10 +23,6 @@ import pycorese.maven_tools as pmt
 #configure_logging()
 
 
-_CORESE_LIBRARY_PATH = Path(resources.files(__package__))\
-                       .joinpath('jars/corese-core-4.5.0-jar-with-dependencies.jar')\
-                       .resolve()
-
 class JPypeBridge:
     """
     Python wrapper of the Java Corese API using JPype bridge.
@@ -35,7 +31,7 @@ class JPypeBridge:
     ----------
     corese_path : str, optional
         Path to the Corese-core library. Default is None.
-        If None, download the default version (4.5.0) from maven
+        If None, download the default version (5.0.0) from maven
         If provided, use it as is (useful for debug)
     version: str, optional
         Specify a version to download from maven
@@ -43,7 +39,7 @@ class JPypeBridge:
 
     def __init__(self,
                  corese_path=None,
-                 version: str = "4.5.0"):
+                 version: str = "5.0.0"):
 
         if corese_path:
             self.corese_path = corese_path
