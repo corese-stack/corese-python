@@ -1,10 +1,10 @@
 """Implementation of the JPype bridge to Corese API in Java."""
 
-
 import logging
 import os
 
-#from pathlib import Path
+from importlib import resources
+from pathlib import Path
 
 # Importing jpype.imports enables the functionality to import Java classes as
 # if they were Python modules, e.g. from fr.inria.corese.core import Graph
@@ -19,10 +19,13 @@ from jpype.types import *
 
 import pycorese.maven_tools as pmt
 
-
 #from . import configure_logging
 #configure_logging()
 
+
+_CORESE_LIBRARY_PATH = Path(resources.files(__package__))\
+                       .joinpath('jars/corese-core-4.5.0-jar-with-dependencies.jar')\
+                       .resolve()
 
 class JPypeBridge:
     """
@@ -31,9 +34,11 @@ class JPypeBridge:
     Parameters
     ----------
     corese_path : str, optional
-        Path to the Corese-core library. Default is None. If None, use the library
-        downloaded during package installation.
-
+        Path to the Corese-core library. Default is None.
+        If None, download the default version (4.5.0) from maven
+        If provided, use it as is (useful for debug)
+    version: str, optional
+        Specify a version to download from maven
     """
 
     def __init__(self,
@@ -61,10 +66,38 @@ class JPypeBridge:
 
     def _exit_handler(self):
         jpype.shutdownJVM()
-        logging.info('CORESE is stopped')
+        logging.info('JPype: CORESE is stopped')
+
+    def unloadCorese(self, force=False):
+        """
+        Explicitly unload Corese library.
+
+        It's not necessary to call this method, as the library is automatically
+        unloaded when the Python interpreter exits.
+        """
+        logging.info('JPype: WARNING: CORESE cannot be restarted after unloading.')
+
+        if force:
+            self._exit_handler()
+            self.java_gateway = None
+        else:
+            logging.info('JPype: If the unloading is necessary run unloadCorese method with the force=True option')
 
     def loadCorese(self,  memory_allocation=None) -> jpype:
-        """Load Corese library into context of JPype."""
+        """
+        Load Corese library into context of JPype.
+
+        Parameters
+        ----------
+        memory_allocation : str, optional
+            Memory allocation for the JVM, e.g. '4g'. Default is automatic allocation by JVM.
+
+        Returns
+        -------
+
+            jpype
+            JPype object.
+        """
         # NOTE: Because of lack of JVM support, you cannot shutdown the JVM and then restart it.
         # Nor can you start more than one copy of the JVM.
         # https://jpype.readthedocs.io/en/latest/install.html#known-bugs-limitations
@@ -80,6 +113,9 @@ class JPypeBridge:
                     java_args.append(f'-Xmx{memory_allocation}')
                 jpype.startJVM(*java_args , classpath=[self.corese_path])
 
+            # This is a minimum set of classes required for the API to work
+            # if we need more classes we should think about how to expose
+            # them without listing every single one of them here
 
             # Import of class
             from fr.inria.corese.core import Graph # type: ignore
@@ -91,7 +127,7 @@ class JPypeBridge:
             from fr.inria.corese.core.transform import Transformer # type: ignore
 
             from fr.inria.corese.core.storage.api.dataManager import DataManager  # type: ignore
-            from fr.inria.corese.core.storage import CoreseGraphDataManager  # type: ignore
+            from fr.inria.corese.core.storage import CoreseGraphDataManager # type: ignore
             from fr.inria.corese.core.storage import CoreseGraphDataManagerBuilder  # type: ignore
 
             from fr.inria.corese.core.shacl import Shacl # type: ignore

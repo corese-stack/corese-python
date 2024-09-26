@@ -3,17 +3,15 @@
 
 import os
 import subprocess
-#import urllib.request
 from time import sleep
-#from pathlib import Path
+from importlib import resources
+from pathlib import Path
 import logging
 
 from py4j.java_gateway import JavaGateway
 
 import pycorese.maven_tools as pmt
 
-#from . import configure_logging
-#configure_logging()
 
 class Py4JBridge:
     """
@@ -22,8 +20,11 @@ class Py4JBridge:
     Parameters
     ----------
     corese_path : str, optional
-        Path to the Corese-Python library. Default is None. If None, use the library
-        downloaded during package installation.
+        Path to the Corese-Python library. Default is None.
+        If None, download the default version (4.5.0) from maven
+        If provided, use it instead of maven versions (useful for debug)
+    version: str, optional
+        version which will be downloaded
 
     """
 
@@ -55,10 +56,31 @@ class Py4JBridge:
     def _exit_handler(self) -> None:
         if self.java_gateway is not None:
             self.java_gateway.shutdown()
-        logging.info('CORESE is stopped')
+            logging.info('Py4J: CORESE is stopped')
+
+    def unloadCorese(self):
+        """
+        Explicitly unload Corese library.
+
+        It's not necessary to call this method, as the library is automatically
+        unloaded when the Python interpreter exits.
+        """
+        self._exit_handler()
+        self.java_gateway = None
 
     def loadCorese(self,  memory_allocation=None) -> JavaGateway:
-        """Load Corese-Python library in the context of Py4J."""
+        """Load Corese-Python library in the context of Py4J.
+
+        Parameters
+        ----------
+        memory_allocation : str, optional
+            Memory allocation for the JVM, e.g. '4g'. Default is automatic allocation by JVM.
+
+        Returns
+        -------
+        JavaGateway
+            Py4J JavaGateway object.
+        """
         # restart JVM if is already runningS
         if self.java_gateway is not None:
             self.java_gateway.shutdown()
@@ -71,20 +93,15 @@ class Py4JBridge:
             if memory_allocation:
                 java_args.extend(f'-Xmx{memory_allocation}')
 
-            if True:
-                self.java_gateway = JavaGateway.launch_gateway(classpath=str(self.corese_path),
-                                                               javaopts=java_args,
-                                                               die_on_exit=True)
-                #sleep(1.0)
-            else:
+            self.java_gateway = JavaGateway.launch_gateway(classpath=str(self.corese_path),
+                                                            javaopts=java_args,
+                                                            die_on_exit=True)
+            #sleep(1.0)
 
-                java_args.extend(['-jar', self.corese_path])
-                #subprocess.Popen(['java', '-Dfile.encoding=UTF8', '-jar', self.corese_path])
-                subprocess.Popen(['java'] + java_args )
-                sleep(.0)
 
-                self.java_gateway = JavaGateway()
-                sleep(1.0)
+            # This is a minimum set of classes required for the API to work
+            # if we need more classes we should think about how to expose
+            # them without listing every single one of them here
 
             self.Graph = self.java_gateway.jvm.fr.inria.corese.core.Graph
             self.Load = self.java_gateway.jvm.fr.inria.corese.core.load.Load
