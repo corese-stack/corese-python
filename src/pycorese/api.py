@@ -38,8 +38,16 @@ class CoreseAPI:
         """
         self._bridge.unloadCorese()
 
+        self.java_gateway = None
+
+        self.Graph = None
+        self.QueryProcess = None
+        self.ResultFormat = None
+        self.Load = None
+
     def loadCorese(self) -> None:
         """Load Corese library into JVM and expose the Corese classes."""
+
         if self.java_bridge == 'py4j':
 
             from .py4J_bridge import Py4JBridge
@@ -54,23 +62,6 @@ class CoreseAPI:
             self._bridge = JPypeBridge(corese_path = self.corese_path,
                                        version = self.version)
             self.java_gateway =self._bridge.loadCorese()
-
-
-            # self.Graph = jpype_bridge.Graph
-            # self.Load = jpype_bridge.Load
-            # self.QueryProcess = jpype_bridge.QueryProcess
-            # self.ResultFormat = jpype_bridge.ResultFormat
-            # self.RDF = jpype_bridge.RDF
-            # self.RuleEngine = jpype_bridge.RuleEngine
-            # self.Transformer = jpype_bridge.Transformer
-
-            # # Classes to manage Graph(s) with different storage options
-            # self.DataManager = jpype_bridge.DataManager
-            # self.CoreseGraphDataManager = jpype_bridge.CoreseGraphDataManager
-            # self.CoreseGraphDataManagerBuilder = jpype_bridge.CoreseGraphDataManagerBuilder
-
-            # self.Shacl  = jpype_bridge.Shacl
-            # self.Loader = jpype_bridge.Loader
 
         # This is a minimum set of classes required for the API to work
         # if you need more classes we should think about how to expose
