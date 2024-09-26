@@ -36,7 +36,7 @@ class Py4JBridge:
             self.corese_path = corese_path
             if not os.path.exists(corese_path):
                 msg = f'given CORESE library is not found at {corese_path}.'
-                loging.critical(msg)
+                logging.critical(msg)
                 raise FileNotFoundError(
                     '\n'+msg)
 
