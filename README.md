@@ -7,7 +7,7 @@ at the moment, the jar file is tagged as '5.0.0-SNAPSHOT'
 ## build jar file locally
 
 ```
-./gradlew clean build
+./gradlew clean publishToMavenLocal
 ```
 
 ## test py4j bridge example in python
