@@ -26,8 +26,6 @@ def artifact2filename(artifact,
 
     filename = maven_repository.joinpath(artifact.artifact_id + "-" + artifact.version + "." + artifact.extension)
 
-    #print(f"filename1={filename}")
-
     return filename
 
 
@@ -53,8 +51,6 @@ def package2filename(package: str,
         maven_repository.mkdir(parents=True, exist_ok=True)
 
     filename = maven_repository.joinpath(jar)
-
-    #print(f"filename={filename}")
 
     return filename
 
@@ -85,7 +81,7 @@ def maven_download(package: str = 'corese-core',
             logging.info(f"jar {jar} downloaded")
             return True
         else:
-            print(f"download of {jar} failed.")
+            logging.critical(f"download of {jar} failed.")
             return False
     except RequestException as e:
-        print(e.msg)
+        logging.critical(e.msg)

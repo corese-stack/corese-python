@@ -95,7 +95,6 @@ class Py4JBridge:
             if memory_allocation:
                 java_args.extend(f'-Xmx{memory_allocation}')
 
-            print(f"DEBUG= {self.corese_path}")
             self.java_gateway = JavaGateway.launch_gateway(classpath=str(self.corese_path),
                                                             javaopts=java_args,
                                                             die_on_exit=True)
@@ -107,7 +106,6 @@ class Py4JBridge:
             # them without listing every single one of them here
 
             self.Graph = self.java_gateway.jvm.fr.inria.corese.core.Graph
-            print(f"DEBUG= {self.Graph}")
             self.Load = self.java_gateway.jvm.fr.inria.corese.core.load.Load
             self.QueryProcess = self.java_gateway.jvm.fr.inria.corese.core.query.QueryProcess
             self.ResultFormat = self.java_gateway.jvm.fr.inria.corese.core.print.ResultFormat
