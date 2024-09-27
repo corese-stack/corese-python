@@ -22,14 +22,30 @@ conda activate corese-python
 
 Makes available the python libraries: `pandas`, `py4j`, `jpype1`, `maven-artifact`.
 
-### test locally py4j bridge example in python
+### run the tests
+
+From the top directory, or in the `tests` sub-directory
+
+```
+pytest -v
+```
+
+If a specific test fails, you can have more informaiton, using:
+(you need to know the filename, test class name, test name)
+
+eg:
+```
+pytest tests/test_api.py::Test_api::test_bad_bridge
+```
+
+### run a simple example using py4j bridge (without installing)
 
 ```
 ./python_examples/simple_query.py -j $PWD/build/libs/corese-python-5.0.0-SNAPSHOT-jar-with-dependencies.jar
 ```
 
 
-### experimental: test locally jpype bridge example in python
+### experimental: run a simple example using jpype bridge (without installing)
 
 May work but not garanteed !!! You need a corese-core jar file **with dependancies** !!!
 
