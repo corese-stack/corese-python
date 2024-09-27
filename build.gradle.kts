@@ -5,6 +5,7 @@
 plugins {
     `java-library`
     `maven-publish`
+    `jacoco`
     id("com.gradleup.shadow") version "8.3.1"
 
 }
@@ -47,4 +48,16 @@ tasks {
     shadowJar {
         this.archiveClassifier = "jar-with-dependencies"
     }
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
+
+    reports {
+        xml.required.set(true)
+    }
+}
+
+tasks.test {
+    finalizedBy(tasks.jacocoTestReport)
 }

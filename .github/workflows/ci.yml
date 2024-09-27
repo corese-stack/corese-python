@@ -1,0 +1,104 @@
+name: Continuous Integration process
+run-name: ${{ github.actor }} has launched CI process on ${{ github.ref_name }}
+on:
+  push:
+    branches:
+      - "main"
+      - "develop"
+  pull_request:
+    branches:
+      - "main"
+      - "develop"
+
+permissions:
+  contents: read
+  issues: read
+  checks: write
+  pull-requests: write
+
+jobs:
+  Continuous-Integration-Actions:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout of head
+        id: ci-sources-checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        id: ci-java-setup
+        uses: actions/setup-java@v4
+        with:
+          java-version: 21
+          distribution: 'temurin'
+
+      - name: Gradle build
+        id: ci-gradle-build
+        run: ./gradlew clean assemble
+
+      - name: Gradle tests
+        run: ./gradlew test
+
+      - name: Run Coverage
+        run: ./gradlew jacocoTestReport
+
+      - name: Add coverage to PR
+        id: jacoco
+        uses: madrapps/jacoco-report@v1.7.0
+        with:
+          paths: |
+            **/build/reports/jacoco/test/jacocoTestReport.xml
+          token: ${{ secrets.GITHUB_TOKEN }}
+          min-coverage-overall: 40
+          min-coverage-changed-files: 60
+          update-comment: true
+
+      - name: Get the Coverage info
+        run: |
+          echo "Total coverage ${{ steps.jacoco.outputs.coverage-overall }}"
+          echo "Changed Files coverage ${{ steps.jacoco.outputs.coverage-changed-files }}"
+
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action/linux@v2
+        if: always()
+        with:
+          files: |
+            build/test-results/**/*.xml
+
+      - name: Get test artifacts
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: Package
+          path: |
+            **/build/reports/
+            **/build/test-results/
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.10"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest pytest-cov setuptools wheel build
+          # next line may be replaced by a requirements.txt file
+          pip install pandas py4j jpype1 maven-artifact
+      - name: Test with pytest
+        run: |
+          pytest -v
+      - name: Code coverage with pytest
+        run: |
+          pytest --cov
+      - name: Build libray
+        run: |
+          python -m build
+
+      - name: Final Step
+        id: ci-final-step
+        run: |
+          echo "This job's status is ${{ job.status }}."
+          echo "Created jar file(s):"
+          find ./build -name '*.jar'
+          echo "Created python package(s):"
+          ls -l dist/*
