@@ -38,6 +38,27 @@ eg:
 pytest tests/test_api.py::Test_api::test_bad_bridge
 ```
 
+### code coverage
+
+Install the coverage package:
+
+```
+pip install pytest-cov
+```
+
+And run the tests
+
+```
+pytest --cov
+```
+
+If you want a browsable coverage report:
+
+```
+pytest --cov --cov-report=html
+open htmlcov/index.html
+```
+
 ### run a simple example using py4j bridge (without installing)
 
 ```
