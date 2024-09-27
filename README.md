@@ -1,16 +1,18 @@
-# local tests with py4j
+# how to build/test/install pycorese java gateway and python wrapper
 
 ## remark
 
 at the moment, the jar file is tagged as '5.0.0-SNAPSHOT'
 
-## build jar file locally
+## java part: build jar file locally
 
 ```
 ./gradlew clean publishToMavenLocal
 ```
 
-## Conda environment
+## python part: test locally
+
+### Conda environment
 
 For conda users:
 ```bash
@@ -20,14 +22,14 @@ conda activate corese-python
 
 Makes available the python libraries: `pandas`, `py4j`, `jpype1`, `maven-artifact`.
 
-## test py4j bridge example in python
+### test locally py4j bridge example in python
 
 ```
 ./python_examples/simple_query.py -j $PWD/build/libs/corese-python-5.0.0-SNAPSHOT-jar-with-dependencies.jar
 ```
 
 
-## test jpype bridge example in python
+### experimental: test locally jpype bridge example in python
 
 May work but not garanteed !!! You need a corese-core jar file **with dependancies** !!!
 
@@ -35,4 +37,39 @@ May work but not garanteed !!! You need a corese-core jar file **with dependanci
 ./python_examples/simple_query.py -b jpype -j /somewhere/corese-core-5.0.0-SNAPSHOT-jar-with-dependencies.jar
 ```
 
-#
+## python installation
+
+### prerequesite
+
+```
+pip install --upgrade pip setuptools wheel build
+```
+
+### build the package
+
+```
+python -m build
+```
+
+which build the packages into `./dist`
+
+
+### install locally
+
+```
+pip install dist/pycorese-0.0-py3-none-any.whl
+```
+
+or
+```
+pip install dist/pycorese-0.0.tar.gz
+```
+
+- verify
+
+```
+$ pip list  | grep corese
+pycorese                  0.0
+
+$ python -c 'import pycorese'
+```
