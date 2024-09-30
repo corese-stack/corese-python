@@ -32,11 +32,16 @@ class CoreseAPI:
       :param bridge: Bridge name to use for Java integration ('py4j' or 'jpype'). Default is 'py4j'.
     """
 
-    def __init__(self, java_bridge: str = 'jpype'):
+    def __init__(self,
+                 java_bridge: str = 'py4j',
+                 corese_path: str = None,
+                 version: str = "4.5.0"):
         
         if java_bridge.lower() not in ['py4j', 'jpype']:
             raise ValueError('Invalid java bridge. Only "py4j" and "jpype" are supported.')
 
+        self.corese_path = corese_path
+        self.version = version
         self.java_bridge = java_bridge.lower()
         self.java_gateway = None
 
@@ -67,16 +72,18 @@ class CoreseAPI:
         """Load Corese library into JVM and expose the Corese classes."""
 
         if self.java_bridge == 'py4j':
-           
+
             from .py4J_bridge import Py4JBridge
 
-            self._bridge = Py4JBridge()
+            self._bridge = Py4JBridge(corese_path = self.corese_path,
+                                      version = self.version)
             self.java_gateway = self._bridge.loadCorese()
         else:
 
             from .jpype_bridge import JPypeBridge
 
-            self._bridge = JPypeBridge()
+            self._bridge = JPypeBridge(corese_path = self.corese_path,
+                                       version = self.version)
             self.java_gateway =self._bridge.loadCorese()
 
         # This is a minimum set of classes required for the API to work
