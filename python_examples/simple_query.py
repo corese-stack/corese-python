@@ -72,7 +72,7 @@ ex = "http://example.org/"
 
 # Create and add statement: Edith Piaf is an Singer
 edith_Piaf_IRI = graph.addResource(ex + "EdithPiaf")
-rdf_Type_Property = graph.addProperty(corese.RDF.TYPE)
+rdf_Type_Property = graph.addProperty(corese.Namespaces.RDF + 'type')
 singer_IRI = graph.addResource(ex + "Singer")
 
 graph.addEdge(edith_Piaf_IRI, rdf_Type_Property, singer_IRI)
