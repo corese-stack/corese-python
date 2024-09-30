@@ -110,6 +110,7 @@ class Py4JBridge:
             self.QueryProcess = self.java_gateway.jvm.fr.inria.corese.core.query.QueryProcess
             self.ResultFormat = self.java_gateway.jvm.fr.inria.corese.core.print.ResultFormat
             self.RDF = self.java_gateway.jvm.fr.inria.corese.core.logic.RDF
+            self.RDFS = self.java_gateway.jvm.fr.inria.corese.core.logic.RDFS
             self.RuleEngine = self.java_gateway.jvm.fr.inria.corese.core.rule.RuleEngine
             self.Transformer = self.java_gateway.jvm.fr.inria.corese.core.transform.Transformer
 
@@ -118,9 +119,9 @@ class Py4JBridge:
             self.CoreseGraphDataManagerBuilder = self.java_gateway.jvm.fr.inria.corese.core.storage.CoreseGraphDataManagerBuilder
 
             self.Shacl  = self.java_gateway.jvm.fr.inria.corese.core.shacl.Shacl
-            self.Loader = self.java_gateway.jvm.fr.inria.corese.core.api.Loader
-
-
+            #self.Loader = self.java_gateway.jvm.fr.inria.corese.core.api.Loader
+            
+            
             logging.info('Py4J: CORESE is loaded')
 
         except Exception as e:

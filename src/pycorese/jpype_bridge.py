@@ -120,7 +120,7 @@ class JPypeBridge:
             # Import of class
             from fr.inria.corese.core import Graph # type: ignore
             from fr.inria.corese.core.load import Load  # type: ignore
-            from fr.inria.corese.core.logic import RDF  # type: ignore
+            from fr.inria.corese.core.logic import RDF, RDFS  # type: ignore
             from fr.inria.corese.core.print import ResultFormat  # type: ignore
             from fr.inria.corese.core.query import QueryProcess  # type: ignore
             from fr.inria.corese.core.rule import RuleEngine  # type: ignore
@@ -131,7 +131,7 @@ class JPypeBridge:
             from fr.inria.corese.core.storage import CoreseGraphDataManagerBuilder  # type: ignore
 
             from fr.inria.corese.core.shacl import Shacl # type: ignore
-            from fr.inria.corese.core.api import Loader # type: ignore
+            #from fr.inria.corese.core.api import Loader # type: ignore
 
             self.DataManager = DataManager
             self.CoreseGraphDataManager = CoreseGraphDataManager
@@ -142,11 +142,12 @@ class JPypeBridge:
             self.QueryProcess = QueryProcess
             self.ResultFormat = ResultFormat
             self.RDF = RDF
+            self.RDFS = RDFS
             self.RuleEngine = RuleEngine
             self.Transformer = Transformer
 
             self.Shacl = Shacl
-            self.Loader = Loader
+            #self.Loader = Loader
 
             logging.info('JPype: CORESE is loaded')
 
