@@ -10,6 +10,11 @@ at the moment, the jar file is tagged as '5.0.0-SNAPSHOT'
 ./gradlew clean publishToMavenLocal
 ```
 
+or (jar file **must** be complete then loaded by python wrappers
+```
+./gradlew shadowJar
+```
+
 ## python part: test locally
 
 ### Conda environment
@@ -65,6 +70,7 @@ open htmlcov/index.html
 ./python_examples/simple_query.py -j $PWD/build/libs/corese-python-5.0.0-SNAPSHOT-jar-with-dependencies.jar
 ```
 
+Remark: to build this jar file, you must run `./gradlew shadowJar` before
 
 ### experimental: run a simple example using jpype bridge (without installing)
 

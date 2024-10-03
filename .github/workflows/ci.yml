@@ -34,7 +34,7 @@ jobs:
 
       - name: Gradle build
         id: ci-gradle-build
-        run: ./gradlew clean assemble
+        run: ./gradlew clean shadowJar
 
       # - name: Gradle tests
       #   run: ./gradlew test
