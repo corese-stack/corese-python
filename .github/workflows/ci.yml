@@ -34,7 +34,9 @@ jobs:
 
       - name: Gradle build
         id: ci-gradle-build
-        run: ./gradlew clean shadowJar
+        run: |
+          ./gradlew clean shadowJar
+          ./gradlew downloadCoreseCore
 
       # - name: Gradle tests
       #   run: ./gradlew test
