@@ -1,6 +1,8 @@
 """The module provides the capability to launch corese-python jar."""
 
 
+VERSION="4.5.0"
+
 import pandas as pd
 from io import StringIO
 import os

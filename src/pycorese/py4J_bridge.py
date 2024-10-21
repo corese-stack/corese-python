@@ -9,6 +9,7 @@ from importlib import resources
 from pathlib import Path
 import logging
 
+from .corese_version import corese_version
 from py4j.java_gateway import JavaGateway
 
 
@@ -31,21 +32,19 @@ class Py4JBridge:
 
         if corese_path:
             self.corese_path = corese_path
-            if not os.path.exists(corese_path):
-                msg = f'given CORESE library is not found at {corese_path}.'
+            if not os.path.exists(self.corese_path):
+                msg = f'given CORESE library is not found at {self.corese_path}.'
                 logging.critical(msg)
-                raise FileNotFoundError(
-                    '\n'+msg)
+                raise FileNotFoundError('\n'+msg)
 
         else:
-            package_jar_path = os.path.join(sysconfig.get_paths()['data'], 'data', 'pycorese', 'corese-python-4.5.0-jar-with-dependencies.jar')
+            package_jar_path = os.path.join(sysconfig.get_paths()['data'], 'share', 'pycorese', f'corese-python-{corese_version}-jar-with-dependencies.jar')
             self.corese_path = os.environ.get("CORESE_PATH", package_jar_path)
 
             if not os.path.exists(self.corese_path):
-                msg = f'given CORESE library is not found at {corese_path}.'
+                msg = f'given CORESE library is not found at {self.corese_path}.'
                 logging.critical(msg)
-                raise FileNotFoundError(
-                    '\n'+msg)
+                raise FileNotFoundError('\n'+msg)
 
         self.java_gateway = None
 
