@@ -3,11 +3,10 @@
 
 */
 
-group = "fr.inria.corese"
-version = "4.5.0"
-description = "corese-python"
-java.sourceCompatibility = JavaVersion.VERSION_11
-
+val coreseVersion = "4.5.0"
+val corese_core= "corese-core-$coreseVersion-jar-with-dependencies.jar"
+val source="https://repo.maven.apache.org/maven2/fr/inria/corese/corese-core/$coreseVersion"
+val dest="./build/libs"
 
 plugins {
     `java-library`
@@ -26,11 +25,16 @@ repositories {
 
 dependencies {
     api("net.sf.py4j:py4j:0.10.9")
-    api("fr.inria.corese:corese-core:$version")
+    api("fr.inria.corese:corese-core:$coreseVersion")
     api("jakarta.activation:jakarta.activation-api:2.1.2")
     api("info.picocli:picocli:4.7.5")
     testImplementation("junit:junit:4.13.2")
 }
+
+group = "fr.inria.corese"
+version = "$coreseVersion"
+description = "corese-python"
+java.sourceCompatibility = JavaVersion.VERSION_11
 
 publishing {
     publications.create<MavenPublication>("maven") {
@@ -50,7 +54,18 @@ tasks {
     shadowJar {
         this.archiveClassifier = "jar-with-dependencies"
     }
+
+    register<Exec>("downloadCoreseCore") {
+
+        doFirst {
+            mkdir (dest)
+        }
+
+        commandLine("curl", "$source/$corese_core", "-o", "$dest/$corese_core")
+    }
 }
+
+
 
 tasks.jacocoTestReport {
     dependsOn(tasks.test)
