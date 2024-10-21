@@ -1,7 +1,6 @@
 # __init__.py
 
 from .api import CoreseAPI
-# from .module2 import MyClass
 
 import logging
 
