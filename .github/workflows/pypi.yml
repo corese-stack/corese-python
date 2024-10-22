@@ -3,8 +3,7 @@ run-name: ${{ github.actor }} has launched CI process on ${{ github.ref_name }}
 on:
   push:
     branches:
-#      - "main"
-      - "feature/publish_on_pypi"
+      - "main"
 
 permissions:
   contents: read
