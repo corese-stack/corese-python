@@ -92,6 +92,11 @@ jobs:
       - name: Code coverage with pytest
         run: |
           pytest --cov
+      -name Copy Jars
+        run: |
+          mkdir -p ./resources
+          rm -rf ./resources/*
+          cp ./build/libs/*.jar ./resources/
       - name: Build libray
         run: |
           python -m build
