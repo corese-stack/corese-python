@@ -47,11 +47,13 @@ jobs:
       - name: Test with pytest
         run: |
           pytest -v
-      -name Copy Jars
+
+      -name: Copy Jars
         run: |
           mkdir -p ./resources
           rm -rf ./resources/*
           cp ./build/libs/*.jar ./resources/
+
       - name: Build python libray
         run: |
           python -m build
