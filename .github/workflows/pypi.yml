@@ -62,7 +62,7 @@ jobs:
       - name: Publish to pypi.org
         run: |
           pid=$$
-          echo ${PYPI_TOKEN} > ./pypi.token.$pid
+          echo ${{ secrets.PYPI_TOKEN }} > ./pypi.token.$pid
 
       - name: Final Step
         run: |
