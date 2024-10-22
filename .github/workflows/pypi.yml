@@ -53,8 +53,8 @@ jobs:
 
       - name: Publish to pypi.org
         run: |
-          pid = $$
-          echo $PYPI_TOKEN > ./pypi.token.$$
+          pid=$$
+          echo $PYPI_TOKEN > ./pypi.token.$pid
 
       - name: Final Step
         id: ci-final-step
