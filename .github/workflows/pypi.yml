@@ -54,12 +54,7 @@ jobs:
       - name: Publish to pypi.org
         run: |
           pid = $$
-          cat > ./pypi.token.$$ << EOF
-[pypi]
-username = __token__
-password = $PYPI_TOKEN
-<< EOF
-
+          echo $PYPI_TOKEN > ./pypi.token.$$
 
       - name: Final Step
         id: ci-final-step
