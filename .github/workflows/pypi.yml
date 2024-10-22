@@ -43,11 +43,16 @@ jobs:
           python -m pip install --upgrade pip
           pip install pytest setuptools wheel build twine
           # next line may be replaced by a requirements.txt file
-          pip install pandas py4j jpype1 maven-artifact
+          pip install pandas py4j jpype1
       - name: Test with pytest
         run: |
           pytest -v
-      - name: Build libray
+      -name Copy Jars
+        run: |
+          mkdir -p ./resources
+          rm -rf ./resources/*
+          cp ./build/libs/*.jar ./resources/
+      - name: Build python libray
         run: |
           python -m build
 

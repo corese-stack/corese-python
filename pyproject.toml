@@ -7,7 +7,7 @@ build-backend = "setuptools.build_meta"
 version = { file = "VERSION.txt" }
 
 [project]
-name = "PyCorese"
+name = "pycorese"
 dynamic = ["version"]
 authors = [
     { name = "Anna Bobasheva", email = "anna.bobasheva@inria.fr" },
@@ -15,7 +15,7 @@ authors = [
     { name = "Remi Ceres", email = "remi.ceres@inria.fr"}
 ]
 description = "coresep-ython: Corese Python API for Corese SPARQL engine."
-keywords = ["Query Engine", "SPARQL", "SHACL", "RDF", 
+keywords = ["Query Engine", "SPARQL", "SHACL", "RDF",
             "RDFS", "OWL", "Reasoning", "Knowledge Graph"]
 readme = "README.md"
 license = {file = "LICENSE"}
@@ -58,8 +58,8 @@ include-package-data = true
 where = ["src"]
 
 # Adding the Java jars to the package.
-# The files are copied to the resources directory in the CI workflow. 
-# This is done due to the fact that `python build` ignores `build` directory 
+# The files are copied to the resources directory in the CI workflow.
+# This is done due to the fact that `python build` ignores `build` directory
 # where gradle builds the jar files.
 [tool.setuptools.data-files]
-"share/PyCorese" = ["resources/*.jar"]
+"share/pycorese" = ["resources/*.jar"]
