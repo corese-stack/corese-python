@@ -48,7 +48,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install pytest pytest-cov setuptools wheel build
           # next line may be replaced by a requirements.txt file
-          pip install pandas py4j jpype1
+          #pip install pandas py4j jpype1
 
       - name: Test with pytest
         run: |
