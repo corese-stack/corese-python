@@ -14,7 +14,7 @@ authors = [
     { name = "Jean-Luc Szpyrka", email = "jean-luc.szpyrka@inria.fr" },
     { name = "Remi Ceres", email = "remi.ceres@inria.fr"}
 ]
-description = "coresep-ython: Corese Python API for Corese SPARQL engine."
+description = "corese-python: Corese Python API for Corese SPARQL engine."
 keywords = ["Query Engine", "SPARQL", "SHACL", "RDF",
             "RDFS", "OWL", "Reasoning", "Knowledge Graph"]
 readme = "README.md"
