@@ -18,18 +18,15 @@ jobs:
 
     steps:
       - name: Checkout of head
-        id: ci-sources-checkout
         uses: actions/checkout@v4
 
       - name: Set up JDK 21
-        id: ci-java-setup
         uses: actions/setup-java@v4
         with:
           java-version: 21
           distribution: 'temurin'
 
       - name: Gradle build
-        id: ci-gradle-build
         run: |
           ./gradlew clean shadowJar
           ./gradlew downloadCoreseCore
@@ -66,6 +63,5 @@ jobs:
           echo $PYPI_TOKEN > ./pypi.token.$pid
 
       - name: Final Step
-        id: ci-final-step
         run: |
           echo "This job's status is ${{ job.status }}."
