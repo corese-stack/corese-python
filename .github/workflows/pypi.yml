@@ -47,7 +47,7 @@ jobs:
         run: |
           pytest -v
 
-      -name: Copy Jars
+      - name: Copy Jars
         run: |
           mkdir -p ./resources
           rm -rf ./resources/*
