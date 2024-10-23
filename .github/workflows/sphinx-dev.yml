@@ -1,0 +1,32 @@
+name: "Sphinx: Render development docs"
+run-name: ${{ github.actor }} has launched CI process on ${{ github.ref_name }}
+on:
+  push:
+    branches:
+      - "feature/retrieve_doc" # TODO: update with main upon release
+
+permissions:
+  contents: write
+
+jobs:
+  Continuous-Integration-Actions:
+    runs-on: self-hosted
+
+    env:
+      PACKAGE_TOKEN: ${{ secrets.JLS_TOKEN }}
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        ref: feature/retrieve_doc # TODO: update with main upon release
+
+    - name: Fetch tags
+      run: git fetch --prune --unshallow --tags --force
+
+    - name: Build Sphinx documentation with multiversion
+      run: |
+        source /builds/miniconda3/etc/profile.d/conda.sh
+        conda activate corese-core-documentation
+        sphinx-build docs/source/ build/html/dev/
+        ghp-import build/html/dev/ -p -x dev
