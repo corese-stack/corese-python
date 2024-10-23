@@ -11,6 +11,10 @@ class CustomBuild(_build_py):
         gradlew = 'gradlew.bat' if os.name == 'nt' else './gradlew'
 
         try:
+            # Step 0: go to the source directory
+            curdir = os.getcwd()
+            os.chdir(os.environ['PWD'])
+
             # Step 1: Call gradlew clean to ensure a clean build
             subprocess.check_call([gradlew, 'clean'])
 
@@ -22,15 +26,18 @@ class CustomBuild(_build_py):
 
             # Step 2: Copy the JAR file(s) from the Gradle build directory to the resources directory
             jar_source = os.path.join('build', 'libs')  # Adjust this path if necessary
-            jar_destination = os.path.join('resources')
+            jar_destination = os.path.join(curdir, 'resources')
 
             # Create destination directory if it doesn't exist
-            os.makedirs(os.path.dirname(jar_destination), exist_ok=True)
+            os.makedirs(jar_destination, exist_ok=True)
 
             jar_files = glob.glob(os.path.join(jar_source, '*.jar'))  # Find all JAR files
             for jar_file in jar_files:
                 shutil.copy(jar_file, jar_destination)
                 print(f"Copied {jar_file} to {jar_destination}")
+
+            # go back to the temparory directory to finish the build
+            os.chdir(curdir)
 
         except subprocess.CalledProcessError as e:
             print(f"Gradle task failed with error: {e}")
