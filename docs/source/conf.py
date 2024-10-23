@@ -115,5 +115,5 @@ highlight_language = 'java'
 todo_include_todos = True
 
 # Optional: Exclude certain branches or tags from multi-versioning
-smv_branch_whitelist = r'develop'  # TODO Build documentation only for feature/retrieve-doc, must be replaced with "main" for production
+#smv_branch_whitelist = r'develop'  # TODO Build documentation only for feature/retrieve-doc, must be replaced with "main" for production
 smv_tag_whitelist = r'^v\d+\.\d+.*$'  # Only build tags that match version pattern like v1.0
