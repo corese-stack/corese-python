@@ -17,7 +17,7 @@ sys.path.insert(0, pathlib.Path(__file__).parents[2].resolve().as_posix())
 #sys.path.insert(0, pathlib.Path(__file__).parents[2].joinpath('code').resolve().as_posix())
 
 
-project = 'CORESE'
+project = 'CORESE-PYTHON'
 copyright = '2024, WIMMICS'
 author = 'WIMMICS'
 
@@ -68,8 +68,8 @@ html_logo = "_static/corese.svg"
 html_favicon = "_static/Corese-square-logo-transparent.svg"
 
 # Modify the title to get good social-media links
-html_title = "CORESE"
-html_short_title = "CORESE"
+html_title = "CORESE-PYTHON"
+html_short_title = "CORESE-PYTHON"
 
 # -- Theme Options -----------------------------------------------------------
 # Theme options are theme-specific and customize the look and feel of a theme
@@ -86,7 +86,7 @@ html_theme_options = {
     "icon_links": [
         {
             "name": "GitHub",
-            "url": "https://github.com/Wimmics/corese",
+            "url": "https://github.com/corese-stack/corese-python",
             "icon": "fab fa-github-square"
         }
     ],
