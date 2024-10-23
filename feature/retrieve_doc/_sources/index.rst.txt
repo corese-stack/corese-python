@@ -59,11 +59,11 @@ Corese is a software platform implementing and extending the standards of the Se
    
       Corese offers several interfaces
       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-      * `Corese-library <user_guide.html#corese-library>`_: Java library to process RDF data and use Corese features via an API.
-      * `Corese-server  <user_guide.html#corese-server>`_: Tool to easily create, configure and manage SPARQL endpoints.
-      * `Corese-GUI <install.html#corese-gui>`_: Graphical interface that allows an easy and visual use of Corese features.
-      * `Corese-Python (beta) <user_guide.html#corese-python>`_: Python wrapper for accessing and manipulating RDF data with Corese features using py4j.
-      * `Corese-Command (beta)  <user_guide.html#corese-command>`_: Command Line Interface for Corese that allows users to interact with Corese features from the terminal.
+      * `corese-core <https://github.com/corese-stack/corese-core/>`_: Java library to process RDF data and use Corese features via an API.
+      * `corese-server  <https://github.com/corese-stack/corese-server/>`_: Tool to easily create, configure and manage SPARQL endpoints.
+      * `corese-GUI <https://github.com/corese-stack/corese-gui/>`_: Graphical interface that allows an easy and visual use of Corese features.
+      * `corese-python (beta) <https://github.com/corese-stack/corese-python/>`_: Python wrapper for accessing and manipulating RDF data with Corese features using py4j.
+      * `corese-command (beta)  <https://github.com/corese-stack/corese-command/>`_: Command Line Interface for Corese that allows users to interact with Corese features from the terminal.
 
 .. raw:: html
 
