@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} has launched CI process on ${{ github.ref_name }}
 on:
   push:
     branches:
-      - "feature/retrieve_doc" # TODO: update with main upon release
+      - "develop"
 
 permissions:
   contents: write
@@ -19,7 +19,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
       with:
-        ref: feature/retrieve_doc # TODO: update with main upon release
+        ref: develop
 
     - name: Fetch tags
       run: git fetch --prune --unshallow --tags --force
