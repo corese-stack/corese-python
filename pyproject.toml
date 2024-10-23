@@ -14,7 +14,7 @@ authors = [
     { name = "Jean-Luc Szpyrka", email = "jean-luc.szpyrka@inria.fr" },
     { name = "Remi Ceres", email = "remi.ceres@inria.fr"}
 ]
-description = "coresep-ython: Corese Python API for Corese SPARQL engine."
+description = "corese-python: Corese Python API for Corese SPARQL engine."
 keywords = ["Query Engine", "SPARQL", "SHACL", "RDF",
             "RDFS", "OWL", "Reasoning", "Knowledge Graph"]
 readme = "README.md"
@@ -27,7 +27,7 @@ dependencies = [
 ]
 
 classifiers = [
-    "License :: OSI Approved :: GNU Lesser General Public License (LGPL)",
+    "License :: OSI Approved :: GNU Lesser General Public License v2 (LGPLv2)",
     "Intended Audience :: Science/Research",
     "Topic :: Scientific/Engineering",
     "Programming Language :: Python :: 3"

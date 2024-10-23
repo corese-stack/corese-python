@@ -1,3 +1,0 @@
-# pycorese
-
-To be defined
