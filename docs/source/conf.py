@@ -104,10 +104,10 @@ myst_heading_anchors = 4
 myst_fence_as_directive = ["mermaid"]
 
 # Tell sphinx what the primary language being documented is.
-primary_domain = 'java'
+primary_domain = 'python'
 
 # Tell sphinx what the pygments highlight language should be.
-highlight_language = 'java'
+highlight_language = 'python'
 
 # Setup the sphinx.ext.todo extension
 
