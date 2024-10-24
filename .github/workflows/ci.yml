@@ -30,12 +30,6 @@ jobs:
           java-version: 21
           distribution: 'temurin'
 
-      - name: Gradle build
-        id: ci-gradle-build
-        run: |
-          ./gradlew clean shadowJar
-          ./gradlew downloadCoreseCore
-
       - name: Set up Python 3.10
         uses: actions/setup-python@v3
         with:

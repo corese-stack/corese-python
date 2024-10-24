@@ -1,4 +1,8 @@
-# __init__.py
+"""The module provides a wrapper to corese library (Software platform for the Semantic Web of Linked Data)"""
+
+
+__version__ = '1.0.1'
+__version_info__ = tuple([ int(num) for num in __version__.split('.')])
 
 from .api import CoreseAPI
 
