@@ -3,51 +3,58 @@ import os
 import shutil
 import glob
 from setuptools import setup
-from setuptools.command.build_py import build_py as _build_py
+from setuptools.command.sdist import sdist as _sdist
 
-class CustomBuild(_build_py):
-    def run(self):
-        # Detect platform and use the correct gradlew wrapper
-        gradlew = 'gradlew.bat' if os.name == 'nt' else './gradlew'
+class CustomSDist(_sdist):
+    def run(self):  
 
-        try:
-            # Step 0: go to the source directory
-            curdir = os.getcwd()
-            os.chdir(os.environ['PWD'])
+        print("\033[1m****  Running custom sdist... \033[0m")
+        print(f"Current directory: {os.getcwd()}")
+
+        def _build_java_libs():            
+            # Detect platform and use the correct gradlew wrapper
+            gradlew = 'gradlew.bat' if os.name == 'nt' else './gradlew'
+            print(f"Using {gradlew} to build corese-python library")
 
             # Step 1: Call gradlew clean to ensure a clean build
             subprocess.check_call([gradlew, 'clean'])
 
             # Step 2: Call gradlew shadowJar task to build corese-python JAR file
             subprocess.check_call([gradlew, 'shadowJar'])
+            print("corese-python JAR file built successfully")
 
-            # Step 3: Call gradlew downloadCorese task to download the corese-core JAR file
-            subprocess.check_call([gradlew, 'downloadCorese'])
+            # Step 3: Call gradlew downloadCoreseCore task to download the corese-core JAR file
+            subprocess.check_call([gradlew, 'downloadCoreseCore'])
 
-            # Step 2: Copy the JAR file(s) from the Gradle build directory to the resources directory
-            jar_source = os.path.join('build', 'libs')  # Adjust this path if necessary
-            jar_destination = os.path.join(curdir, 'resources')
+            return os.path.join(os.getcwd(), 'build', 'libs')
 
-            # Create destination directory if it doesn't exist
-            os.makedirs(jar_destination, exist_ok=True)
+        src_dir = _build_java_libs()
 
-            jar_files = glob.glob(os.path.join(jar_source, '*.jar'))  # Find all JAR files
-            for jar_file in jar_files:
-                shutil.copy(jar_file, jar_destination)
-                print(f"Copied {jar_file} to {jar_destination}")
-
-            # go back to the temparory directory to finish the build
-            os.chdir(curdir)
-
-        except subprocess.CalledProcessError as e:
-            print(f"Gradle task failed with error: {e}")
-            raise
-
-        # Continue with the normal build process
-        super().run()
+        # Ensure the destination directory exists
+        dest_dir = 'resources'
+        os.makedirs(dest_dir, exist_ok=True)
+        
+        # Copy files from build/libs to resources directory
+        for filename in os.listdir(src_dir):
+            if filename.endswith('.jar'):
+                shutil.copy(os.path.join(src_dir, filename), dest_dir)
+        
+        # Continue with the normal sdist process
+        super().run()        
 
 setup(
     cmdclass={
-        'build_py': CustomBuild,
+        'sdist': CustomSDist,
     },
+ 
+    # Same as having
+    # [tool.setuptools.data-files] 
+    # "share/pycorese" = ["resources/*.jar"]
+    # in pyproject.toml
+    # Uncomment if prefer to keep everything in one file.
+
+    # data_files=[
+    #     ('share/pycorese', glob.glob('resources/*.jar')),  # Include JAR files from the resources directory
+    # ],
+    # include_package_data=True,
 )
