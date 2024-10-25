@@ -1,7 +1,6 @@
 import subprocess
 import os
 import shutil
-import glob
 from setuptools import setup
 from setuptools.command.sdist import sdist as _sdist
 
