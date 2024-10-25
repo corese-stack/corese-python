@@ -58,8 +58,8 @@ include-package-data = true
 where = ["src"]
 
 # Adding the Java jars to the package.
-# The files are copied to the resources directory in the CI workflow.
-# This is done due to the fact that `python build` ignores `build` directory
-# where gradle builds the jar files.
+# The jar files are built by the custom build step in the setup.py.
+# The files are built/downloaded by the gradle build system 
+# and copied to the `resources` directory.
 [tool.setuptools.data-files]
 "share/pycorese" = ["resources/*.jar"]
