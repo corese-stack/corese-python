@@ -64,6 +64,12 @@ class JPypeBridge:
         jpype.shutdownJVM()
         logging.info('JPype: CORESE is stopped')
 
+    def coreseVersion(self):
+        """
+        TODO: call coreseVersion() from corese engine
+        """
+        return corese_version
+
     def unloadCorese(self, force=False):
         """
         Explicitly unload Corese library.

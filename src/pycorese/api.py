@@ -44,11 +44,29 @@ class CoreseAPI:
         self.corese_path = corese_path
         self.java_bridge = java_bridge.lower()
         self.java_gateway = None
+        self._bridge = None
 
         self.Graph = None
         self.QueryProcess = None
         self.ResultFormat = None
         self.Load = None
+
+    def coreseVersion(self):
+        """
+        returns the corese-version
+
+        Remark: corese engine must be loaded first.
+
+        TODO: implement this to call the coreseVersion() from
+        the corese engine (at the moment this method is staic and
+        may return bad result)
+        """
+
+        if self._bridge is None:
+            print(f"Corese engine not loaded yet")
+            return None
+
+        return self._bridge.coreseVersion()
 
     def unloadCorese(self):
         """
