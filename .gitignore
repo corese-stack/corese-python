@@ -164,6 +164,14 @@ cython_debug/
 build
 log
 
+# VSCode
+.vscode/
+
+
 # garbage
 \#*
 .\#*
+
+# backup files
+resources/
+*.bak

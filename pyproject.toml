@@ -1,3 +1,65 @@
 [build-system]
-requires = ["setuptools"]
+requires = ["setuptools>=42", "wheel"] # add "setuptools_scm" if we want to use github tags for versioning
 build-backend = "setuptools.build_meta"
+
+
+[tool.setuptools.dynamic]
+version = { file = "VERSION.txt" }
+
+[project]
+name = "pycorese"
+dynamic = ["version"]
+authors = [
+    { name = "Anna Bobasheva", email = "anna.bobasheva@inria.fr" },
+    { name = "Jean-Luc Szpyrka", email = "jean-luc.szpyrka@inria.fr" },
+    { name = "Remi Ceres", email = "remi.ceres@inria.fr"}
+]
+description = "corese-python: Corese Python API for Corese SPARQL engine."
+keywords = ["Query Engine", "SPARQL", "SHACL", "RDF",
+            "RDFS", "OWL", "Reasoning", "Knowledge Graph"]
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.10"
+dependencies = [
+  "py4j>=0.10.9.7",
+  "jpype1>=1.5.0",
+  "pandas>=1.3.3",
+]
+
+classifiers = [
+    "License :: OSI Approved :: GNU Lesser General Public License v2 (LGPLv2)",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering",
+    "Programming Language :: Python :: 3"
+]
+
+[project.urls]
+Homepage = "https://corese-stack.github.io/corese-python/"
+Issues = "https://github.com/corese-stack/corese-python/issues"
+Documentation = "https://corese-stack.github.io/corese-python/"
+Repository = "https://github.com/corese-stack/corese-python.git"
+
+[tool.pytest.ini_options]
+# We follow the pytest recommendations by setting the `import-mode` and using
+# the `src/tests` layout.
+# https://docs.pytest.org/en/stable/explanation/goodpractices.html#tests-outside-application-code
+testpaths = [
+    "src/",
+    "tests/"
+]
+pythonpath = "src"
+
+# Adding the Java jars to the package
+# https://setuptools.pypa.io/en/stable/userguide/datafiles.html#package-data
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+# Adding the Java jars to the package.
+# The jar files are built by the custom build step in the setup.py.
+# The files are built/downloaded by the gradle build system 
+# and copied to the `resources` directory.
+[tool.setuptools.data-files]
+"share/pycorese" = ["resources/*.jar"]

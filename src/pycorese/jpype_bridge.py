@@ -2,9 +2,11 @@
 
 import logging
 import os
+import sysconfig
 
 from importlib import resources
 from pathlib import Path
+
 
 # Importing jpype.imports enables the functionality to import Java classes as
 # if they were Python modules, e.g. from fr.inria.corese.core import Graph
@@ -17,11 +19,7 @@ import jpype
 import jpype.imports
 from jpype.types import *
 
-import pycorese.maven_tools as pmt
-
-#from . import configure_logging
-#configure_logging()
-
+from .corese_version import corese_version
 
 class JPypeBridge:
     """
@@ -31,32 +29,30 @@ class JPypeBridge:
     ----------
     corese_path : str, optional
         Path to the Corese-core library. Default is None.
-        If None, download the default version (5.0.0) from maven
-        If provided, use it as is (useful for debug)
-    version: str, optional
-        Specify a version to download from maven
+        if None, use the jar file provided by the package
+
+        Remark: the CORESE_PATH environment variable can be used to
+        provide enaltenative jar file.
     """
 
     def __init__(self,
-                 corese_path=None,
-                 version: str = "5.0.0"):
+                 corese_path=None):
 
         if corese_path:
             self.corese_path = corese_path
-            if not os.path.exists(corese_path):
-                msg = f'given CORESE library is not found at {corese_path}.'
+            if not os.path.exists(self.corese_path):
+                msg = f'given CORESE library is not found at {self.corese_path}.'
                 logging.critical(msg)
-                raise FileNotFoundError(
-                    '\n'+msg)
+                raise FileNotFoundError('\n'+msg)
 
         else:
-            # use maven to load the jar file
-            self.corese_path = pmt.package2filename("corese-python",
-                                                    version)
+            package_jar_path = os.path.join(sysconfig.get_paths()['data'], 'share', 'pycorese', f'corese-core-{corese_version}-jar-with-dependencies.jar')
+            self.corese_path = os.environ.get("CORESE_PATH", package_jar_path)
 
             if not os.path.exists(self.corese_path):
-                pmt.maven_download("corese-core",
-                                   version)
+                msg = f'given CORESE library is not found at {self.corese_path}.'
+                logging.critical(msg)
+                raise FileNotFoundError('\n'+msg)
 
         self.java_gateway = None
 
@@ -67,6 +63,12 @@ class JPypeBridge:
     def _exit_handler(self):
         jpype.shutdownJVM()
         logging.info('JPype: CORESE is stopped')
+
+    def coreseVersion(self):
+        """
+        TODO: call coreseVersion() from corese engine
+        """
+        return corese_version
 
     def unloadCorese(self, force=False):
         """

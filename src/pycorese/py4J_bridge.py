@@ -3,14 +3,14 @@
 
 import os
 import subprocess
+import sysconfig
 from time import sleep
 from importlib import resources
 from pathlib import Path
 import logging
 
+from .corese_version import corese_version
 from py4j.java_gateway import JavaGateway
-
-import pycorese.maven_tools as pmt
 
 
 class Py4JBridge:
@@ -20,34 +20,31 @@ class Py4JBridge:
     Parameters
     ----------
     corese_path : str, optional
-        Path to the Corese-Python library. Default is None.
-        If None, download the default version (5.0.0) from maven
-        If provided, use it instead of maven versions (useful for debug)
-    version: str, optional
-        version which will be downloaded
+        Path to the corese-python library. Default is None.
+        if None, use the jar file provided by the package
 
+        Remark: the CORESE_PATH environment variable can be used to
+        provide enaltenative jar file.
     """
 
     def __init__(self,
-                 corese_path: str|None =None,
-                 version: str = "5.0.0"):
+                 corese_path: str|None =None):
 
         if corese_path:
             self.corese_path = corese_path
-            if not os.path.exists(corese_path):
-                msg = f'given CORESE library is not found at {corese_path}.'
+            if not os.path.exists(self.corese_path):
+                msg = f'given CORESE library is not found at {self.corese_path}.'
                 logging.critical(msg)
-                raise FileNotFoundError(
-                    '\n'+msg)
+                raise FileNotFoundError('\n'+msg)
 
         else:
-            # use maven to load the jar file
-            self.corese_path = pmt.package2filename("corese-python",
-                                                    version)
+            package_jar_path = os.path.join(sysconfig.get_paths()['data'], 'share', 'pycorese', f'corese-python-{corese_version}-jar-with-dependencies.jar')
+            self.corese_path = os.environ.get("CORESE_PATH", package_jar_path)
 
             if not os.path.exists(self.corese_path):
-                pmt.maven_download("corese-python",
-                                   version)
+                msg = f'given CORESE library is not found at {self.corese_path}.'
+                logging.critical(msg)
+                raise FileNotFoundError('\n'+msg)
 
         self.java_gateway = None
 
@@ -59,6 +56,12 @@ class Py4JBridge:
         if self.java_gateway is not None:
             self.java_gateway.shutdown()
             logging.info('Py4J: CORESE is stopped')
+
+    def coreseVersion(self):
+        """
+        TODO: call coreseVersion() from corese engine
+        """
+        return corese_version
 
     def unloadCorese(self):
         """
@@ -120,8 +123,8 @@ class Py4JBridge:
 
             self.Shacl  = self.java_gateway.jvm.fr.inria.corese.core.shacl.Shacl
             #self.Loader = self.java_gateway.jvm.fr.inria.corese.core.api.Loader
-            
-            
+
+
             logging.info('Py4J: CORESE is loaded')
 
         except Exception as e:
