@@ -43,13 +43,18 @@ jobs:
         run: |
           pytest --cov
 
+      - name: Gradle build
+        run: |
+          ./gradlew clean shadowJar
+          ./gradlew downloadCoreseCore
+
       - name: Copy Jars
         run: |
           mkdir -p ./resources
           rm -rf ./resources/*
           cp ./build/libs/*.jar ./resources/
 
-      - name: Build python libray
+      - name: Build python library
         run: |
           python -m build
 
