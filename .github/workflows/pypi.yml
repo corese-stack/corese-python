@@ -3,9 +3,7 @@ run-name: ${{ github.actor }} has launched CI process on ${{ github.ref_name }}
 on:
   push:
     branches:
-#      - "main"
-      - "feature/debug_pypi_publishing"
-
+      - "main"
 
 permissions:
   contents: read
@@ -52,18 +50,17 @@ jobs:
 
       - name: Copy Jars
         run: |
-          pwd
           mkdir -p ./resources
           rm -rf ./resources/*
           cp ./build/libs/*.jar ./resources/
 
-      - name: Build python libray
+      - name: Build python library
         run: |
           python -m build
 
       - name: Publish to pypi.org
         run: |
-          echo TWINE_USERNAME="__token__" TWINE_PASSWORD=${{ secrets.PYPI_TOKEN }} twine upload dist/*
+          TWINE_USERNAME="__token__" TWINE_PASSWORD=${{ secrets.PYPI_TOKEN }} twine upload dist/*
 
       - name: Final Step
         run: |
