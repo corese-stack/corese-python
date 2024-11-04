@@ -57,6 +57,12 @@ class Py4JBridge:
             self.java_gateway.shutdown()
             logging.info('Py4J: CORESE is stopped')
 
+    def coreseVersion(self):
+        """
+        TODO: call coreseVersion() from corese engine
+        """
+        return corese_version
+
     def unloadCorese(self):
         """
         Explicitly unload Corese library.
