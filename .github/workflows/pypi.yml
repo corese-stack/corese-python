@@ -45,6 +45,11 @@ jobs:
         run: |
           pytest --cov
 
+      - name: Gradle build
+        run: |
+          ./gradlew clean shadowJar
+          ./gradlew downloadCoreseCore
+
       - name: Copy Jars
         run: |
           pwd
