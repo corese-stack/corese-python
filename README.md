@@ -16,5 +16,5 @@ Follow the instuctions from `INSTALL.md`
 
 ## Documentation
 
-Corese documentation: https://corese-stack.github.io/corese-core
-Corese python wrapper:  https://corese-stack.github.io/corese-python
+- Corese documentation: https://corese-stack.github.io/corese-core
+- Corese python wrapper:  https://corese-stack.github.io/corese-python
