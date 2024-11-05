@@ -7,5 +7,4 @@ dependencies:
   - py4j
   - pip
   - pip:
-       - maven-artifact
        - jpype1
