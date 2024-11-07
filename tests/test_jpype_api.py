@@ -4,7 +4,7 @@
 import pytest
 from pycorese.api import CoreseAPI
 
-class Test_api:
+class Test_jpype_api:
     """test user inputs"""
 
     #  test constructor
@@ -28,4 +28,4 @@ class Test_api:
         c = CoreseAPI(java_bridge = "jpype")
 
         # version not found since corese is  not loaded
-        assert(c.coreseVersion() is None)
+        assert(c.engineVersion() is None)

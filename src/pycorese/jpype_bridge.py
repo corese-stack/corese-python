@@ -64,9 +64,9 @@ class JPypeBridge:
         jpype.shutdownJVM()
         logging.info('JPype: CORESE is stopped')
 
-    def coreseVersion(self):
+    def engineVersion(self):
         """
-        TODO: call coreseVersion() from corese engine
+        TODO: call engineVersion() from corese engine
         """
         version = None
         try:
@@ -76,7 +76,7 @@ class JPypeBridge:
             pass
 
         if version is None:
-            loggingWarning(f"JPype: the CORESE library is too old. coreseVersion() is available since 4.6.0 only.")
+            loggingWarning(f"JPype: the CORESE library is too old. engineVersion() is available since 4.6.0 only.")
 
         return version
 

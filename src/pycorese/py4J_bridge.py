@@ -57,7 +57,7 @@ class Py4JBridge:
             self.java_gateway.shutdown()
             logging.info('Py4J: CORESE is stopped')
 
-    def coreseVersion(self):
+    def engineVersion(self):
         """
         get corese version from the loaded corese engine
         """
@@ -68,7 +68,7 @@ class Py4JBridge:
             pass
 
         if version is None:
-            logging.warning(f"Py4j: the CORESE library is too old. coreseVersion() is available since 4.6.0 only.")
+            logging.warning(f"Py4j: the CORESE library is too old. engineVersion() is available since 4.6.0 only.")
 
         return version
 
