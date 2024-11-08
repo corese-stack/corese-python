@@ -40,23 +40,19 @@ jobs:
           python -m pip install --upgrade pip
           pip install pytest pytest-cov setuptools wheel build
 
+      - name: Build libray # this also downloads necessary corese-*.jar files
+        run: |
+          python -m build
+
       - name: Test with pytest
         run: |
-          pytest -v
+          pytest
 
       - name: Code coverage with pytest
         run: |
           pytest --cov
 
-      - name: Build libray
-        run: |
-          python -m build
-
       - name: Final Step
         id: ci-final-step
         run: |
           echo "This job's status is ${{ job.status }}."
-          echo "Created jar file(s):"
-          find ./build -name '*.jar'
-          echo "Created python package(s):"
-          ls -l dist/*

@@ -51,13 +51,13 @@ class CoreseAPI:
         self.ResultFormat = None
         self.Load = None
 
-    def coreseVersion(self):
+    def engineVersion(self):
         """
         returns the corese-version
 
         Remark: corese engine must be loaded first.
 
-        TODO: implement this to call the coreseVersion() from
+        TODO: implement this to call the engineVersion() from
         the corese engine (at the moment this method is staic and
         may return bad result)
         """
@@ -66,7 +66,7 @@ class CoreseAPI:
             print(f"Corese engine not loaded yet")
             return None
 
-        return self._bridge.coreseVersion()
+        return self._bridge.engineVersion()
 
     def unloadCorese(self):
         """
