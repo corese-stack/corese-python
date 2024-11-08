@@ -14,24 +14,28 @@ import pycorese.corese_version as pv
 class Test_py4j_run:
     """test p4yj queries"""
 
-    rdf_file = os.path.abspath(os.path.join(__file__,
-                                            '..',
-                                            '..',
-                                            "python_examples",
-                                            "data",
-                                            "beatles.rdf"))
-
-    ttl_file = os.path.abspath(os.path.join(__file__,
-                                            '..',
-                                            '..',
-                                            "python_examples",
-                                            "data",
-                                            "beatles-validator.ttl"))
-
-
     # run only once
     @classmethod
     def setup_class(cls):
+        #
+        # global variable depending on the running context
+        # (CI/github, local build)
+        topdir = os.environ.get('GITHUB_WORKSPACE' ,
+                                os.path.abspath(os.path.join(__file__,
+                                                             '..',
+                                                             '..')))
+
+        cls.rdf_file = os.path.join( topdir,
+                                     "python_examples",
+                                     "data",
+                                     "beatles.rdf")
+
+        cls.ttl_file = os.path.join( topdir,
+                                     "python_examples",
+                                     "data",
+                                     "beatles-validator.ttl")
+
+        # init localCorese (multiple localCorese may provoque errors_
         cls.corese = CoreseAPI()
         cls.corese.loadCorese()
         print(cls.corese.engineVersion())
