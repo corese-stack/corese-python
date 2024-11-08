@@ -44,13 +44,16 @@ class Test_py4j_run:
         # init localCorese (multiple localCorese may provoque errors_
         cls.corese = CoreseAPI( corese_path = cls.corese_path)
         cls.corese.loadCorese()
-        print(cls.corese.engineVersion())
 
 
     # run before each test function
     def setUp(self):
         os.environ.pop('CORESE_PATH', None)
 
+
+    def test_py4j_version_default(self):
+        corese = Test_py4j_run.corese
+        assert(corese.engineVersion() == pv.corese_version)
 
     def test_py4j_loadRDF(self):
         # to reduce the length of next lines of code

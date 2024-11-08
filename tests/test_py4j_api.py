@@ -11,13 +11,6 @@ import pycorese.corese_version as pv
 class Test_py4j_api:
     """test user inputs"""
 
-    corese_path = os.path.abspath(os.path.join(__file__,
-                                               '..',
-                                               '..',
-                                               "build",
-                                               "libs",
-                                               f'corese-python-{pv.corese_version}-jar-with-dependencies.jar'))
-
     # run before each test function
     def setUp(self):
         # remove CORESE_PATH, which has an effect on the loaded jar
@@ -48,11 +41,3 @@ class Test_py4j_api:
 
         # version not found since corese is  not loaded
         assert(corese.engineVersion() is None)
-
-    def test_py4j_version_default(self):
-
-        # effectively load the corese-python jar file
-        corese = CoreseAPI(corese_path = Test_py4j_api.corese_path)
-        corese.loadCorese()
-
-        assert(corese.engineVersion() == pv.corese_version)
