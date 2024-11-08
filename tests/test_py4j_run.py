@@ -35,8 +35,14 @@ class Test_py4j_run:
                                      "data",
                                      "beatles-validator.ttl")
 
+        cls.corese_path = os.path.join(topdir,
+                                       "build",
+                                       "libs",
+                                       f'corese-python-{pv.corese_version}-jar-with-dependencies.jar')
+
+
         # init localCorese (multiple localCorese may provoque errors_
-        cls.corese = CoreseAPI()
+        cls.corese = CoreseAPI( corese_path = cls.corese_path)
         cls.corese.loadCorese()
         print(cls.corese.engineVersion())
 
