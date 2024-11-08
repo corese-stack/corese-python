@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - "develop"
+      - "feature/add_tests"
   pull_request:
     branches:
       - "develop"
@@ -40,10 +41,15 @@ jobs:
           python -m pip install --upgrade pip
           pip install pytest pytest-cov setuptools wheel build
 
-      - name: Need local jar files for the tests
+      - name: Build libray
         run: |
-          ./gradlew clean shadowJar
-          ./gradlew downloadCoreseCore
+          env
+          python -m build
+
+      # - name: Need local jar files for the tests
+      #   run: |
+      #     ./gradlew clean shadowJar
+      #     ./gradlew downloadCoreseCore
 
       - name: Test with pytest
         run: |
@@ -52,10 +58,6 @@ jobs:
       - name: Code coverage with pytest
         run: |
           pytest --cov
-
-      - name: Build libray
-        run: |
-          python -m build
 
       - name: Final Step
         id: ci-final-step
