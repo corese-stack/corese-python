@@ -80,15 +80,14 @@ This command builds the packages into `./dist` directory. Note that the custom `
 
 The custom `sdist` command adds the following steps:
 
-* compile the `corese-python-x.y.z-jar-with-dependencies.jar` file using the Gradle build tool. This jar file is required to run Corese using the `Py4J` bridge.
-* download the `corese-core-x.y.z-jar-with-dependencies.jar` file from the Maven repository. This jar file is required to run Corese using the `JPype` bridge.
-* copy the jar files to the `./resources` directory.
-
-
+* compiling the `corese-python-x.y.z-jar-with-dependencies.jar` file using the Gradle build tool. This jar file is required to run Corese using the `Py4J` bridge.
+* downloading the `corese-core-x.y.z-jar-with-dependencies.jar` file from the Maven repository. This jar file is required to run Corese using the `JPype` bridge.
+* copying the jar files to the `./resources` directory.
 
 > [!NOTE]
 > - do not run `python setup.py` that will not build the full package.
-> - the versions of `pycorese`, `corese-python`, `corese-core` are maintained separately.
+> - the versions of `pycorese` and Java libraries are maintained separately.
+> - `corese-python` version should be the same as `corese-core` it depends on, for simplicity reasons. 
 > -  the commands for the first two steps are provided in the [Obtaining Java libraries manually](#obtain-java-libraries-manually) section.
 
 ## Testing the package
