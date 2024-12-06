@@ -14,7 +14,7 @@ authors = [
     { name = "Jean-Luc Szpyrka", email = "jean-luc.szpyrka@inria.fr" },
     { name = "Remi Ceres", email = "remi.ceres@inria.fr"}
 ]
-description = "corese-python: Corese Python API for Corese SPARQL engine."
+description = "pycorese: Python API for CORESE Semantic Web platform"
 keywords = ["Query Engine", "SPARQL", "SHACL", "RDF",
             "RDFS", "OWL", "Reasoning", "Knowledge Graph"]
 readme = "README.md"
@@ -27,10 +27,16 @@ dependencies = [
 ]
 
 classifiers = [
+    "Development Status :: 4 - Beta",
     "License :: OSI Approved :: GNU Lesser General Public License v2 (LGPLv2)",
+    "Operating System :: OS Independent",
     "Intended Audience :: Science/Research",
     "Topic :: Scientific/Engineering",
-    "Programming Language :: Python :: 3"
+    "Topic :: Software Development :: Libraries",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
 ]
 
 [project.urls]
@@ -59,7 +65,8 @@ where = ["src"]
 
 # Adding the Java jars to the package.
 # The jar files are built by the custom build step in the setup.py.
-# The files are built/downloaded by the gradle build system 
-# and copied to the `resources` directory.
+# One jar is built by the gradle build system,
+# the other is downloaded from the maven repository.
+# Both are copied to the `resources` directory.
 [tool.setuptools.data-files]
 "share/pycorese" = ["resources/*.jar"]
