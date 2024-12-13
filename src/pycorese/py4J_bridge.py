@@ -68,7 +68,7 @@ class Py4JBridge:
             pass
 
         if version is None:
-            loggingWarning(f"Py4j: the CORESE library is too old. coreseVersion() is available since 4.6.0 only.")
+            logging.Warning(f"Py4j: the CORESE library is too old. coreseVersion() is available since 4.6.0 only.")
 
         return version
 

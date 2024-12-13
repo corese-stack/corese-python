@@ -1,17 +1,18 @@
-CORESE APIs
+.. The links for corese-command and corese-server are not available in the corese-stack at the moment.
+.. Using the old repository documentation at https://wimmics.github.io/corese.
+
+Corese APIs
 ###########
 
 .. toctree::
   :hidden:
-
-   Python API
 
 .. grid:: 2
 
     .. grid-item-card::
       :shadow: sm
       :class-card: sd-rounded-3
-      :link: https://corese-stack.github.io/corese-core/
+      :link: https://corese-stack.github.io/corese-core/v4.6.0/java_api/library_root.html
 
       Corese Java API
       ^^^^^^^^^^^^^^^^^^^^^^^
@@ -31,7 +32,7 @@ CORESE APIs
     .. grid-item-card::
       :shadow: sm
       :class-card: sd-rounded-3
-      :link: https://corese-stack.github.io/corese-command/
+      :link: https://wimmics.github.io/corese/cli_ref/cli_root.html
 
       Corese command-line interface
       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -47,7 +48,7 @@ CORESE APIs
     .. grid-item-card::
       :shadow: sm
       :class-card: sd-rounded-3
-      :link: https://github.com/corese-stack/corese-server/
+      :link: https://wimmics.github.io/corese/rest_api/api_root.html
 
       Corese REST API
       ^^^^^^^^^^^^^^^^^^^^^^^
@@ -62,7 +63,7 @@ CORESE APIs
     .. grid-item-card::
       :shadow: sm
       :class-card: sd-rounded-3
-      :link: https://github.com/corese-stack/corese-python/
+      :link: python_api/api_root.html
 
       Corese Python API
       ^^^^^^^^^^^^^^^^^^^^^^^
@@ -73,4 +74,4 @@ CORESE APIs
       * run SPARQL queries (SELECT, CONSTRUCT, ASK, UPDATE)
       * validate RDF data against SHACL shapes
 
-            in development...
+      and more...
