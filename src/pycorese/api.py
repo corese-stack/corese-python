@@ -1,6 +1,3 @@
-"""The module provides the capability to launch corese-python jar."""
-
-
 import pandas as pd
 from io import StringIO
 import os
@@ -29,14 +26,20 @@ def _is_turtle(content):
 
 class CoreseAPI:
     """
-    Python implementation of Corese API.
+    Simplified API to leverage functionality of Corese Java library (``corese-core``).
 
-      :param bridge: Bridge name to use for Java integration ('py4j' or 'jpype'). Default is 'py4j'.
+    Parameters
+    ----------
+    java_bridge : str, optional
+        Package name to use for Java integration. Options: 'py4j', 'jpype'. Default is 'py4j'.
+    corese_path : str, optional
+        Path to the corese-python library. If not specified (default), the jar
+        file that was installed with the package is used.
     """
 
     def __init__(self,
                  java_bridge: str = 'py4j',
-                 corese_path: str = None):
+                 corese_path: str|None = None):
 
         if java_bridge.lower() not in ['py4j', 'jpype']:
             raise ValueError('Invalid java bridge. Only "py4j" and "jpype" are supported.')
@@ -46,24 +49,39 @@ class CoreseAPI:
         self.java_gateway = None
         self._bridge = None
 
-        self.Graph = None
-        self.QueryProcess = None
-        self.ResultFormat = None
-        self.Load = None
+        # This is a minimum set of Corese classes required for the API to work
+        self.Graph = None        # Corese ``fr.inria.corese.core.Graph`` object
+        self.QueryProcess = None # Corese ``fr.inria.corese.core.query.QueryProcess`` object
+        self.ResultFormat = None # Corese ``fr.inria.corese.core.print.ResultFormat`` object
+        self.Load = None         # Corese ``fr.inria.corese.core.load.Load`` object
+        self.RuleEngine = None   # Corese ``fr.inria.corese.core.rule.RuleEngine`` object
+        self.Transformer = None  # Corese ``fr.inria.corese.core.transform.Transformer`` object
+        self.Shacl = None        # Corese ``fr.inria.corese.core.shacl.Shacl`` object
+        self.DataManager = None  # Corese ``fr.inria.corese.core.storage.api.dataManager.DataManager`` object
+        self.CoreseGraphDataManager = None # Corese ``fr.inria.corese.core.storage.CoreseGraphDataManager`` object
+        self.CoreseGraphDataManagerBuilder = None # Corese ``fr.inria.corese.core.storage.CoreseGraphDataManagerBuilder`` object
 
-    def coreseVersion(self):
+
+    def coreseVersion(self)-> str|None:
         """
-        returns the corese-version
+        Get the version of the corese-core library.
 
-        Remark: corese engine must be loaded first.
+        Notes
+        -----
+        Corese library  must be loaded first.
 
-        TODO: implement this to call the coreseVersion() from
-        the corese engine (at the moment this method is staic and
-        may return bad result)
+        Returns
+        -------
+        str
+            The version of the   ``corese-core``   library used. If the library is not loaded, returns None.
         """
+
+        #TODO: implement this to call the coreseVersion() from
+        # the corese engine (at the moment this method is static and
+        # may return bad result)
 
         if self._bridge is None:
-            print(f"Corese engine not loaded yet")
+            print("Corese engine is not loaded yet")
             return None
 
         return self._bridge.coreseVersion()
@@ -75,7 +93,9 @@ class CoreseAPI:
         It's not necessary to call this method, as the library is automatically
         unloaded when the Python interpreter exits.
 
-        WARNING: After unloading Corese bridged by JPype it is not possible to restart it.
+        Warning
+        -------
+        After unloading Corese bridged by ``JPype`` it is not possible to restart it.
         """
         self._bridge.unloadCorese()
 
@@ -87,8 +107,9 @@ class CoreseAPI:
         self.Load = None
 
     def loadCorese(self) -> None:
-        """Load Corese library into JVM and expose the Corese classes."""
-
+        """Load Corese library into JVM and expose the Corese classes.
+        """
+        #TODO: refactor
         if self.java_bridge == 'py4j':
 
             from .py4J_bridge import Py4JBridge
@@ -136,21 +157,20 @@ class CoreseAPI:
     #TODO: Add support for the other RDF formats
     def loadRDF(self, rdf: str, graph=None)-> object:
         """
-        Load RDF file/string into Corese graph.
+        Load RDF file/string into Corese graph. Supported formats are RDF/XML and Turtle.
 
         Parameters
         ----------
-        rdf: str
-            Path to the RDF file or RDF content.
-        graph : object (fr.inria.corese.core.Graph or
-                        fr.inria.corese.core.storage.CoreseGraphDataManager), optional
-            Corese graph object. Default is None.
+        rdf : str
+            Path to the RDF file or a string with RDF content.
+        graph : object, optional
+            Corese object of either ``fr.inria.corese.core.Graph`` or ``fr.inria.core.storage.CoreseGraphDataManager`` type.
+            If an object is not provided (default), new Graph and GraphManager will be created.
 
         Returns
         -------
-        object (fr.inria.corese.core.Graph or
-                fr.inria.core.storage.CoreseGraphDataManager)
-            Corese Graph object.
+        object
+            Corese ``fr.inria.core.storage.CoreseGraphDataManager`` object.
         """
         if not self.java_gateway:
             self.loadCorese()
@@ -179,56 +199,52 @@ class CoreseAPI:
         return graph_mgr
 
     def loadRuleEngine(self, graph: object,
-                        profile: object,
-                        replace:bool = False)-> object:
-            """
-            Load rule engine for the given graph.
-
-            Parameters
-            ----------
-            graph : object (fr.inria.corese.core.Graph or fr.inria.core.storage.CoreseGraphDataManager)
-                Corese graph object or DataManager.
-            profile : object
-                Profile object for the rule engine. Accepted values:
-                - RuleEngine.Profile.RDFS
-                - RuleEngine.Profile.OWLRL
-                - RuleEngine.Profile.OWLRL_LITE
-                - RuleEngine.Profile.OWLRL_EXT
-            replace : bool, optional
-                Replace the existing rule engine. Default is False.
-
-            Returns
-            -------
-            object (fr.inria.core.rule.RuleEngine)
-                RuleEngine object.
-            """
-            assert self.RuleEngine, 'Corese classes are not loaded properly.'
-            assert graph, 'Graph object is required.'
-            assert profile, 'Profile object is required.'
-            #TODO: assert profile is valid
-
-            if replace:
-                self.resetRuleEngine(graph)
-
-            rule_engine = self.RuleEngine.create(graph)
-
-            rule_engine.setProfile(profile)
-            rule_engine.process()
-
-            return rule_engine
-
-    def resetRuleEngine(self, graph: object)-> None:
+                             profile: object,
+                             replace:bool = False)-> object:
         """
-        Reset the rule engine for the given graph.
+        Load the rule engine for a given graph.
 
         Parameters
         ----------
-        graph : object (fr.inria.corese.core.Graph or fr.inria.core.storage.CoreseGraphDataManager)
-            Corese graph object or DataManager.
+        graph : object
+            Corese Graph or DataManager object
+        profile : object
+            Profile object for the rule engine. Accepted values:
+            ``RuleEngine.Profile.RDFS``,
+            ``RuleEngine.Profile.OWLRL``,
+            ``RuleEngine.Profile.OWLRL_LITE``,
+            ``RuleEngine.Profile.OWLRL_EXT``
+        replace : bool, optional
+            Replace the existing rule engine. Default is False.
 
         Returns
         -------
-        None
+        object
+            Corese ``fr.inria.core.rule.RuleEngine`` object.
+        """
+        assert self.RuleEngine, 'Corese classes are not loaded properly.'
+        assert graph, 'Graph object is required.'
+        assert profile, 'Profile object is required.'
+        #TODO: assert profile is valid
+
+        if replace:
+            self.resetRuleEngine(graph)
+
+        rule_engine = self.RuleEngine.create(graph)
+
+        rule_engine.setProfile(profile)
+        rule_engine.process()
+
+        return rule_engine
+
+    def resetRuleEngine(self, graph: object)-> None:
+        """
+        Reset the rule engine for a given graph.
+
+        Parameters
+        ----------
+        graph : object
+            Corese Graph or DataManager object
         """
         assert self.RuleEngine, 'Corese classes are not loaded properly.'
         assert graph, 'Graph object is required.'
@@ -241,23 +257,24 @@ class CoreseAPI:
                     query: str ='SELECT * WHERE {?s ?p ?o} LIMIT 5',
                     return_dataframe: bool =True)-> object|pd.DataFrame:
         """
-        Execute SPARQL SELECT or ASK query on Corese graph.
+        Execute SPARQL SELECT or ASK query on Corese graph. Optionally return the result as DataFrame.
 
         Parameters
         ----------
-        graph : object (fr.inria.corese.core.Graph)
-            Corese graph object.
-        prefixes : str or list
-            SPARQL prefixes. Default is None.
-        query : str
-            SPARQL query. Default is 'SELECT * WHERE {?s ?p ?o} LIMIT 5'.
-        return_dataframe : bool, optional. Default is True.
+        graph : object
+            Corese Graph or DataManager object
+        prefixes : str or list, optional
+            namespace prefixes. Default is None.
+        query : str, optional
+            SPARQL query. By default five first triples of the graph are returned.
+        return_dataframe : bool, optional
+            Return the result as a DataFrame. Default is True.
 
         Returns
         -------
-        object (fr.inria.core.print.ResultFormat)
-            Result of the SPARQL
-
+        object or pd.DataFrame
+            Result of the SPARQL query in CSV-formatted  ``fr.inria.core.print.ResultFormat``
+            object or a DataFrame.
         """
         assert self.QueryProcess, 'Corese classes are not loaded properly.'
         assert self.ResultFormat, 'Corese classes are not loaded properly.'
@@ -285,21 +302,20 @@ class CoreseAPI:
     def toDataFrame(self, queryResult: object,
                             dtypes: list|dict|None = None)-> pd.DataFrame:
         """
-        Convert Corese ResultFormat object to pandas DataFrame.
+        Convert Corese ResultFormat object to ``pandas.DataFrame``.
 
         Parameters
         ----------
-        queryResult : csv resultFormat object (fr.inria.core.print.ResultFormat)
-            ResultFormat object.
+        queryResult : object
+            CSV-formatted  ``fr.inria.core.print.ResultFormat`` object.
         dtypes : list or dict, optional
-            Data types for the columns in the format required by Pandas
-            read_csv method https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html.
-            Default is None.
+            Optional column data types for the columns in the format as in ``panads.read_csv`` method.
+            https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html
 
         Returns
         -------
         pd.DataFrame
-            Result in DataFrame format.
+            Corese object converted to a DataFrame.
         """
         assert self.ResultFormat, 'Corese classes are not loaded properly.'
 
@@ -325,18 +341,18 @@ class CoreseAPI:
 
         Parameters
         ----------
-        graph : object (fr.inria.corese.core.Graph)
-            Corese graph object.
-        prefixes : str or list
-            SPARQL prefixes. Default is None.
-        query : str
+        graph : object
+            Corese Graph or DataManager object
+        prefixes : str or list, optional
+            namespace prefixes. Default is None.
+        query : str, optional
             SPARQL query. Default is empty string resulting in empty graph.
         merge : bool, optional
-            Merge the result with the existing graph. Default is False.
+            Option to merge the result with the existing graph. Default is False.
 
         Returns
         -------
-        object (fr.inria.core.print.ResultFormat)
+        object
             Result of the SPARQL CONSTRUCT query in RDF/XML format.
         """
         assert self.QueryProcess, 'Corese classes are not loaded properly.'
@@ -367,14 +383,15 @@ class CoreseAPI:
 
         Parameters
         ----------
-        rdf : object (fr.inria.corese.core.Graph)
-            Corese graph object.
+        rdf : object
+            Corese RDF object
 
         Returns
         -------
         str
             RDF in Turtle format.
         """
+
         assert self.Transformer, 'Corese classes are not loaded properly.'
 
         # TODO: ASk Remi about getGraph, the Graph and the right way to do the transformation
@@ -390,20 +407,22 @@ class CoreseAPI:
         """
         Validate RDF graph against SHACL shape.
 
-        This Version supports only Turtle format.
+        This version supports only Turtle format to define a SHACL shape.
 
         Parameters
         ----------
-        graph : object (fr.inria.corese.core.Graph)
-            Corese graph object.
-        shacl_shape_ttl : str
-            SHACL shape in Turtle format.
+        graph : object
+            Corese Graph or DataManager object
         prefixes : str or list, optional
-            Prefixes. Default is None.
+            namespace prefixes. Default is None.
+        shacl_shape_ttl : str, optional
+            SHACL shape in Turtle format. If not provided, the validation will be skipped.
+        return_dataframe : bool, optional
+            Return the validation report as a DataFrame. Default is False.
 
         Returns
         -------
-        str
+        object
             SHACL validation report in Turtle format.
         """
         assert self.Shacl, 'Corese classes are not loaded properly.'
@@ -442,7 +461,7 @@ class CoreseAPI:
     # Parse validation report
     def shaclReportToDataFrame(self, validation_report: str)-> pd.DataFrame:
         """
-        Convert SHACL validation report to pandas DataFrame.
+        Convert SHACL validation report to ``pandas.DataFrame``.
 
         Parameters
         ----------
@@ -452,7 +471,7 @@ class CoreseAPI:
         Returns
         -------
         pd.DataFrame
-            Validation report in DataFrame format.
+            Validation report as a DataFrame.
         """
         prefix_shacl = f'@prefix sh: <{self.Namespaces.SHACL}> .'
 

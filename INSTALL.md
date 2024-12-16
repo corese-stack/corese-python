@@ -87,7 +87,7 @@ The custom `sdist` command adds the following steps:
 > [!NOTE]
 > - do not run `python setup.py` that will not build the full package.
 > - the versions of `pycorese` and Java libraries are maintained separately.
-> - `corese-python` version should be the same as `corese-core` it depends on, for simplicity reasons. 
+> - `corese-python` version should be the same as `corese-core` it depends on, for simplicity reasons.
 > -  the commands for the first two steps are provided in the [Obtaining Java libraries manually](#obtain-java-libraries-manually) section.
 
 ## Testing the package
@@ -134,7 +134,7 @@ pip install dist/pycorese-0.1.1.tar.gz
 
 ## Verifying the installation
 
-```
+```bash
 $ pip list  | grep corese
 pycorese                  0.1.1
 
@@ -148,13 +148,13 @@ $ python -c 'import pycorese'
 
 Without installing the package you can run the following command (the default Java bridge is `py4j`):
 
-```
+```bash
 ./examples/simple_query.py -j $PWD/build/libs/corese-python-4.6.0-jar-with-dependencies.jar
 ```
 
 or change the bridge to `jpype`:
 
-```
+```bash
 ./examples/simple_query.py -b jpype -j $PWD/build/libs/corese-core-4.6.0-jar-with-dependencies.jar
 ```
 

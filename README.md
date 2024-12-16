@@ -22,7 +22,7 @@
 
 **pycorese** is a Python package that provides a simple way to integrate the [corese-core](https://github.com/corese-stack/corese-core) Java library into Python applications.
 
-**pycorese** provides an intuitive API to interact with Corese's capabilities such as storage, SPARQL engine, RDFS and OWL reasoning, and SHACL validation.
+**pycorese** offers an intuitive API to interact with Corese's capabilities such as storage, SPARQL engine, RDFS and OWL reasoning, and SHACL validation.
 
 **pycorese** unlocks the potential of Semantic Web stack for applications such as semantic data analysis, knowledge graph construction, and Machine Learning.
 
