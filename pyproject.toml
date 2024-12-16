@@ -14,7 +14,7 @@ authors = [
     { name = "Anna Bobasheva", email = "anna.bobasheva@inria.fr" },
     { name = "Jean-Luc Szpyrka", email = "jean-luc.szpyrka@inria.fr" },
     { name = "Remi Ceres", email = "remi.ceres@inria.fr"},
-    { name = "Erwan Demairy", email = erwan.demairy@inria.fr"},
+    { name = "Erwan Demairy", email = "erwan.demairy@inria.fr"},
 ]
 description = "pycorese: Python API for CORESE Semantic Web platform"
 keywords = ["Query Engine", "SPARQL", "SHACL", "RDF",
