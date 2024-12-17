@@ -27,7 +27,6 @@ jobs:
     - name: Build Sphinx documentation with multiversion
       run: |
         source /builds/miniconda3/etc/profile.d/conda.sh
-        pip install -r docs/requirements.txt
         conda activate corese-core-documentation
         sphinx-build docs/source/ build/html/dev/
         ghp-import build/html/dev/ -p -x dev
