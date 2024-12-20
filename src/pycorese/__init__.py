@@ -1,10 +1,17 @@
 """The module provides a wrapper to corese library (Software platform for the Semantic Web of Linked Data)"""
 
-
-__version__ = '1.0.1'
-__version_info__ = tuple([ int(num) for num in __version__.split('.')])
-
 from .api import CoreseAPI
+
+all = ['CoreseAPI']
+
+# Read version of the package from the file
+# that is in the project rood directory
+from pathlib import Path
+
+with open(Path(__file__).parent / "VERSION.txt") as _f:
+    __version__ = _f.read().strip()
+
+__version_info__ = tuple([ int(num) for num in __version__.split('.')])
 
 import logging
 
