@@ -61,7 +61,16 @@ class Py4JBridge:
         """
         get corese version from the loaded corese engine
         """
-        return corese_version
+        version = None
+        try:
+            version = corese.java_gateway.jvm.fr.inria.corese.core.util.CoreseInfo.getVersion()
+        except:
+            pass
+
+        if version is None:
+            logging.Warning(f"Py4j: the CORESE library is too old. coreseVersion() is available since 4.6.0 only.")
+
+        return version
 
     def unloadCorese(self):
         """
