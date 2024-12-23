@@ -76,21 +76,18 @@ Build the package:
 python -m build
 ```
 
-This command builds the packages into `./dist` directory. Note that the custom `sdist` command is implemented in [setup.py](./setup.py).
+which build the packages into `./dist`
 
-The custom `sdist` command adds the following steps:
+Remark:
+- do not run `python setup.py` which will not build the full package
+- the described install process will:
 
-* compiling the `corese-python-x.y.z-jar-with-dependencies.jar` file using the Gradle build tool. This jar file is required to run Corese using the `Py4J` bridge.
-* downloading the `corese-core-x.y.z-jar-with-dependencies.jar` file from the Maven repository. This jar file is required to run Corese using the `JPype` bridge.
-* copying the jar files to the `./resources` directory.
+ 1/ compile the `corese-python-4.x.y-jar-with-dependencies.jar` file
+ 2/ download the `corese-core-4.x.y-jar-with-dependencies.jar` file from maven
 
-> [!NOTE]
-> - do not run `python setup.py` that will not build the full package.
-> - the versions of `pycorese` and Java libraries are maintained separately.
-> - `corese-python` version should be the same as `corese-core` it depends on, for simplicity reasons.
-> -  the commands for the first two steps are provided in the [Obtaining Java libraries manually](#obtain-java-libraries-manually) section.
+- these two files are necessary to run the wrappers and are part of the distribution
 
-## Testing the package
+### test
 
 From the top directory, or in the `./tests` sub-directory run the command:
 
@@ -140,22 +137,24 @@ pycorese                  0.1.1
 
 $ python -c 'import pycorese'
 ```
-> [!NOTE]
-> - change the version number accordingly.
 
+## Appendix 1: run local python example
 
-## Run a simple example
+### Conda environment
 
-Without installing the package you can run the following command (the default Java bridge is `py4j`):
+If necessary, we provide a conda environment:
 
 ```bash
-./examples/simple_query.py -j $PWD/build/libs/corese-python-4.6.0-jar-with-dependencies.jar
+conda env update -f pkg/env/corese-python.yaml
+conda activate corese-python
 ```
 
-or change the bridge to `jpype`:
+This makes available the python libraries: `pandas`, `py4j`, `jpype1`
 
-```bash
-./examples/simple_query.py -b jpype -j $PWD/build/libs/corese-core-4.6.0-jar-with-dependencies.jar
+### run a simple example using py4j bridge (without installing)
+
+```
+./python_examples/simple_query.py -j $PWD/build/libs/corese-python-4.6.0-jar-with-dependencies.jar
 ```
 
 <!--  **_NOTE:_** -->

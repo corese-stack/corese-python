@@ -19,6 +19,7 @@ authors = [
     { name = "Erwan Demairy", email = "erwan.demairy@inria.fr"},
 ]
 description = "pycorese: Python API for CORESE Semantic Web platform"
+description = "pycorese: Python API for CORESE Semantic Web platform"
 keywords = ["Query Engine", "SPARQL", "SHACL", "RDF",
             "RDFS", "OWL", "Reasoning", "Knowledge Graph"]
 
@@ -32,10 +33,17 @@ dependencies = [
 
 classifiers = [
     "Development Status :: 4 - Beta",
+    "Development Status :: 4 - Beta",
     "License :: OSI Approved :: GNU Lesser General Public License v2 (LGPLv2)",
+    "Operating System :: OS Independent",
     "Operating System :: OS Independent",
     "Intended Audience :: Science/Research",
     "Topic :: Scientific/Engineering",
+    "Topic :: Software Development :: Libraries",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Topic :: Software Development :: Libraries",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
@@ -68,11 +76,8 @@ include-package-data = true
 where = ["src"]
 
 # Adding the Java jars to the package.
-# The jar files are obtained by the custom `sdist` step in the setup.py.
-# (1) corese-python-{version}-with-dependencies.jar is built by the gradle build system,
-# (2) corese-core-{version}-with-dependencies.jar is downloaded from the maven repository
-#     (https://mvnrepository.com/artifact/fr.inria.corese/corese-core).
-# Both files are copied to the `resources` directory
-# and installed to the `share/pycorese` directory of the venv.
+# The jar files are built by the custom build step in the setup.py.
+# The files are built/downloaded by the gradle build system
+# and copied to the `resources` directory.
 [tool.setuptools.data-files]
 "share/pycorese" = ["resources/*.jar"]
