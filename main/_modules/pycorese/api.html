@@ -1,0 +1,1074 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pycorese.api &#8212; corese-python  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=0675bd48" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pycorese/api';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://corese-stack.github.io/corese-python/switcher.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'v\d+\.\d+\.\d+';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../../_static/Corese-square-logo-transparent.svg"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/corese.svg" class="logo__image only-light" alt="corese-python  documentation - Home"/>
+    <script>document.write(`<img src="../../_static/corese.svg" class="logo__image only-dark" alt="corese-python  documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../user_guide.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../python_api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../dev_install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../corese.html">
+    About Corese
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/corese-stack/corese-python" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-github-square fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../user_guide.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../python_api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../dev_install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../corese.html">
+    About Corese
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/corese-stack/corese-python" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-github-square fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">pycorese.api</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for pycorese.api</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
+
+<span class="k">def</span> <span class="nf">_isFile</span><span class="p">(</span><span class="nb">input</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="n">file_path_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;^(?:[a-zA-Z]:</span><span class="se">\\</span><span class="s1">|\.{1,2}[</span><span class="se">\\</span><span class="s1">\/]|\/)?(?:[\w\-\s]+[</span><span class="se">\\</span><span class="s1">\/]?)+[\w\-\s]+\.[\w]+$&#39;</span>
+
+    <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">file_path_pattern</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="nb">input</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The file </span><span class="si">{</span><span class="nb">input</span><span class="si">}</span><span class="s2"> does not exist.&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="kc">False</span>
+
+<span class="k">def</span> <span class="nf">_is_rdf_xml</span><span class="p">(</span><span class="n">content</span><span class="p">):</span>
+    <span class="n">rdf_xml_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;^\s*&lt;\?xml.*\?&gt;.*&lt;rdf:RDF&#39;</span>
+    <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">rdf_xml_pattern</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">DOTALL</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+
+<span class="k">def</span> <span class="nf">_is_turtle</span><span class="p">(</span><span class="n">content</span><span class="p">):</span>
+    <span class="n">turtle_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;(@prefix|@base|&lt;[^&gt;]+&gt;\s*&lt;[^&gt;]+&gt;\s*&lt;[^&gt;]+&gt;|&lt;[^&gt;]+&gt;\s*&lt;[^&gt;]+&gt;\s*&quot;[^&quot;]*&quot;)&#39;</span>
+    <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">turtle_pattern</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+
+
+<div class="viewcode-block" id="CoreseAPI">
+<a class="viewcode-back" href="../../python_api/index.html#pycorese.api.CoreseAPI">[docs]</a>
+<span class="k">class</span> <span class="nc">CoreseAPI</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Simplified API to leverage functionality of Corese Java library (``corese-core``).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    java_bridge : str, optional</span>
+<span class="sd">        Package name to use for Java integration. Options: &#39;py4j&#39;, &#39;jpype&#39;. Default is &#39;py4j&#39;.</span>
+<span class="sd">    corese_path : str, optional</span>
+<span class="sd">        Path to the corese-python library. If not specified (default), the jar</span>
+<span class="sd">        file that was installed with the package is used.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">java_bridge</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;py4j&#39;</span><span class="p">,</span>
+                 <span class="n">corese_path</span><span class="p">:</span> <span class="nb">str</span><span class="o">|</span><span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="n">java_bridge</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;py4j&#39;</span><span class="p">,</span> <span class="s1">&#39;jpype&#39;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid java bridge. Only &quot;py4j&quot; and &quot;jpype&quot; are supported.&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">corese_path</span> <span class="o">=</span> <span class="n">corese_path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">java_bridge</span> <span class="o">=</span> <span class="n">java_bridge</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">java_gateway</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bridge</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># This is a minimum set of Corese classes required for the API to work</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Graph</span> <span class="o">=</span> <span class="kc">None</span>        <span class="c1"># Corese ``fr.inria.corese.core.Graph`` object</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">QueryProcess</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># Corese ``fr.inria.corese.core.query.QueryProcess`` object</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ResultFormat</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># Corese ``fr.inria.corese.core.print.ResultFormat`` object</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Load</span> <span class="o">=</span> <span class="kc">None</span>         <span class="c1"># Corese ``fr.inria.corese.core.load.Load`` object</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">RuleEngine</span> <span class="o">=</span> <span class="kc">None</span>   <span class="c1"># Corese ``fr.inria.corese.core.rule.RuleEngine`` object</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Transformer</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># Corese ``fr.inria.corese.core.transform.Transformer`` object</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Shacl</span> <span class="o">=</span> <span class="kc">None</span>        <span class="c1"># Corese ``fr.inria.corese.core.shacl.Shacl`` object</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">DataManager</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># Corese ``fr.inria.corese.core.storage.api.dataManager.DataManager`` object</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">CoreseGraphDataManager</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># Corese ``fr.inria.corese.core.storage.CoreseGraphDataManager`` object</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">CoreseGraphDataManagerBuilder</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># Corese ``fr.inria.corese.core.storage.CoreseGraphDataManagerBuilder`` object</span>
+
+
+<div class="viewcode-block" id="CoreseAPI.coreseVersion">
+<a class="viewcode-back" href="../../python_api/index.html#pycorese.api.CoreseAPI.coreseVersion">[docs]</a>
+    <span class="k">def</span> <span class="nf">coreseVersion</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">-&gt;</span> <span class="nb">str</span><span class="o">|</span><span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the version of the corese-core library.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        Corese library  must be loaded first.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            The version of the   ``corese-core``   library used. If the library is not loaded, returns None.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1">#TODO: implement this to call the coreseVersion() from</span>
+        <span class="c1"># the corese engine (at the moment this method is static and</span>
+        <span class="c1"># may return bad result)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bridge</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Corese engine is not loaded yet&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bridge</span><span class="o">.</span><span class="n">coreseVersion</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="CoreseAPI.unloadCorese">
+<a class="viewcode-back" href="../../python_api/index.html#pycorese.api.CoreseAPI.unloadCorese">[docs]</a>
+    <span class="k">def</span> <span class="nf">unloadCorese</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Explicitly unload Corese library.</span>
+
+<span class="sd">        It&#39;s not necessary to call this method, as the library is automatically</span>
+<span class="sd">        unloaded when the Python interpreter exits.</span>
+
+<span class="sd">        Warning</span>
+<span class="sd">        -------</span>
+<span class="sd">        After unloading Corese bridged by ``JPype`` it is not possible to restart it.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bridge</span><span class="o">.</span><span class="n">unloadCorese</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">java_gateway</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">Graph</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">QueryProcess</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ResultFormat</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Load</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="CoreseAPI.loadCorese">
+<a class="viewcode-back" href="../../python_api/index.html#pycorese.api.CoreseAPI.loadCorese">[docs]</a>
+    <span class="k">def</span> <span class="nf">loadCorese</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Load Corese library into JVM and expose the Corese classes.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1">#TODO: refactor</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">java_bridge</span> <span class="o">==</span> <span class="s1">&#39;py4j&#39;</span><span class="p">:</span>
+
+            <span class="kn">from</span> <span class="nn">.py4J_bridge</span> <span class="kn">import</span> <span class="n">Py4JBridge</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_bridge</span> <span class="o">=</span> <span class="n">Py4JBridge</span><span class="p">(</span><span class="n">corese_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">corese_path</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">java_gateway</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bridge</span><span class="o">.</span><span class="n">loadCorese</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="kn">from</span> <span class="nn">.jpype_bridge</span> <span class="kn">import</span> <span class="n">JPypeBridge</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_bridge</span> <span class="o">=</span> <span class="n">JPypeBridge</span><span class="p">(</span><span class="n">corese_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">corese_path</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">java_gateway</span> <span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_bridge</span><span class="o">.</span><span class="n">loadCorese</span><span class="p">()</span>
+
+        <span class="c1"># This is a minimum set of classes required for the API to work</span>
+        <span class="c1"># if we need more classes we should think about how to expose</span>
+        <span class="c1"># them without listing every single one of them here</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bridge</span><span class="o">.</span><span class="n">Graph</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Load</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bridge</span><span class="o">.</span><span class="n">Load</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">QueryProcess</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bridge</span><span class="o">.</span><span class="n">QueryProcess</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ResultFormat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bridge</span><span class="o">.</span><span class="n">ResultFormat</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">RuleEngine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bridge</span><span class="o">.</span><span class="n">RuleEngine</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Transformer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bridge</span><span class="o">.</span><span class="n">Transformer</span>
+
+        <span class="c1"># Classes to manage Graph(s) with different storage options</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">DataManager</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bridge</span><span class="o">.</span><span class="n">DataManager</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">CoreseGraphDataManager</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bridge</span><span class="o">.</span><span class="n">CoreseGraphDataManager</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">CoreseGraphDataManagerBuilder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bridge</span><span class="o">.</span><span class="n">CoreseGraphDataManagerBuilder</span>
+
+        <span class="c1"># Classes to manage SHACL validation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Shacl</span>  <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bridge</span><span class="o">.</span><span class="n">Shacl</span>
+
+        <span class="c1"># Define the known namespaces</span>
+        <span class="n">Namespace</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;Namespace&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;RDF&#39;</span><span class="p">,</span> <span class="s1">&#39;RDFS&#39;</span><span class="p">,</span> <span class="s1">&#39;SHACL&#39;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Namespaces</span> <span class="o">=</span> <span class="n">Namespace</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_bridge</span><span class="o">.</span><span class="n">RDF</span><span class="o">.</span><span class="n">RDF</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_bridge</span><span class="o">.</span><span class="n">RDFS</span><span class="o">.</span><span class="n">RDFS</span><span class="p">,</span>
+            <span class="s1">&#39;http://www.w3.org/ns/shacl#&#39;</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">SHACL_REPORT_QUERY</span><span class="o">=</span><span class="s1">&#39;&#39;&#39;SELECT ?o ?p ?s</span>
+<span class="s1">                                   WHERE { ?o a sh:ValidationResult.</span>
+<span class="s1">                                           ?o ?p ?s. }&#39;&#39;&#39;</span></div>
+
+
+
+    <span class="c1">#TODO: Add support for the other RDF formats</span>
+<div class="viewcode-block" id="CoreseAPI.loadRDF">
+<a class="viewcode-back" href="../../python_api/index.html#pycorese.api.CoreseAPI.loadRDF">[docs]</a>
+    <span class="k">def</span> <span class="nf">loadRDF</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rdf</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">graph</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span><span class="o">-&gt;</span> <span class="nb">object</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Load RDF file/string into Corese graph. Supported formats are RDF/XML and Turtle.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        rdf : str</span>
+<span class="sd">            Path to the RDF file or a string with RDF content.</span>
+<span class="sd">        graph : object, optional</span>
+<span class="sd">            Corese object of either ``fr.inria.corese.core.Graph`` or ``fr.inria.core.storage.CoreseGraphDataManager`` type.</span>
+<span class="sd">            If an object is not provided (default), new Graph and GraphManager will be created.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        object</span>
+<span class="sd">            Corese ``fr.inria.core.storage.CoreseGraphDataManager`` object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">java_gateway</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">loadCorese</span><span class="p">()</span>
+
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">Graph</span><span class="p">,</span> <span class="s1">&#39;Corese classes are not loaded properly.&#39;</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">Load</span><span class="p">,</span> <span class="s1">&#39;Corese classes are not loaded properly.&#39;</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">CoreseGraphDataManagerBuilder</span><span class="p">,</span> <span class="s1">&#39;Corese classes are not loaded properly.&#39;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">graph</span><span class="p">:</span>
+            <span class="n">graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+
+        <span class="n">graph_mgr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">CoreseGraphDataManagerBuilder</span><span class="p">()</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+
+        <span class="n">ld</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Load</span><span class="p">()</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">graph_mgr</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">_isFile</span><span class="p">(</span><span class="n">rdf</span><span class="p">):</span>
+            <span class="n">ld</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">rdf</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">_is_rdf_xml</span><span class="p">(</span><span class="n">rdf</span><span class="p">):</span>
+                <span class="n">ld</span><span class="o">.</span><span class="n">loadString</span><span class="p">(</span><span class="n">rdf</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Load</span><span class="o">.</span><span class="n">RDFXML_FORMAT</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">_is_turtle</span><span class="p">(</span><span class="n">rdf</span><span class="p">):</span>
+                <span class="n">ld</span><span class="o">.</span><span class="n">loadString</span><span class="p">(</span><span class="n">rdf</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Load</span><span class="o">.</span><span class="n">TURTLE_FORMAT</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unsupported RDF format. Only RDF/XML and Turtle are supported by this version&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">graph_mgr</span></div>
+
+
+<div class="viewcode-block" id="CoreseAPI.loadRuleEngine">
+<a class="viewcode-back" href="../../python_api/index.html#pycorese.api.CoreseAPI.loadRuleEngine">[docs]</a>
+    <span class="k">def</span> <span class="nf">loadRuleEngine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span>
+                             <span class="n">profile</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span>
+                             <span class="n">replace</span><span class="p">:</span><span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span><span class="o">-&gt;</span> <span class="nb">object</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Load the rule engine for a given graph.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        graph : object</span>
+<span class="sd">            Corese Graph or DataManager object</span>
+<span class="sd">        profile : object</span>
+<span class="sd">            Profile object for the rule engine. Accepted values:</span>
+<span class="sd">            ``RuleEngine.Profile.RDFS``,</span>
+<span class="sd">            ``RuleEngine.Profile.OWLRL``,</span>
+<span class="sd">            ``RuleEngine.Profile.OWLRL_LITE``,</span>
+<span class="sd">            ``RuleEngine.Profile.OWLRL_EXT``</span>
+<span class="sd">        replace : bool, optional</span>
+<span class="sd">            Replace the existing rule engine. Default is False.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        object</span>
+<span class="sd">            Corese ``fr.inria.core.rule.RuleEngine`` object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">RuleEngine</span><span class="p">,</span> <span class="s1">&#39;Corese classes are not loaded properly.&#39;</span>
+        <span class="k">assert</span> <span class="n">graph</span><span class="p">,</span> <span class="s1">&#39;Graph object is required.&#39;</span>
+        <span class="k">assert</span> <span class="n">profile</span><span class="p">,</span> <span class="s1">&#39;Profile object is required.&#39;</span>
+        <span class="c1">#TODO: assert profile is valid</span>
+
+        <span class="k">if</span> <span class="n">replace</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">resetRuleEngine</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+
+        <span class="n">rule_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">RuleEngine</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+
+        <span class="n">rule_engine</span><span class="o">.</span><span class="n">setProfile</span><span class="p">(</span><span class="n">profile</span><span class="p">)</span>
+        <span class="n">rule_engine</span><span class="o">.</span><span class="n">process</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">rule_engine</span></div>
+
+
+<div class="viewcode-block" id="CoreseAPI.resetRuleEngine">
+<a class="viewcode-back" href="../../python_api/index.html#pycorese.api.CoreseAPI.resetRuleEngine">[docs]</a>
+    <span class="k">def</span> <span class="nf">resetRuleEngine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span><span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reset the rule engine for a given graph.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        graph : object</span>
+<span class="sd">            Corese Graph or DataManager object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">RuleEngine</span><span class="p">,</span> <span class="s1">&#39;Corese classes are not loaded properly.&#39;</span>
+        <span class="k">assert</span> <span class="n">graph</span><span class="p">,</span> <span class="s1">&#39;Graph object is required.&#39;</span>
+
+        <span class="n">rule_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">RuleEngine</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">getGraph</span><span class="p">())</span>
+        <span class="n">rule_engine</span><span class="o">.</span><span class="n">remove</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="CoreseAPI.sparqlSelect">
+<a class="viewcode-back" href="../../python_api/index.html#pycorese.api.CoreseAPI.sparqlSelect">[docs]</a>
+    <span class="k">def</span> <span class="nf">sparqlSelect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span>
+                    <span class="n">prefixes</span><span class="p">:</span> <span class="nb">str</span><span class="o">|</span><span class="nb">list</span><span class="o">|</span><span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                    <span class="n">query</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span><span class="s1">&#39;SELECT * WHERE {?s ?p ?o} LIMIT 5&#39;</span><span class="p">,</span>
+                    <span class="n">return_dataframe</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">-&gt;</span> <span class="nb">object</span><span class="o">|</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Execute SPARQL SELECT or ASK query on Corese graph. Optionally return the result as DataFrame.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        graph : object</span>
+<span class="sd">            Corese Graph or DataManager object</span>
+<span class="sd">        prefixes : str or list, optional</span>
+<span class="sd">            namespace prefixes. Default is None.</span>
+<span class="sd">        query : str, optional</span>
+<span class="sd">            SPARQL query. By default five first triples of the graph are returned.</span>
+<span class="sd">        return_dataframe : bool, optional</span>
+<span class="sd">            Return the result as a DataFrame. Default is True.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        object or pd.DataFrame</span>
+<span class="sd">            Result of the SPARQL query in CSV-formatted  ``fr.inria.core.print.ResultFormat``</span>
+<span class="sd">            object or a DataFrame.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">QueryProcess</span><span class="p">,</span> <span class="s1">&#39;Corese classes are not loaded properly.&#39;</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">ResultFormat</span><span class="p">,</span> <span class="s1">&#39;Corese classes are not loaded properly.&#39;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">graph</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Graph object is required.&#39;</span><span class="p">)</span>
+
+        <span class="c1">#TODO: extract method to create a prefix string</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">prefixes</span><span class="p">:</span>
+            <span class="n">prefixes</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">prefixes</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">prefixes</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">prefixes</span><span class="p">)</span>
+
+        <span class="n">exec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">QueryProcess</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+        <span class="nb">map</span> <span class="o">=</span> <span class="n">exec</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">prefixes</span><span class="p">,</span> <span class="n">query</span><span class="p">])</span> <span class="p">)</span>
+
+        <span class="c1"># to keep it simple for now return the result in CSV format</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ResultFormat</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="nb">map</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ResultFormat</span><span class="o">.</span><span class="n">SPARQL_RESULTS_CSV</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">return_dataframe</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">toDataFrame</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="CoreseAPI.toDataFrame">
+<a class="viewcode-back" href="../../python_api/index.html#pycorese.api.CoreseAPI.toDataFrame">[docs]</a>
+    <span class="k">def</span> <span class="nf">toDataFrame</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queryResult</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span>
+                            <span class="n">dtypes</span><span class="p">:</span> <span class="nb">list</span><span class="o">|</span><span class="nb">dict</span><span class="o">|</span><span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span><span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Convert Corese ResultFormat object to ``pandas.DataFrame``.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        queryResult : object</span>
+<span class="sd">            CSV-formatted  ``fr.inria.core.print.ResultFormat`` object.</span>
+<span class="sd">        dtypes : list or dict, optional</span>
+<span class="sd">            Optional column data types for the columns in the format as in ``panads.read_csv`` method.</span>
+<span class="sd">            https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        pd.DataFrame</span>
+<span class="sd">            Corese object converted to a DataFrame.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">ResultFormat</span><span class="p">,</span> <span class="s1">&#39;Corese classes are not loaded properly.&#39;</span>
+
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">StringIO</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">queryResult</span><span class="p">)),</span>
+                            <span class="n">skipinitialspace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                            <span class="n">dtype</span><span class="o">=</span><span class="n">dtypes</span><span class="p">)</span>
+
+        <span class="c1"># Assign n/a to empty strings</span>
+        <span class="n">string_dtypes</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">convert_dtypes</span><span class="p">()</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="s2">&quot;string&quot;</span><span class="p">)</span>
+        <span class="n">df</span><span class="p">[</span><span class="n">string_dtypes</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span> <span class="o">=</span> <span class="n">string_dtypes</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^\s*$&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">df</span></div>
+
+
+    <span class="c1">#TODO: add timeout</span>
+<div class="viewcode-block" id="CoreseAPI.sparqlConstruct">
+<a class="viewcode-back" href="../../python_api/index.html#pycorese.api.CoreseAPI.sparqlConstruct">[docs]</a>
+    <span class="k">def</span> <span class="nf">sparqlConstruct</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span>
+                        <span class="n">prefixes</span><span class="p">:</span> <span class="nb">str</span><span class="o">|</span><span class="nb">list</span><span class="o">|</span><span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                        <span class="n">query</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+                        <span class="n">merge</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">-&gt;</span> <span class="nb">object</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Execute SPARQL CONSTRUCT query on Corese graph.</span>
+
+<span class="sd">        Optionally the new triples can be merged with the existing graph.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        graph : object</span>
+<span class="sd">            Corese Graph or DataManager object</span>
+<span class="sd">        prefixes : str or list, optional</span>
+<span class="sd">            namespace prefixes. Default is None.</span>
+<span class="sd">        query : str, optional</span>
+<span class="sd">            SPARQL query. Default is empty string resulting in empty graph.</span>
+<span class="sd">        merge : bool, optional</span>
+<span class="sd">            Option to merge the result with the existing graph. Default is False.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        object</span>
+<span class="sd">            Result of the SPARQL CONSTRUCT query in RDF/XML format.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">QueryProcess</span><span class="p">,</span> <span class="s1">&#39;Corese classes are not loaded properly.&#39;</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">ResultFormat</span><span class="p">,</span> <span class="s1">&#39;Corese classes are not loaded properly.&#39;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">graph</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Graph object is required.&#39;</span><span class="p">)</span>
+
+        <span class="c1">#todo: extract method to create a prefix string</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">prefixes</span><span class="p">:</span>
+            <span class="n">prefixes</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">prefixes</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">prefixes</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">prefixes</span><span class="p">)</span>
+
+        <span class="n">exec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">QueryProcess</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+        <span class="nb">map</span> <span class="o">=</span> <span class="n">exec</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">prefixes</span><span class="p">,</span> <span class="n">query</span><span class="p">])</span> <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">merge</span><span class="p">:</span>
+            <span class="n">graph</span><span class="o">.</span><span class="n">getGraph</span><span class="p">()</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="nb">map</span><span class="o">.</span><span class="n">getGraph</span><span class="p">())</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ResultFormat</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="nb">map</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ResultFormat</span><span class="o">.</span><span class="n">DEFAULT_CONSTRUCT_FORMAT</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="CoreseAPI.toTurtle">
+<a class="viewcode-back" href="../../python_api/index.html#pycorese.api.CoreseAPI.toTurtle">[docs]</a>
+    <span class="k">def</span> <span class="nf">toTurtle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rdf</span><span class="p">:</span><span class="nb">object</span><span class="p">)</span><span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Convert RDF/XML to Turtle format.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        rdf : object</span>
+<span class="sd">            Corese RDF object</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            RDF in Turtle format.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">Transformer</span><span class="p">,</span> <span class="s1">&#39;Corese classes are not loaded properly.&#39;</span>
+
+        <span class="c1"># TODO: ASk Remi about getGraph, the Graph and the right way to do the transformation</span>
+        <span class="n">ttl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Transformer</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">rdf</span><span class="o">.</span><span class="n">getMappings</span><span class="p">()</span><span class="o">.</span><span class="n">getGraph</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">Transformer</span><span class="o">.</span><span class="n">TURTLE</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">ttl</span><span class="o">.</span><span class="n">toString</span><span class="p">()</span></div>
+
+
+    <span class="c1">#TODO: ASk Remi what are the acceptable shacl formats</span>
+<div class="viewcode-block" id="CoreseAPI.shaclValidate">
+<a class="viewcode-back" href="../../python_api/index.html#pycorese.api.CoreseAPI.shaclValidate">[docs]</a>
+    <span class="k">def</span> <span class="nf">shaclValidate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span>
+                            <span class="n">prefixes</span><span class="p">:</span> <span class="nb">str</span><span class="o">|</span><span class="nb">list</span><span class="o">|</span><span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                            <span class="n">shacl_shape_ttl</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+                            <span class="n">return_dataframe</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span><span class="o">-&gt;</span> <span class="nb">object</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Validate RDF graph against SHACL shape.</span>
+
+<span class="sd">        This version supports only Turtle format to define a SHACL shape.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        graph : object</span>
+<span class="sd">            Corese Graph or DataManager object</span>
+<span class="sd">        prefixes : str or list, optional</span>
+<span class="sd">            namespace prefixes. Default is None.</span>
+<span class="sd">        shacl_shape_ttl : str, optional</span>
+<span class="sd">            SHACL shape in Turtle format. If not provided, the validation will be skipped.</span>
+<span class="sd">        return_dataframe : bool, optional</span>
+<span class="sd">            Return the validation report as a DataFrame. Default is False.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        object</span>
+<span class="sd">            SHACL validation report in Turtle format.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">Shacl</span><span class="p">,</span> <span class="s1">&#39;Corese classes are not loaded properly.&#39;</span>
+
+        <span class="n">prefix_shacl</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;@prefix sh: &lt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">Namespaces</span><span class="o">.</span><span class="n">SHACL</span><span class="si">}</span><span class="s1">&gt; .&#39;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">prefixes</span><span class="p">:</span>
+            <span class="n">prefixes</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">prefixes</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">prefixes</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">prefixes</span><span class="p">)</span>
+
+        <span class="n">prefixes</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">prefixes</span><span class="p">,</span> <span class="n">prefix_shacl</span><span class="p">])</span>
+
+        <span class="n">shapeGraph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+        <span class="n">ld</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Load</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">shapeGraph</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">_isFile</span><span class="p">(</span><span class="n">shacl_shape_ttl</span><span class="p">):</span>
+            <span class="c1"># Load shape graph from file</span>
+            <span class="n">ld</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">shacl_shape_ttl</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Load shape graph from string</span>
+            <span class="n">ld</span><span class="o">.</span><span class="n">loadString</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">prefixes</span><span class="p">,</span> <span class="n">shacl_shape_ttl</span><span class="p">]),</span>
+                          <span class="bp">self</span><span class="o">.</span><span class="n">Load</span><span class="o">.</span><span class="n">TURTLE_FORMAT</span><span class="p">)</span>
+
+        <span class="c1"># Evaluation</span>
+        <span class="n">shacl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Shacl</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">getGraph</span><span class="p">(),</span> <span class="n">shapeGraph</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">shacl</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+
+        <span class="n">trans</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Transformer</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Transformer</span><span class="o">.</span><span class="n">TURTLE</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">return_dataframe</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">shaclReportToDataFrame</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">trans</span><span class="o">.</span><span class="n">toString</span><span class="p">()))</span>
+
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">trans</span><span class="o">.</span><span class="n">toString</span><span class="p">())</span></div>
+
+
+    <span class="c1"># Parse validation report</span>
+<div class="viewcode-block" id="CoreseAPI.shaclReportToDataFrame">
+<a class="viewcode-back" href="../../python_api/index.html#pycorese.api.CoreseAPI.shaclReportToDataFrame">[docs]</a>
+    <span class="k">def</span> <span class="nf">shaclReportToDataFrame</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">validation_report</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span><span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Convert SHACL validation report to ``pandas.DataFrame``.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        validation_report : str</span>
+<span class="sd">            SHACL validation report in Turtle format.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        pd.DataFrame</span>
+<span class="sd">            Validation report as a DataFrame.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">prefix_shacl</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;@prefix sh: &lt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">Namespaces</span><span class="o">.</span><span class="n">SHACL</span><span class="si">}</span><span class="s1">&gt; .&#39;</span>
+
+        <span class="n">validation_report_graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">loadRDF</span><span class="p">(</span><span class="n">validation_report</span><span class="p">)</span>
+
+        <span class="n">report</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sparqlSelect</span><span class="p">(</span><span class="n">validation_report_graph</span><span class="p">,</span> <span class="n">prefix_shacl</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">SHACL_REPORT_QUERY</span><span class="p">)</span>
+
+        <span class="n">report</span> <span class="o">=</span> <span class="n">report</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;p&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
+        <span class="n">report</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">uri</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">uri</span> <span class="ow">in</span> <span class="n">report</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
+
+        <span class="c1">#TODO cleanup the report</span>
+
+        <span class="k">return</span> <span class="n">report</span></div>
+</div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+
+    <span class="c1"># Initialize the CoreseAPI</span>
+    <span class="n">cr</span> <span class="o">=</span> <span class="n">CoreseAPI</span><span class="p">(</span><span class="n">java_bridge</span><span class="o">=</span><span class="s1">&#39;py4j&#39;</span><span class="p">)</span>
+    <span class="n">cr</span><span class="o">.</span><span class="n">loadCorese</span><span class="p">()</span>
+
+    <span class="c1"># Load RDF file</span>
+    <span class="n">gr</span> <span class="o">=</span> <span class="n">cr</span><span class="o">.</span><span class="n">loadRDF</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="s1">&#39;examples&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span><span class="s1">&#39;beatles.rdf&#39;</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Graph size: &quot;</span><span class="p">,</span> <span class="n">gr</span><span class="o">.</span><span class="n">graphSize</span><span class="p">())</span>
+
+    <span class="c1"># Load Rule Engine OwlRL</span>
+    <span class="n">ren</span> <span class="o">=</span> <span class="n">cr</span><span class="o">.</span><span class="n">loadRuleEngine</span><span class="p">(</span><span class="n">gr</span><span class="p">,</span> <span class="n">profile</span><span class="o">=</span><span class="n">cr</span><span class="o">.</span><span class="n">RuleEngine</span><span class="o">.</span><span class="n">Profile</span><span class="o">.</span><span class="n">OWLRL</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Graph size: &quot;</span><span class="p">,</span> <span class="n">gr</span><span class="o">.</span><span class="n">graphSize</span><span class="p">())</span>
+
+    <span class="c1"># Load another Rule Engine e.g. RDFS to replace the existing one</span>
+    <span class="n">ren</span> <span class="o">=</span> <span class="n">cr</span><span class="o">.</span><span class="n">loadRuleEngine</span><span class="p">(</span><span class="n">gr</span><span class="p">,</span> <span class="n">profile</span><span class="o">=</span><span class="n">cr</span><span class="o">.</span><span class="n">RuleEngine</span><span class="o">.</span><span class="n">Profile</span><span class="o">.</span><span class="n">RDFS</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Graph size: &quot;</span><span class="p">,</span> <span class="n">gr</span><span class="o">.</span><span class="n">graphSize</span><span class="p">())</span>
+
+    <span class="c1"># Reset Rule Engine</span>
+    <span class="n">cr</span><span class="o">.</span><span class="n">resetRuleEngine</span><span class="p">(</span><span class="n">gr</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Graph size: &quot;</span><span class="p">,</span> <span class="n">gr</span><span class="o">.</span><span class="n">graphSize</span><span class="p">())</span>
+
+    <span class="c1"># Execute SPARQL SELECT query</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">cr</span><span class="o">.</span><span class="n">sparqlSelect</span><span class="p">(</span><span class="n">gr</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="s1">&#39;select * where {?s ?p ?o} limit 5&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Convert the result to DataFrame</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">cr</span><span class="o">.</span><span class="n">toDataFrame</span><span class="p">(</span><span class="n">res</span><span class="p">))</span>
+
+    <span class="c1"># Execute SPARQL CONSTRUCT query</span>
+    <span class="n">prefixes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;@prefix ex: &lt;http://example.com/&gt;&#39;</span><span class="p">]</span>
+    <span class="n">contruct</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;CONSTRUCT {?Beatle a ex:BandMember }</span>
+<span class="s1">                WHERE { ex:The_Beatles ex:member ?Beatle}&#39;&#39;&#39;</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">cr</span><span class="o">.</span><span class="n">sparqlConstruct</span><span class="p">(</span><span class="n">gr</span><span class="p">,</span> <span class="n">prefixes</span><span class="o">=</span><span class="n">prefixes</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="n">contruct</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+
+    <span class="c1"># Convert the result to Turtle</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">cr</span><span class="o">.</span><span class="n">toTurtle</span><span class="p">(</span><span class="n">results</span><span class="p">))</span>
+
+    <span class="c1"># Execute SHACL validation</span>
+    <span class="n">shacl_shape_file</span> <span class="o">=</span> <span class="s1">&#39;.</span><span class="se">\\</span><span class="s1">examples</span><span class="se">\\</span><span class="s1">data</span><span class="se">\\</span><span class="s1">beatles-validator.ttl&#39;</span>
+    <span class="n">report</span> <span class="o">=</span> <span class="n">cr</span><span class="o">.</span><span class="n">shaclValidate</span><span class="p">(</span><span class="n">gr</span><span class="p">,</span> <span class="n">shacl_shape_ttl</span><span class="o">=</span><span class="n">shacl_shape_file</span><span class="p">,</span> <span class="n">prefixes</span><span class="o">=</span><span class="n">prefixes</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">report</span><span class="p">)</span>
+
+    <span class="c1"># Convert SHACL validation report to DataFrame</span>
+    <span class="n">shr</span> <span class="o">=</span> <span class="n">cr</span><span class="o">.</span><span class="n">shaclReportToDataFrame</span><span class="p">(</span><span class="n">report</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">shr</span><span class="p">)</span>
+
+    <span class="c1"># Shutdown the JVM</span>
+    <span class="n">cr</span><span class="o">.</span><span class="n">unloadCorese</span><span class="p">()</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Done!&quot;</span><span class="p">)</span>
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, WIMMICS.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

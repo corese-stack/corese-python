@@ -1,0 +1,727 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Development Installation &#8212; corese-python  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0675bd48" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'dev_install';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://corese-stack.github.io/corese-python/switcher.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'v\d+\.\d+\.\d+';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="_static/Corese-square-logo-transparent.svg"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="About Corese" href="corese.html" />
+    <link rel="prev" title="Java bridge packages" href="python_api/bridges.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/corese.svg" class="logo__image only-light" alt="corese-python  documentation - Home"/>
+    <script>document.write(`<img src="_static/corese.svg" class="logo__image only-dark" alt="corese-python  documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="user_guide.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="python_api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="corese.html">
+    About Corese
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/corese-stack/corese-python" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-github-square fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="user_guide.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="python_api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="corese.html">
+    About Corese
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/corese-stack/corese-python" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-github-square fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"></div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Development...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="development-installation">
+<h1>Development Installation<a class="headerlink" href="#development-installation" title="Link to this heading">#</a></h1>
+<p>This document describes how to install the development environment for the <strong>pycorese</strong> package.</p>
+<p><strong>pycorese</strong> is a Python wrapper for the <a class="reference external" href="https://github.com/corese-stack/corese-core">Corese-core</a> Java library. To build and use this package, you need to have Java installed on your system.</p>
+<p><strong>pycorese</strong>  provides two options for running the Corese Java code using the following Python packages to access Java objects:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.py4j.org/">Py4J</a></p></li>
+<li><p><a class="reference external" href="https://jpype.readthedocs.io/en/latest/">JPype</a></p></li>
+</ul>
+<p>That’s the reason the installation process is a bit more complex than for a standard Python package.</p>
+<section id="clone-the-github-repository">
+<h2>Clone the GitHub repository<a class="headerlink" href="#clone-the-github-repository" title="Link to this heading">#</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/corese-stack/corese-python.git
+<span class="nb">cd</span><span class="w"> </span>corese-python
+</pre></div>
+</div>
+</section>
+<section id="python-build-environment">
+<h2>Python build environment<a class="headerlink" href="#python-build-environment" title="Link to this heading">#</a></h2>
+<p>You can use the provided <a class="reference external" href="https://docs.conda.io/en/latest/">conda</a> environment file to create a virtual environment with the necessary dependencies.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>env<span class="w"> </span>update<span class="w"> </span>-f<span class="w"> </span>pkg/env/corese-python.yaml
+conda<span class="w"> </span>activate<span class="w"> </span>corese-python
+</pre></div>
+</div>
+<p>Or install the dependencies manually:</p>
+<ul>
+<li><p>project dependencies:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>py4j<span class="w"> </span>jpype1<span class="w"> </span>pandas
+</pre></div>
+</div>
+</li>
+<li><p>build dependencies:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip<span class="w"> </span>setuptools<span class="w"> </span>wheel<span class="w"> </span>build
+</pre></div>
+</div>
+</li>
+<li><p>test dependencies:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>pytest<span class="w"> </span>pytest-cov
+</pre></div>
+</div>
+</li>
+<li><p>documentation dependencies:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>sphinx<span class="w"> </span>pydata_sphinx_theme
+</pre></div>
+</div>
+</li>
+</ul>
+<!-- TODO: Add other documentation dependencies install support-->
+<!-- TODO: Add conda install support-->
+</section>
+<section id="java-build-environment">
+<h2>Java build environment<a class="headerlink" href="#java-build-environment" title="Link to this heading">#</a></h2>
+<p>To build the package Java Development Kit (JDK) version 11 or higher and the <a class="reference external" href="https://docs.gradle.org/current/userguide/userguide.html">Gradle</a> build tool are required.</p>
+<p>If Java is not installed, visit the <a class="reference external" href="https://www.java.com/en/download/help/download_options.html">official website</a> for installation instructions.</p>
+<p>Gradle can be installed as an extension to your IDE or as a standalone tool.</p>
+<ul class="simple">
+<li><p>Gradle extension for VSCode is available from the <a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-gradle">Visual Studio Marketplace</a></p></li>
+<li><p>To install Gradle as a standalone tool, follow the instructions on the <a class="reference external" href="https://gradle.org/install/">official website</a>.</p></li>
+</ul>
+</section>
+<section id="building-the-package">
+<h2>Building the package<a class="headerlink" href="#building-the-package" title="Link to this heading">#</a></h2>
+<p>Clean all the build directories (not necessary if you just downloaded the source code):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rm</span> <span class="o">-</span><span class="n">fr</span> <span class="n">dist</span> <span class="n">build</span> <span class="n">resources</span> <span class="n">src</span><span class="o">/</span><span class="n">pycorese</span><span class="o">.</span><span class="n">egg</span><span class="o">-</span><span class="n">info</span>
+</pre></div>
+</div>
+<p>Build the package:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">build</span>
+</pre></div>
+</div>
+<p>This command builds the packages into <code class="docutils literal notranslate"><span class="pre">https://github.com/corese-stack/corese-python/blob/main/dist</span></code> directory. Note that the custom <code class="docutils literal notranslate"><span class="pre">sdist</span></code> command is implemented in <a class="reference external" href="https://github.com/corese-stack/corese-python/blob/main/setup.py">setup.py</a>.</p>
+<p>The custom <code class="docutils literal notranslate"><span class="pre">sdist</span></code> command adds the following steps:</p>
+<ul class="simple">
+<li><p>compiling the <code class="docutils literal notranslate"><span class="pre">corese-python-x.y.z-jar-with-dependencies.jar</span></code> file using the Gradle build tool. This jar file is required to run Corese using the <code class="docutils literal notranslate"><span class="pre">Py4J</span></code> bridge.</p></li>
+<li><p>downloading the <code class="docutils literal notranslate"><span class="pre">corese-core-x.y.z-jar-with-dependencies.jar</span></code> file from the Maven repository. This jar file is required to run Corese using the <code class="docutils literal notranslate"><span class="pre">JPype</span></code> bridge.</p></li>
+<li><p>copying the jar files to the <code class="docutils literal notranslate"><span class="pre">https://github.com/corese-stack/corese-python/blob/main/resources</span></code> directory.</p></li>
+</ul>
+<blockquote>
+<div><p>[!NOTE]</p>
+<ul class="simple">
+<li><p>do not run <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">setup.py</span></code> that will not build the full package.</p></li>
+<li><p>the versions of <code class="docutils literal notranslate"><span class="pre">pycorese</span></code> and Java libraries are maintained separately.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">corese-python</span></code> version should be the same as <code class="docutils literal notranslate"><span class="pre">corese-core</span></code> it depends on, for simplicity reasons.</p></li>
+<li><p>the commands for the first two steps are provided in the <a class="reference internal" href="#obtain-java-libraries-manually"><span class="xref myst">Obtaining Java libraries manually</span></a> section.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="testing-the-package">
+<h2>Testing the package<a class="headerlink" href="#testing-the-package" title="Link to this heading">#</a></h2>
+<p>From the top directory, or in the <code class="docutils literal notranslate"><span class="pre">https://github.com/corese-stack/corese-python/blob/main/tests</span></code> sub-directory run the command:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pytest</span> <span class="o">-</span><span class="n">v</span>
+</pre></div>
+</div>
+<p>If a specific test fails, you can have more information, using the following command:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pytest</span> <span class="n">tests</span><span class="o">/</span><span class="n">test_api</span><span class="o">.</span><span class="n">py</span><span class="p">::</span><span class="n">Test_api</span><span class="p">::</span><span class="n">test_bad_bridge</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>[!NOTE]</p>
+<ul class="simple">
+<li><p>substitute the filename, test class name, and test name with your specific test.</p></li>
+</ul>
+</div></blockquote>
+<p>Run the test coverage:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pytest</span> <span class="o">--</span><span class="n">cov</span>
+</pre></div>
+</div>
+<p>For the HTML coverage report, run the following commands:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pytest</span> <span class="o">--</span><span class="n">cov</span> <span class="o">--</span><span class="n">cov</span><span class="o">-</span><span class="n">report</span><span class="o">=</span><span class="n">html</span>
+<span class="nb">open</span> <span class="n">htmlcov</span><span class="o">/</span><span class="n">index</span><span class="o">.</span><span class="n">html</span>
+</pre></div>
+</div>
+</section>
+<section id="installing-the-locally-built-package">
+<h2>Installing the locally built package<a class="headerlink" href="#installing-the-locally-built-package" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">dist</span><span class="o">/</span><span class="n">pycorese</span><span class="o">-</span><span class="mf">0.1.1</span><span class="o">-</span><span class="n">py3</span><span class="o">-</span><span class="n">none</span><span class="o">-</span><span class="nb">any</span><span class="o">.</span><span class="n">whl</span>
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">dist</span><span class="o">/</span><span class="n">pycorese</span><span class="o">-</span><span class="mf">0.1.1</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
+</pre></div>
+</div>
+</section>
+<section id="verifying-the-installation">
+<h2>Verifying the installation<a class="headerlink" href="#verifying-the-installation" title="Link to this heading">#</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pip<span class="w"> </span>list<span class="w">  </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>corese
+pycorese<span class="w">                  </span><span class="m">0</span>.1.1
+
+$<span class="w"> </span>python<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;import pycorese&#39;</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>[!NOTE]</p>
+<ul class="simple">
+<li><p>change the version number accordingly.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="run-a-simple-example">
+<h2>Run a simple example<a class="headerlink" href="#run-a-simple-example" title="Link to this heading">#</a></h2>
+<p>Without installing the package you can run the following command (the default Java bridge is <code class="docutils literal notranslate"><span class="pre">py4j</span></code>):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>https://github.com/corese-stack/corese-python/blob/main/examples/simple_query.py<span class="w"> </span>-j<span class="w"> </span><span class="nv">$PWD</span>/build/libs/corese-python-4.6.0-jar-with-dependencies.jar
+</pre></div>
+</div>
+<p>or change the bridge to <code class="docutils literal notranslate"><span class="pre">jpype</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>https://github.com/corese-stack/corese-python/blob/main/examples/simple_query.py<span class="w"> </span>-b<span class="w"> </span>jpype<span class="w"> </span>-j<span class="w"> </span><span class="nv">$PWD</span>/build/libs/corese-core-4.6.0-jar-with-dependencies.jar
+</pre></div>
+</div>
+<!--  **_NOTE:_** -->
+<blockquote>
+<div><p>[!NOTE]</p>
+<ul class="simple">
+<li><p>the jar files are obtained either by <a class="reference internal" href="#building-the-package"><span class="xref myst">building the package</span></a> or <a class="reference internal" href="#obtain-java-libraries-manually"><span class="xref myst">manually</span></a>.</p></li>
+<li><p>the primary development focus is on using the <code class="docutils literal notranslate"><span class="pre">py4j</span></code> bridge.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="obtain-java-libraries-manually">
+<h2>Obtain Java libraries manually<a class="headerlink" href="#obtain-java-libraries-manually" title="Link to this heading">#</a></h2>
+<p>In case you want to build <code class="docutils literal notranslate"><span class="pre">corese-python-x.y.z-jar-with-dependencies.jar</span></code> Java library separately, use the following commands:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">gradlew</span> <span class="n">shadowJar</span>
+</pre></div>
+</div>
+<p>In case you want to download the <code class="docutils literal notranslate"><span class="pre">corese-core-x.y.z-jar-with-dependencies.jar</span></code> Java library separately, use the following commands:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">gradlew</span> <span class="n">downloadCoreseCore</span>
+</pre></div>
+</div>
+<p>These tasks are defined in the <a class="reference external" href="https://github.com/corese-stack/corese-python/blob/main/build.gradle.kts">build.gradle.kts</a> file.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="python_api/bridges.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Java bridge packages</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="corese.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">About Corese</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clone-the-github-repository">Clone the GitHub repository</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-build-environment">Python build environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#java-build-environment">Java build environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-the-package">Building the package</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-the-package">Testing the package</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-the-locally-built-package">Installing the locally built package</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verifying-the-installation">Verifying the installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-a-simple-example">Run a simple example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#obtain-java-libraries-manually">Obtain Java libraries manually</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="_sources/dev_install.md.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, WIMMICS.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

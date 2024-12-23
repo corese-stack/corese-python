@@ -1,0 +1,864 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Python API Reference &#8212; corese-python  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=0675bd48" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'python_api/index';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://corese-stack.github.io/corese-python/switcher.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'v\d+\.\d+\.\d+';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../_static/Corese-square-logo-transparent.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Java bridge packages" href="bridges.html" />
+    <link rel="prev" title="Using pycorese" href="../user_guide.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/corese.svg" class="logo__image only-light" alt="corese-python  documentation - Home"/>
+    <script>document.write(`<img src="../_static/corese.svg" class="logo__image only-dark" alt="corese-python  documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../dev_install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../corese.html">
+    About Corese
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/corese-stack/corese-python" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-github-square fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../dev_install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../corese.html">
+    About Corese
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/corese-stack/corese-python" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-github-square fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="bridges.html">About Java bridges</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Python API Reference</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="python-api-reference">
+<h1>Python API Reference<a class="headerlink" href="#python-api-reference" title="Link to this heading">#</a></h1>
+<p><strong>pycorese</strong> is a Python wrapper for accessing and manipulating RDF data with Corese features connected by one of the java bridge packages: <code class="docutils literal notranslate"><span class="pre">py4j</span></code> or <code class="docutils literal notranslate"><span class="pre">jpype</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>pycorese</strong> is still in beta version and is under active development. The API may change in future releases.</p>
+</div>
+<p>In the following sections, you will find the documentation of the Python API of <strong>pycorese</strong>.</p>
+<section id="high-level-api">
+<h2>High-level API<a class="headerlink" href="#high-level-api" title="Link to this heading">#</a></h2>
+<p>HIgh-level API is a set of convenience methods to facilitate the common tasks of working with Knowledge Graphs.</p>
+<dl class="py class" id="module-pycorese.api">
+<dt class="sig sig-object py" id="pycorese.api.CoreseAPI">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pycorese.api.</span></span><span class="sig-name descname"><span class="pre">CoreseAPI</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">java_bridge</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'py4j'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">corese_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pycorese/api.html#CoreseAPI"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pycorese.api.CoreseAPI" title="Link to this definition">#</a></dt>
+<dd><p>Simplified API to leverage functionality of Corese Java library (<code class="docutils literal notranslate"><span class="pre">corese-core</span></code>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>java_bridge</strong> (<em>str</em><em>, </em><em>optional</em>) – Package name to use for Java integration. Options: ‘py4j’, ‘jpype’. Default is ‘py4j’.</p></li>
+<li><p><strong>corese_path</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to the corese-python library. If not specified (default), the jar
+file that was installed with the package is used.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="pycorese.api.CoreseAPI.coreseVersion">
+<span class="sig-name descname"><span class="pre">coreseVersion</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pycorese/api.html#CoreseAPI.coreseVersion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pycorese.api.CoreseAPI.coreseVersion" title="Link to this definition">#</a></dt>
+<dd><p>Get the version of the corese-core library.</p>
+<div class="admonition-notes admonition">
+<p class="admonition-title">Notes</p>
+<p>Corese library  must be loaded first.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>str</em> – The version of the   <code class="docutils literal notranslate"><span class="pre">corese-core</span></code>   library used. If the library is not loaded, returns None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pycorese.api.CoreseAPI.loadCorese">
+<span class="sig-name descname"><span class="pre">loadCorese</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pycorese/api.html#CoreseAPI.loadCorese"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pycorese.api.CoreseAPI.loadCorese" title="Link to this definition">#</a></dt>
+<dd><p>Load Corese library into JVM and expose the Corese classes.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pycorese.api.CoreseAPI.loadRDF">
+<span class="sig-name descname"><span class="pre">loadRDF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rdf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">object</span></span></span><a class="reference internal" href="../_modules/pycorese/api.html#CoreseAPI.loadRDF"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pycorese.api.CoreseAPI.loadRDF" title="Link to this definition">#</a></dt>
+<dd><p>Load RDF file/string into Corese graph. Supported formats are RDF/XML and Turtle.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rdf</strong> (<em>str</em>) – Path to the RDF file or a string with RDF content.</p></li>
+<li><p><strong>graph</strong> (<em>object</em><em>, </em><em>optional</em>) – Corese object of either <code class="docutils literal notranslate"><span class="pre">fr.inria.corese.core.Graph</span></code> or <code class="docutils literal notranslate"><span class="pre">fr.inria.core.storage.CoreseGraphDataManager</span></code> type.
+If an object is not provided (default), new Graph and GraphManager will be created.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>object</em> – Corese <code class="docutils literal notranslate"><span class="pre">fr.inria.core.storage.CoreseGraphDataManager</span></code> object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pycorese.api.CoreseAPI.loadRuleEngine">
+<span class="sig-name descname"><span class="pre">loadRuleEngine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">profile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">object</span></span></span><a class="reference internal" href="../_modules/pycorese/api.html#CoreseAPI.loadRuleEngine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pycorese.api.CoreseAPI.loadRuleEngine" title="Link to this definition">#</a></dt>
+<dd><p>Load the rule engine for a given graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<em>object</em>) – Corese Graph or DataManager object</p></li>
+<li><p><strong>profile</strong> (<em>object</em>) – Profile object for the rule engine. Accepted values:
+<code class="docutils literal notranslate"><span class="pre">RuleEngine.Profile.RDFS</span></code>,
+<code class="docutils literal notranslate"><span class="pre">RuleEngine.Profile.OWLRL</span></code>,
+<code class="docutils literal notranslate"><span class="pre">RuleEngine.Profile.OWLRL_LITE</span></code>,
+<code class="docutils literal notranslate"><span class="pre">RuleEngine.Profile.OWLRL_EXT</span></code></p></li>
+<li><p><strong>replace</strong> (<em>bool</em><em>, </em><em>optional</em>) – Replace the existing rule engine. Default is False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>object</em> – Corese <code class="docutils literal notranslate"><span class="pre">fr.inria.core.rule.RuleEngine</span></code> object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pycorese.api.CoreseAPI.resetRuleEngine">
+<span class="sig-name descname"><span class="pre">resetRuleEngine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pycorese/api.html#CoreseAPI.resetRuleEngine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pycorese.api.CoreseAPI.resetRuleEngine" title="Link to this definition">#</a></dt>
+<dd><p>Reset the rule engine for a given graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>graph</strong> (<em>object</em>) – Corese Graph or DataManager object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pycorese.api.CoreseAPI.shaclReportToDataFrame">
+<span class="sig-name descname"><span class="pre">shaclReportToDataFrame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">validation_report</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/pycorese/api.html#CoreseAPI.shaclReportToDataFrame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pycorese.api.CoreseAPI.shaclReportToDataFrame" title="Link to this definition">#</a></dt>
+<dd><p>Convert SHACL validation report to <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>validation_report</strong> (<em>str</em>) – SHACL validation report in Turtle format.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>pd.DataFrame</em> – Validation report as a DataFrame.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pycorese.api.CoreseAPI.shaclValidate">
+<span class="sig-name descname"><span class="pre">shaclValidate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefixes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shacl_shape_ttl</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_dataframe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">object</span></span></span><a class="reference internal" href="../_modules/pycorese/api.html#CoreseAPI.shaclValidate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pycorese.api.CoreseAPI.shaclValidate" title="Link to this definition">#</a></dt>
+<dd><p>Validate RDF graph against SHACL shape.</p>
+<p>This version supports only Turtle format to define a SHACL shape.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<em>object</em>) – Corese Graph or DataManager object</p></li>
+<li><p><strong>prefixes</strong> (<em>str</em><em> or </em><em>list</em><em>, </em><em>optional</em>) – namespace prefixes. Default is None.</p></li>
+<li><p><strong>shacl_shape_ttl</strong> (<em>str</em><em>, </em><em>optional</em>) – SHACL shape in Turtle format. If not provided, the validation will be skipped.</p></li>
+<li><p><strong>return_dataframe</strong> (<em>bool</em><em>, </em><em>optional</em>) – Return the validation report as a DataFrame. Default is False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>object</em> – SHACL validation report in Turtle format.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pycorese.api.CoreseAPI.sparqlConstruct">
+<span class="sig-name descname"><span class="pre">sparqlConstruct</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefixes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merge</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">object</span></span></span><a class="reference internal" href="../_modules/pycorese/api.html#CoreseAPI.sparqlConstruct"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pycorese.api.CoreseAPI.sparqlConstruct" title="Link to this definition">#</a></dt>
+<dd><p>Execute SPARQL CONSTRUCT query on Corese graph.</p>
+<p>Optionally the new triples can be merged with the existing graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<em>object</em>) – Corese Graph or DataManager object</p></li>
+<li><p><strong>prefixes</strong> (<em>str</em><em> or </em><em>list</em><em>, </em><em>optional</em>) – namespace prefixes. Default is None.</p></li>
+<li><p><strong>query</strong> (<em>str</em><em>, </em><em>optional</em>) – SPARQL query. Default is empty string resulting in empty graph.</p></li>
+<li><p><strong>merge</strong> (<em>bool</em><em>, </em><em>optional</em>) – Option to merge the result with the existing graph. Default is False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>object</em> – Result of the SPARQL CONSTRUCT query in RDF/XML format.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pycorese.api.CoreseAPI.sparqlSelect">
+<span class="sig-name descname"><span class="pre">sparqlSelect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefixes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'SELECT</span> <span class="pre">*</span> <span class="pre">WHERE</span> <span class="pre">{?s</span> <span class="pre">?p</span> <span class="pre">?o}</span> <span class="pre">LIMIT</span> <span class="pre">5'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_dataframe</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">object</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/pycorese/api.html#CoreseAPI.sparqlSelect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pycorese.api.CoreseAPI.sparqlSelect" title="Link to this definition">#</a></dt>
+<dd><p>Execute SPARQL SELECT or ASK query on Corese graph. Optionally return the result as DataFrame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<em>object</em>) – Corese Graph or DataManager object</p></li>
+<li><p><strong>prefixes</strong> (<em>str</em><em> or </em><em>list</em><em>, </em><em>optional</em>) – namespace prefixes. Default is None.</p></li>
+<li><p><strong>query</strong> (<em>str</em><em>, </em><em>optional</em>) – SPARQL query. By default five first triples of the graph are returned.</p></li>
+<li><p><strong>return_dataframe</strong> (<em>bool</em><em>, </em><em>optional</em>) – Return the result as a DataFrame. Default is True.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>object or pd.DataFrame</em> – Result of the SPARQL query in CSV-formatted  <code class="docutils literal notranslate"><span class="pre">fr.inria.core.print.ResultFormat</span></code>
+object or a DataFrame.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pycorese.api.CoreseAPI.toDataFrame">
+<span class="sig-name descname"><span class="pre">toDataFrame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">queryResult</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtypes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/pycorese/api.html#CoreseAPI.toDataFrame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pycorese.api.CoreseAPI.toDataFrame" title="Link to this definition">#</a></dt>
+<dd><p>Convert Corese ResultFormat object to <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>queryResult</strong> (<em>object</em>) – CSV-formatted  <code class="docutils literal notranslate"><span class="pre">fr.inria.core.print.ResultFormat</span></code> object.</p></li>
+<li><p><strong>dtypes</strong> (<em>list</em><em> or </em><em>dict</em><em>, </em><em>optional</em>) – Optional column data types for the columns in the format as in <code class="docutils literal notranslate"><span class="pre">panads.read_csv</span></code> method.
+<a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html">https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html</a></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>pd.DataFrame</em> – Corese object converted to a DataFrame.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pycorese.api.CoreseAPI.toTurtle">
+<span class="sig-name descname"><span class="pre">toTurtle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rdf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/pycorese/api.html#CoreseAPI.toTurtle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pycorese.api.CoreseAPI.toTurtle" title="Link to this definition">#</a></dt>
+<dd><p>Convert RDF/XML to Turtle format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rdf</strong> (<em>object</em>) – Corese RDF object</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>str</em> – RDF in Turtle format.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pycorese.api.CoreseAPI.unloadCorese">
+<span class="sig-name descname"><span class="pre">unloadCorese</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pycorese/api.html#CoreseAPI.unloadCorese"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pycorese.api.CoreseAPI.unloadCorese" title="Link to this definition">#</a></dt>
+<dd><p>Explicitly unload Corese library.</p>
+<p>It’s not necessary to call this method, as the library is automatically
+unloaded when the Python interpreter exits.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>After unloading Corese bridged by <code class="docutils literal notranslate"><span class="pre">JPype</span></code> it is not possible to restart it.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="low-level-api">
+<h2>Low-level API<a class="headerlink" href="#low-level-api" title="Link to this heading">#</a></h2>
+<p>Low-level API is a subset of <code class="docutils literal notranslate"><span class="pre">corese-core</span></code> classes exposed as Python objects. These are dynamically created classes
+and can be accessed only after the Corese engine is loaded</p>
+<p>For the details of these classes and their methods, please refer to the <a class="reference external" href="https://corese-stack.github.io/corese-core/v4.6.0/java_api/library_root.html">Corese Java documentation</a>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycorese.api.CoreseAPI.Graph">
+<span class="sig-prename descclassname"><span class="pre">CoreseAPI.</span></span><span class="sig-name descname"><span class="pre">Graph</span></span><a class="headerlink" href="#pycorese.api.CoreseAPI.Graph" title="Link to this definition">#</a></dt>
+<dd><p>Corese <code class="docutils literal notranslate"><span class="pre">fr.inria.corese.core.Graph</span></code> object.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycorese.api.CoreseAPI.Load">
+<span class="sig-prename descclassname"><span class="pre">CoreseAPI.</span></span><span class="sig-name descname"><span class="pre">Load</span></span><a class="headerlink" href="#pycorese.api.CoreseAPI.Load" title="Link to this definition">#</a></dt>
+<dd><p>Corese <code class="docutils literal notranslate"><span class="pre">fr.inria.corese.core.load.Load</span></code> object.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycorese.api.CoreseAPI.QueryProcess">
+<span class="sig-prename descclassname"><span class="pre">CoreseAPI.</span></span><span class="sig-name descname"><span class="pre">QueryProcess</span></span><a class="headerlink" href="#pycorese.api.CoreseAPI.QueryProcess" title="Link to this definition">#</a></dt>
+<dd><p>Corese <code class="docutils literal notranslate"><span class="pre">fr.inria.corese.core.query.QueryProcess</span></code> object.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycorese.api.CoreseAPI.ResultFormat">
+<span class="sig-prename descclassname"><span class="pre">CoreseAPI.</span></span><span class="sig-name descname"><span class="pre">ResultFormat</span></span><a class="headerlink" href="#pycorese.api.CoreseAPI.ResultFormat" title="Link to this definition">#</a></dt>
+<dd><p>Corese <code class="docutils literal notranslate"><span class="pre">fr.inria.corese.core.print.ResultFormat</span></code> object.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycorese.api.CoreseAPI.RuleEngine">
+<span class="sig-prename descclassname"><span class="pre">CoreseAPI.</span></span><span class="sig-name descname"><span class="pre">RuleEngine</span></span><a class="headerlink" href="#pycorese.api.CoreseAPI.RuleEngine" title="Link to this definition">#</a></dt>
+<dd><p>Corese <code class="docutils literal notranslate"><span class="pre">fr.inria.corese.core.rule.RuleEngine</span></code> object.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycorese.api.CoreseAPI.Transformer">
+<span class="sig-prename descclassname"><span class="pre">CoreseAPI.</span></span><span class="sig-name descname"><span class="pre">Transformer</span></span><a class="headerlink" href="#pycorese.api.CoreseAPI.Transformer" title="Link to this definition">#</a></dt>
+<dd><p>Corese <code class="docutils literal notranslate"><span class="pre">fr.inria.corese.core.transform.Transformer</span></code> object.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycorese.api.CoreseAPI.Shacl">
+<span class="sig-prename descclassname"><span class="pre">CoreseAPI.</span></span><span class="sig-name descname"><span class="pre">Shacl</span></span><a class="headerlink" href="#pycorese.api.CoreseAPI.Shacl" title="Link to this definition">#</a></dt>
+<dd><p>Corese <code class="docutils literal notranslate"><span class="pre">fr.inria.corese.core.shacl.Shacl</span></code> object.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycorese.api.CoreseAPI.DataManager">
+<span class="sig-prename descclassname"><span class="pre">CoreseAPI.</span></span><span class="sig-name descname"><span class="pre">DataManager</span></span><a class="headerlink" href="#pycorese.api.CoreseAPI.DataManager" title="Link to this definition">#</a></dt>
+<dd><p>Corese <code class="docutils literal notranslate"><span class="pre">fr.inria.corese.core.storage.api.dataManager.DataManager</span></code> object.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycorese.api.CoreseAPI.CoreseGraphDataManager">
+<span class="sig-prename descclassname"><span class="pre">CoreseAPI.</span></span><span class="sig-name descname"><span class="pre">CoreseGraphDataManager</span></span><a class="headerlink" href="#pycorese.api.CoreseAPI.CoreseGraphDataManager" title="Link to this definition">#</a></dt>
+<dd><p>Corese <code class="docutils literal notranslate"><span class="pre">fr.inria.corese.core.storage.CoreseGraphDataManager</span></code> object.</p>
+</dd></dl>
+
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="bridges.html">About Java bridges</a></li>
+</ul>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../user_guide.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Using pycorese</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="bridges.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Java bridge packages</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#high-level-api">High-level API</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pycorese.api.CoreseAPI"><code class="docutils literal notranslate"><span class="pre">CoreseAPI</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pycorese.api.CoreseAPI.coreseVersion"><code class="docutils literal notranslate"><span class="pre">CoreseAPI.coreseVersion()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pycorese.api.CoreseAPI.loadCorese"><code class="docutils literal notranslate"><span class="pre">CoreseAPI.loadCorese()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pycorese.api.CoreseAPI.loadRDF"><code class="docutils literal notranslate"><span class="pre">CoreseAPI.loadRDF()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pycorese.api.CoreseAPI.loadRuleEngine"><code class="docutils literal notranslate"><span class="pre">CoreseAPI.loadRuleEngine()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pycorese.api.CoreseAPI.resetRuleEngine"><code class="docutils literal notranslate"><span class="pre">CoreseAPI.resetRuleEngine()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pycorese.api.CoreseAPI.shaclReportToDataFrame"><code class="docutils literal notranslate"><span class="pre">CoreseAPI.shaclReportToDataFrame()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pycorese.api.CoreseAPI.shaclValidate"><code class="docutils literal notranslate"><span class="pre">CoreseAPI.shaclValidate()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pycorese.api.CoreseAPI.sparqlConstruct"><code class="docutils literal notranslate"><span class="pre">CoreseAPI.sparqlConstruct()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pycorese.api.CoreseAPI.sparqlSelect"><code class="docutils literal notranslate"><span class="pre">CoreseAPI.sparqlSelect()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pycorese.api.CoreseAPI.toDataFrame"><code class="docutils literal notranslate"><span class="pre">CoreseAPI.toDataFrame()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pycorese.api.CoreseAPI.toTurtle"><code class="docutils literal notranslate"><span class="pre">CoreseAPI.toTurtle()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pycorese.api.CoreseAPI.unloadCorese"><code class="docutils literal notranslate"><span class="pre">CoreseAPI.unloadCorese()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#low-level-api">Low-level API</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pycorese.api.CoreseAPI.Graph"><code class="docutils literal notranslate"><span class="pre">CoreseAPI.Graph</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pycorese.api.CoreseAPI.Load"><code class="docutils literal notranslate"><span class="pre">CoreseAPI.Load</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pycorese.api.CoreseAPI.QueryProcess"><code class="docutils literal notranslate"><span class="pre">CoreseAPI.QueryProcess</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pycorese.api.CoreseAPI.ResultFormat"><code class="docutils literal notranslate"><span class="pre">CoreseAPI.ResultFormat</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pycorese.api.CoreseAPI.RuleEngine"><code class="docutils literal notranslate"><span class="pre">CoreseAPI.RuleEngine</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pycorese.api.CoreseAPI.Transformer"><code class="docutils literal notranslate"><span class="pre">CoreseAPI.Transformer</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pycorese.api.CoreseAPI.Shacl"><code class="docutils literal notranslate"><span class="pre">CoreseAPI.Shacl</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pycorese.api.CoreseAPI.DataManager"><code class="docutils literal notranslate"><span class="pre">CoreseAPI.DataManager</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pycorese.api.CoreseAPI.CoreseGraphDataManager"><code class="docutils literal notranslate"><span class="pre">CoreseAPI.CoreseGraphDataManager</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/python_api/index.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, WIMMICS.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
