@@ -22,8 +22,8 @@ sphinx-multiversion docs/source build/html
 
 ## Switcher generation
 
-- To navigate between versions by means of the switcher (the dropdown list indicating the available version), the switcher.json object must be generated. 
-- To improve navigability, a landing page must also be generated to redirect to the latest version of the documentation. 
+- To navigate between versions by means of the switcher (the dropdown list indicating the available version), the switcher.json object must be generated.
+- To improve navigability, a landing page must also be generated to redirect to the latest version of the documentation.
 
 To this end a script must be executed and write the output to the output html directory:
 
@@ -33,4 +33,4 @@ To this end a script must be executed and write the output to the output html di
 
 Both sphinx-multiversion and switcher_generator work on tags following the ```^v[0-9]+\.[0-9]+\.[0-9]+$``` syntax and ordered by refname.
 
-The minimal version set in the switcher_generator allows to not generate entries in the switcher and landing page for unexisting or uncompatible documentation.
+The minimal version set in the switcher_generator allows to not generate entries in the switcher and landing page for nonexisting or incompatible documentation.
