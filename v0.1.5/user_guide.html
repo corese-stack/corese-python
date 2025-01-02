@@ -1,0 +1,1565 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Using pycorese &#8212; corese-python  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0675bd48" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'user_guide';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://corese-stack.github.io/corese-python/switcher.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'v\d+\.\d+\.\d+';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="_static/Corese-square-logo-transparent.svg"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Python API Reference" href="python_api/index.html" />
+    <link rel="prev" title="pycorese doc" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/corese.svg" class="logo__image only-light" alt="corese-python  documentation - Home"/>
+    <script>document.write(`<img src="_static/corese.svg" class="logo__image only-dark" alt="corese-python  documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="python_api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="dev_install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="corese.html">
+    About Corese
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/corese-stack/corese-python" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-github-square fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="python_api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="dev_install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="corese.html">
+    About Corese
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/corese-stack/corese-python" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-github-square fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"></div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Using pycorese</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <p><a href="https://colab.research.google.com/github/corese-stack/corese-python/blob/develop/examples/example1.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+<section id="using-pycorese">
+<h1>Using pycorese<a class="headerlink" href="#using-pycorese" title="Link to this heading">#</a></h1>
+<p>This notebook demonstrates how to use the <strong>pycorese</strong> package:</p>
+<ul class="simple">
+<li><p>to load knowledge graph</p></li>
+<li><p>to perform a SPARQL query</p></li>
+<li><p>to validate a SHACL form</p></li>
+<li><p>to access the classes of Corese Java API</p></li>
+</ul>
+<section id="install-pycorese">
+<h2>Install pycorese<a class="headerlink" href="#install-pycorese" title="Link to this heading">#</a></h2>
+<p>Java Runtime Environment (JRE) 11 or higher is required to run <strong>pycorese</strong>.</p>
+<p>If you don’t have Java installed please refer to the <a class="reference external" href="https://www.java.com/en/download/help/download_options.html">official website</a> to download and install it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>java<span class="w"> </span>-version
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>openjdk version &quot;11.0.25&quot; 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>pycorese</strong> is available on PyPI and can be installed using pip:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>pycorese
+</pre></div>
+</div>
+</div>
+</div>
+<p>Download the data files from the GitHub repository:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="k">if</span>  <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;./data/beatles.rdf&#39;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Downloading the data files...&#39;</span><span class="p">)</span>
+    <span class="o">!</span>mkdir<span class="w"> </span>-p<span class="w"> </span>./data
+    <span class="o">!</span>wget<span class="w"> </span>https://raw.githubusercontent.com/corese-stack/corese-python/main/examples/data/beatles.rdf<span class="w"> </span>-O<span class="w"> </span>./data/beatles.rdf
+    <span class="o">!</span>wget<span class="w"> </span>https://raw.githubusercontent.com/corese-stack/corese-python/main/examples/data/beatles-validator.ttl<span class="w"> </span>-O<span class="w"> </span>./data/beatles-validator.ttl
+
+<span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">==</span> <span class="s1">&#39;win32&#39;</span><span class="p">:</span>
+    <span class="o">!</span>dir<span class="w"> </span>/b<span class="w"> </span>.<span class="se">\d</span>ata<span class="se">\*</span>.*
+<span class="k">else</span><span class="p">:</span>
+    <span class="o">!</span>ls<span class="w"> </span>./data
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>beatles.rdf  beatles-validator.ttl
+</pre></div>
+</div>
+</div>
+</div>
+<section id="connect-to-corese-api">
+<h3>Connect to Corese API<a class="headerlink" href="#connect-to-corese-api" title="Link to this heading">#</a></h3>
+<p>Demonstrate loading and querying data with CoreseAPI connected through <code class="docutils literal notranslate"><span class="pre">Py4J</span></code> or <code class="docutils literal notranslate"><span class="pre">JPype</span></code> packages.  If you don’t specify the java bridge type, the default is <code class="docutils literal notranslate"><span class="pre">Py4J</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#%%timeit -n 1 -r 1</span>
+<span class="kn">from</span>  <span class="nn">pycorese.api</span> <span class="kn">import</span> <span class="n">CoreseAPI</span>
+
+<span class="n">python_to_java_bridge</span> <span class="o">=</span> <span class="s1">&#39;py4j&#39;</span>
+<span class="n">corese</span> <span class="o">=</span> <span class="n">CoreseAPI</span><span class="p">(</span><span class="n">java_bridge</span><span class="o">=</span><span class="n">python_to_java_bridge</span><span class="p">)</span>
+<span class="n">corese</span><span class="o">.</span><span class="n">loadCorese</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="high-level-api">
+<h3>High-level API<a class="headerlink" href="#high-level-api" title="Link to this heading">#</a></h3>
+<section id="run-select-query">
+<h4>Run SELECT query<a class="headerlink" href="#run-select-query" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;./data/beatles.rdf&#39;</span><span class="p">)</span>
+
+<span class="n">query</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">SELECT *</span>
+<span class="s1">WHERE {?subject ?p ?o} LIMIT 5&#39;&#39;&#39;</span>
+
+<span class="n">graph</span> <span class="o">=</span> <span class="n">corese</span><span class="o">.</span><span class="n">loadRDF</span><span class="p">(</span><span class="n">data_path</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">corese</span><span class="o">.</span><span class="n">sparqlSelect</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="n">query</span><span class="p">,</span> <span class="n">return_dataframe</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">results</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-391a9389-9662-4f26-be4e-5de1f03397c4" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>subject</th>
+      <th>p</th>
+      <th>o</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>http://example.com/Please_Please_Me</td>
+      <td>http://example.com/artist</td>
+      <td>http://example.com/The_Beatles</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>http://example.com/McCartney</td>
+      <td>http://example.com/artist</td>
+      <td>http://example.com/Paul_McCartney</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>http://example.com/Imagine</td>
+      <td>http://example.com/artist</td>
+      <td>http://example.com/John_Lennon</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>http://example.com/Please_Please_Me</td>
+      <td>http://example.com/date</td>
+      <td>1963-03-22</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>http://example.com/McCartney</td>
+      <td>http://example.com/date</td>
+      <td>1970-04-17</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-391a9389-9662-4f26-be4e-5de1f03397c4')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-391a9389-9662-4f26-be4e-5de1f03397c4 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-391a9389-9662-4f26-be4e-5de1f03397c4');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-9821f6ea-fe6a-4ed9-8438-58ea5139893a">
+  <button class="colab-df-quickchart" onclick="quickchart('df-9821f6ea-fe6a-4ed9-8438-58ea5139893a')"
+            title="Suggest charts"
+            style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-9821f6ea-fe6a-4ed9-8438-58ea5139893a button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+
+  <div id="id_87ede403-8485-4501-b876-f91b9cc7f820">
+    <style>
+      .colab-df-generate {
+        background-color: #E8F0FE;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: none;
+        fill: #1967D2;
+        height: 32px;
+        padding: 0 0 0 0;
+        width: 32px;
+      }
+
+      .colab-df-generate:hover {
+        background-color: #E2EBFA;
+        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+        fill: #174EA6;
+      }
+
+      [theme=dark] .colab-df-generate {
+        background-color: #3B4455;
+        fill: #D2E3FC;
+      }
+
+      [theme=dark] .colab-df-generate:hover {
+        background-color: #434B5C;
+        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+        fill: #FFFFFF;
+      }
+    </style>
+    <button class="colab-df-generate" onclick="generateWithVariable('results')"
+            title="Generate code using this dataframe."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
+  </svg>
+    </button>
+    <script>
+      (() => {
+      const buttonEl =
+        document.querySelector('#id_87ede403-8485-4501-b876-f91b9cc7f820 button.colab-df-generate');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      buttonEl.onclick = () => {
+        google.colab.notebook.generateWithVariable('results');
+      }
+      })();
+    </script>
+  </div>
+
+    </div>
+  </div>
+</div></div>
+</div>
+</section>
+<section id="load-inference-rules">
+<h4>Load inference rules<a class="headerlink" href="#load-inference-rules" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corese</span><span class="o">.</span><span class="n">resetRuleEngine</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+<span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;select * where {?s a ?type} order by ?type&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">corese</span><span class="o">.</span><span class="n">sparqlSelect</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="n">query</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Graph size: &quot;</span><span class="p">,</span> <span class="n">graph</span><span class="o">.</span><span class="n">graphSize</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                     s                           type
+0  http://example.com/Please_Please_Me       http://example.com/Album
+1         http://example.com/McCartney       http://example.com/Album
+2           http://example.com/Imagine       http://example.com/Album
+3       http://example.com/The_Beatles        http://example.com/Band
+4       http://example.com/John_Lennon  http://example.com/SoloArtist
+5    http://example.com/Paul_McCartney  http://example.com/SoloArtist
+6       http://example.com/Ringo_Starr  http://example.com/SoloArtist
+7   http://example.com/George_Harrison  http://example.com/SoloArtist
+8        http://example.com/Love_Me_Do        http://example.com/Song
+Graph size:  29
+</pre></div>
+</div>
+</div>
+</div>
+<p>Adding inference rules to the Corese engine should change the results of the query by adding new triples.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corese</span><span class="o">.</span><span class="n">loadRuleEngine</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">profile</span><span class="o">=</span><span class="n">corese</span><span class="o">.</span><span class="n">RuleEngine</span><span class="o">.</span><span class="n">Profile</span><span class="o">.</span><span class="n">RDFS</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Graph size: &quot;</span><span class="p">,</span> <span class="n">graph</span><span class="o">.</span><span class="n">graphSize</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Graph size:  33
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s see what was added.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;select * where {?s a ?type} order by ?type&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">corese</span><span class="o">.</span><span class="n">sparqlSelect</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="n">query</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Graph size: &quot;</span><span class="p">,</span> <span class="n">graph</span><span class="o">.</span><span class="n">graphSize</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                      s                           type
+0   http://example.com/Please_Please_Me       http://example.com/Album
+1          http://example.com/McCartney       http://example.com/Album
+2            http://example.com/Imagine       http://example.com/Album
+3        http://example.com/The_Beatles        http://example.com/Band
+4        http://example.com/John_Lennon      http://example.com/Person
+5     http://example.com/Paul_McCartney      http://example.com/Person
+6        http://example.com/Ringo_Starr      http://example.com/Person
+7    http://example.com/George_Harrison      http://example.com/Person
+8        http://example.com/John_Lennon  http://example.com/SoloArtist
+9     http://example.com/Paul_McCartney  http://example.com/SoloArtist
+10       http://example.com/Ringo_Starr  http://example.com/SoloArtist
+11   http://example.com/George_Harrison  http://example.com/SoloArtist
+12        http://example.com/Love_Me_Do        http://example.com/Song
+Graph size:  33
+</pre></div>
+</div>
+</div>
+</div>
+<p>The inference was that the solo artist is also a person although it was not explicitly stated in the data.</p>
+</section>
+<section id="run-construct-query">
+<h4>Run CONSTRUCT query<a class="headerlink" href="#run-construct-query" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prefixes</span> <span class="o">=</span> <span class="s1">&#39;@prefix ex: &lt;http://example.com/&gt;&#39;</span>
+<span class="n">contruct</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;CONSTRUCT {?A_Beatle a ex:BandMember }</span>
+<span class="s1">              WHERE { ex:The_Beatles ex:member ?A_Beatle}&#39;&#39;&#39;</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="n">corese</span><span class="o">.</span><span class="n">sparqlConstruct</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">prefixes</span><span class="o">=</span><span class="n">prefixes</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="n">contruct</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;rdf:RDF
+  xmlns:ex=&#39;http://example.com/&#39;
+  xmlns:rdf=&#39;http://www.w3.org/1999/02/22-rdf-syntax-ns#&#39;&gt;
+
+  &lt;ex:BandMember rdf:about=&#39;http://example.com/Ringo_Starr&#39;&gt;
+  &lt;/ex:BandMember&gt;
+
+  &lt;ex:BandMember rdf:about=&#39;http://example.com/John_Lennon&#39;&gt;
+  &lt;/ex:BandMember&gt;
+
+  &lt;ex:BandMember rdf:about=&#39;http://example.com/George_Harrison&#39;&gt;
+  &lt;/ex:BandMember&gt;
+
+  &lt;ex:BandMember rdf:about=&#39;http://example.com/Paul_McCartney&#39;&gt;
+  &lt;/ex:BandMember&gt;
+
+&lt;/rdf:RDF&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>By default, the CONSTRUCT query returns the RDF/XML format. For more concise format convert the results to Turtle.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ttl</span> <span class="o">=</span> <span class="n">corese</span><span class="o">.</span><span class="n">toTurtle</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">ttl</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;http://example.com/George_Harrison&gt; a &lt;http://example.com/BandMember&gt; .
+
+&lt;http://example.com/John_Lennon&gt; a &lt;http://example.com/BandMember&gt; .
+
+&lt;http://example.com/Paul_McCartney&gt; a &lt;http://example.com/BandMember&gt; .
+
+&lt;http://example.com/Ringo_Starr&gt; a &lt;http://example.com/BandMember&gt; .
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="run-shacl-form-validation">
+<h4>Run SHACL form validation<a class="headerlink" href="#run-shacl-form-validation" title="Link to this heading">#</a></h4>
+<p>In the example below, we will use the the SHACL shape file that validates that the <em>beatles</em> graph follows the rules:</p>
+<ul class="simple">
+<li><p>A band has a name and at least on member who is also a Solo Artist</p></li>
+<li><p>An album has one name, one date and one artist associated with it</p></li>
+<li><p>A song has one name, one duration and at least writer and at least one performer associated with it</p></li>
+</ul>
+<p>The validation should fail because the <em>beatles</em> graph does not contain the required information.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_shape_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;./data/beatles-validator.ttl&#39;</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_shape_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">data_shape</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">data_shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PREFIX sh: &lt;http://www.w3.org/ns/shacl#&gt;
+PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
+PREFIX ex: &lt;http://example.com/&gt;
+
+# Shape for Bands
+ex:BandShape a sh:NodeShape ;
+    sh:targetClass ex:Band ;
+    sh:property [
+        sh:path ex:name ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path ex:member ;
+        sh:class ex:SoloArtist ;
+        sh:minCount 1 ;
+    ] .
+
+# Shape for Solo Artists
+ex:SoloArtistShape a sh:NodeShape ;
+    sh:targetClass ex:SoloArtist .
+
+# Shape for Albums
+ex:AlbumShape a sh:NodeShape ;
+    sh:targetClass ex:Album ;
+    sh:property [
+        sh:path ex:name ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path ex:date ;
+        sh:datatype xsd:date ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path ex:artist ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] .
+
+# Shape for Songs
+ex:SongShape a sh:NodeShape ;
+    sh:targetClass ex:Song ;
+    sh:property [
+        sh:path ex:name ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path ex:length ;
+        sh:datatype xsd:integer ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+        sh:property [
+        sh:path ex:performer ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 1 ;
+    ] ;
+    sh:property [
+        sh:path ex:writer ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 1 ;
+    ] .
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prefixes</span> <span class="o">=</span> <span class="s1">&#39;@prefix ex: &lt;http://example.com/&gt;&#39;</span>
+<span class="n">report</span> <span class="o">=</span> <span class="n">corese</span><span class="o">.</span><span class="n">shaclValidate</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">shacl_shape_ttl</span><span class="o">=</span><span class="n">data_shape_path</span><span class="p">,</span> <span class="n">prefixes</span><span class="o">=</span><span class="n">prefixes</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">report</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>@prefix xsh: &lt;http://www.w3.org/ns/shacl#&gt; .
+@prefix sh: &lt;http://www.w3.org/ns/shacl#&gt; .
+
+&lt;urn:uuid:66d7b5ea-0065-4f84-b0e4-d65ba0b16a11&gt; a sh:ValidationResult ;
+  sh:focusNode &lt;http://example.com/Love_Me_Do&gt; ;
+  sh:resultMessage &quot;Fail at: [sh:minCount 1 ;\n  sh:nodeKind sh:IRI ;\n  sh:path &lt;http://example.com/performer&gt;]&quot; ;
+  sh:resultPath &lt;http://example.com/performer&gt; ;
+  sh:resultSeverity sh:Violation ;
+  sh:sourceConstraintComponent sh:MinCountConstraintComponent ;
+  sh:sourceShape _:b7 ;
+  sh:value 0 .
+
+[a sh:ValidationReport ;
+  sh:conforms false ;
+  sh:result &lt;urn:uuid:66d7b5ea-0065-4f84-b0e4-d65ba0b16a11&gt;] .
+</pre></div>
+</div>
+</div>
+</div>
+<p>The SHACL validation report is verbose and can be reshaped into a DataFrame for readability.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">report_dataframe</span> <span class="o">=</span> <span class="n">corese</span><span class="o">.</span><span class="n">shaclReportToDataFrame</span><span class="p">(</span><span class="n">report</span><span class="p">)</span>
+
+<span class="n">report_dataframe</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-0b56a05d-cd73-4eb1-bda8-5ee3b5c8f164" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>type</th>
+      <th>focusNode</th>
+      <th>resultMessage</th>
+      <th>resultPath</th>
+      <th>resultSeverity</th>
+      <th>sourceConstraintComponent</th>
+      <th>sourceShape</th>
+      <th>value</th>
+    </tr>
+    <tr>
+      <th>o</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>urn:uuid:66d7b5ea-0065-4f84-b0e4-d65ba0b16a11</th>
+      <td>http://www.w3.org/ns/shacl#ValidationResult</td>
+      <td>http://example.com/Love_Me_Do</td>
+      <td>Fail at: [sh:minCount 1 ;
+  sh:nodeKind sh:IRI...</td>
+      <td>http://example.com/performer</td>
+      <td>http://www.w3.org/ns/shacl#Violation</td>
+      <td>http://www.w3.org/ns/shacl#MinCountConstraintC...</td>
+      <td>_:b9</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-0b56a05d-cd73-4eb1-bda8-5ee3b5c8f164')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-0b56a05d-cd73-4eb1-bda8-5ee3b5c8f164 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-0b56a05d-cd73-4eb1-bda8-5ee3b5c8f164');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+  <div id="id_1ae0ba18-28df-40fd-8caa-804d0ffc0ace">
+    <style>
+      .colab-df-generate {
+        background-color: #E8F0FE;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: none;
+        fill: #1967D2;
+        height: 32px;
+        padding: 0 0 0 0;
+        width: 32px;
+      }
+
+      .colab-df-generate:hover {
+        background-color: #E2EBFA;
+        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+        fill: #174EA6;
+      }
+
+      [theme=dark] .colab-df-generate {
+        background-color: #3B4455;
+        fill: #D2E3FC;
+      }
+
+      [theme=dark] .colab-df-generate:hover {
+        background-color: #434B5C;
+        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+        fill: #FFFFFF;
+      }
+    </style>
+    <button class="colab-df-generate" onclick="generateWithVariable('report_dataframe')"
+            title="Generate code using this dataframe."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
+  </svg>
+    </button>
+    <script>
+      (() => {
+      const buttonEl =
+        document.querySelector('#id_1ae0ba18-28df-40fd-8caa-804d0ffc0ace button.colab-df-generate');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      buttonEl.onclick = () => {
+        google.colab.notebook.generateWithVariable('report_dataframe');
+      }
+      })();
+    </script>
+  </div>
+
+    </div>
+  </div>
+</div></div>
+</div>
+<p>The report tells us that for the song <em>Love Me Do</em> a performer is not specified.</p>
+</section>
+</section>
+</section>
+<section id="low-level-api">
+<h2>Low-level API<a class="headerlink" href="#low-level-api" title="Link to this heading">#</a></h2>
+<section id="adding-triples-manually-to-the-graph">
+<h3>Adding triples manually to the graph.<a class="headerlink" href="#adding-triples-manually-to-the-graph" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Namespace</span>
+<span class="n">ex</span> <span class="o">=</span> <span class="s2">&quot;http://example.com/&quot;</span>
+
+<span class="c1"># Get the graph from either Graph or DataManager objects</span>
+<span class="n">graph</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">getGraph</span><span class="p">()</span>
+
+<span class="c1"># Create and add statements: Help! is an album</span>
+<span class="n">new_album_IRI</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">addResource</span><span class="p">(</span><span class="n">ex</span> <span class="o">+</span> <span class="s2">&quot;Help&quot;</span><span class="p">)</span>
+<span class="n">rdf_Type_Property</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">addProperty</span><span class="p">(</span><span class="n">corese</span><span class="o">.</span><span class="n">Namespaces</span><span class="o">.</span><span class="n">RDF</span> <span class="o">+</span> <span class="s1">&#39;type&#39;</span><span class="p">)</span>
+<span class="n">album_type_IRI</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">addResource</span><span class="p">(</span><span class="n">ex</span> <span class="o">+</span> <span class="s2">&quot;Album&quot;</span><span class="p">)</span>
+
+<span class="n">graph</span><span class="o">.</span><span class="n">addEdge</span><span class="p">(</span><span class="n">new_album_IRI</span><span class="p">,</span> <span class="n">rdf_Type_Property</span><span class="p">,</span> <span class="n">album_type_IRI</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>JavaObject id=o37
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s see what was added.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;&#39;&#39;@prefix ex: &lt;</span><span class="si">{</span><span class="n">ex</span><span class="si">}</span><span class="s1">&gt;</span>
+<span class="s1">            SELECT *</span>
+<span class="s1">            where </span><span class="se">{{</span><span class="s1">?album a ex:Album </span><span class="se">}}</span><span class="s1">&#39;&#39;&#39;</span>
+
+<span class="n">exec</span> <span class="o">=</span> <span class="n">corese</span><span class="o">.</span><span class="n">QueryProcess</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="n">exec</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>01 ?album = &lt;http://example.com/Please_Please_Me&gt;; 
+02 ?album = &lt;http://example.com/McCartney&gt;; 
+03 ?album = &lt;http://example.com/Imagine&gt;; 
+04 ?album = &lt;http://example.com/Help&gt;; 
+</pre></div>
+</div>
+</div>
+</div>
+<p>The new triple (album <em>Help</em>) was added to the graph.</p>
+<p>Wer can add some more detailes for the album <em>Help!</em> and see what was added.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create and add statement: The name of the album is actually Help!</span>
+<span class="n">name_property_IRI</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">addProperty</span><span class="p">(</span><span class="n">ex</span> <span class="o">+</span> <span class="s2">&quot;name&quot;</span><span class="p">)</span>
+<span class="n">name_literal</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">addLiteral</span><span class="p">(</span><span class="s2">&quot;Help!&quot;</span><span class="p">)</span>
+
+<span class="n">graph</span><span class="o">.</span><span class="n">addEdge</span><span class="p">(</span><span class="n">new_album_IRI</span><span class="p">,</span> <span class="n">name_property_IRI</span><span class="p">,</span> <span class="n">name_literal</span><span class="p">)</span>
+
+<span class="c1"># Create and add statement: The new album was released in 1965</span>
+<span class="n">xsd</span> <span class="o">=</span> <span class="s2">&quot;http://www.w3.org/2001/XMLSchema#&quot;</span>
+<span class="n">release_property_IRI</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">addProperty</span><span class="p">(</span><span class="n">ex</span> <span class="o">+</span> <span class="s2">&quot;date&quot;</span><span class="p">)</span>
+<span class="n">release_literal</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">addLiteral</span><span class="p">(</span><span class="s2">&quot;1965&quot;</span><span class="p">,</span> <span class="n">xsd</span> <span class="o">+</span> <span class="s1">&#39;date&#39;</span><span class="p">)</span>
+
+<span class="n">graph</span><span class="o">.</span><span class="n">addEdge</span><span class="p">(</span><span class="n">new_album_IRI</span><span class="p">,</span> <span class="n">release_property_IRI</span><span class="p">,</span> <span class="n">release_literal</span><span class="p">)</span>
+
+
+<span class="c1"># Create and add statement: The Beatles is the creator of the album Help</span>
+<span class="n">artist_property_IRI</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">addProperty</span><span class="p">(</span><span class="n">ex</span> <span class="o">+</span> <span class="s2">&quot;artist&quot;</span><span class="p">)</span>
+<span class="n">artist_IRI</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">addLiteral</span><span class="p">(</span><span class="n">ex</span> <span class="o">+</span> <span class="s2">&quot;The_Beatles&quot;</span><span class="p">)</span>
+<span class="n">graph</span><span class="o">.</span><span class="n">addEdge</span><span class="p">(</span><span class="n">new_album_IRI</span><span class="p">,</span> <span class="n">artist_property_IRI</span><span class="p">,</span> <span class="n">artist_IRI</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>JavaObject id=o46
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;&#39;&#39;@prefix ex: &lt;</span><span class="si">{</span><span class="n">ex</span><span class="si">}</span><span class="s1">&gt;</span>
+<span class="s1">            CONSTRUCT </span><span class="se">{{</span><span class="s1"> ?album ?p ?o </span><span class="se">}}</span>
+<span class="s1">            WHERE </span><span class="se">{{</span>
+<span class="s1">                VALUES ?album </span><span class="se">{{</span><span class="s1"> ex:Help </span><span class="se">}}</span>
+<span class="s1">                ?album ?p ?o</span><span class="se">}}</span><span class="s1"> &#39;&#39;&#39;</span>
+
+<span class="n">exec</span> <span class="o">=</span> <span class="n">corese</span><span class="o">.</span><span class="n">QueryProcess</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="n">exec</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+
+<span class="n">results_ttl</span> <span class="o">=</span> <span class="n">corese</span><span class="o">.</span><span class="n">ResultFormat</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">corese</span><span class="o">.</span><span class="n">ResultFormat</span><span class="o">.</span><span class="n">TURTLE_FORMAT</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">results_ttl</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt; .
+@prefix ex: &lt;http://example.com/&gt; .
+
+ex:Help ex:artist &quot;http://example.com/The_Beatles&quot; ;
+  ex:date &quot;1965&quot;^^xsd:date ;
+  ex:name &quot;Help!&quot; ;
+  a ex:Album .
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">pycorese doc</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="python_api/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Python API Reference</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-pycorese">Install pycorese</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connect-to-corese-api">Connect to Corese API</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#high-level-api">High-level API</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#run-select-query">Run SELECT query</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#load-inference-rules">Load inference rules</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#run-construct-query">Run CONSTRUCT query</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#run-shacl-form-validation">Run SHACL form validation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#low-level-api">Low-level API</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-triples-manually-to-the-graph">Adding triples manually to the graph.</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="_sources/user_guide.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, WIMMICS.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
