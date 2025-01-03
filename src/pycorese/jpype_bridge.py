@@ -41,7 +41,7 @@ class JPypeBridge:
         if corese_path:
             self.corese_path = corese_path
             if not os.path.exists(self.corese_path):
-                msg = f'given CORESE library is not found at {self.corese_path}.'
+                msg = f'JPype: given CORESE library is not found at {self.corese_path}.'
                 logging.critical(msg)
                 raise FileNotFoundError('\n'+msg)
 
@@ -50,7 +50,7 @@ class JPypeBridge:
             self.corese_path = os.environ.get("CORESE_PATH", package_jar_path)
 
             if not os.path.exists(self.corese_path):
-                msg = f'given CORESE library is not found at {self.corese_path}.'
+                msg = f'JPype: given CORESE library is not found at {self.corese_path}.'
                 logging.critical(msg)
                 raise FileNotFoundError('\n'+msg)
 
@@ -68,7 +68,17 @@ class JPypeBridge:
         """
         TODO: call coreseVersion() from corese engine
         """
-        return corese_version
+        version = None
+        try:
+            from fr.inria.corese.core.util import CoreseInfo
+            version = CoreseInfo.getVersion()
+        except:
+            pass
+
+        if version is None:
+            loggingWarning(f"JPype: the CORESE library is too old. coreseVersion() is available since 4.6.0 only.")
+
+        return version
 
     def unloadCorese(self, force=False):
         """
@@ -155,7 +165,7 @@ class JPypeBridge:
 
 
         except Exception as e:
-            logging.error('JPype: CORESE failed to load: %s', str(e))
+            logging.critical('JPype: CORESE failed to load: %s', str(e))
 
 
         return jpype

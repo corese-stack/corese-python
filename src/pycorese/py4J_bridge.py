@@ -33,7 +33,7 @@ class Py4JBridge:
         if corese_path:
             self.corese_path = corese_path
             if not os.path.exists(self.corese_path):
-                msg = f'given CORESE library is not found at {self.corese_path}.'
+                msg = f'Py4j: given CORESE library is not found at {self.corese_path}.'
                 logging.critical(msg)
                 raise FileNotFoundError('\n'+msg)
 
@@ -42,7 +42,7 @@ class Py4JBridge:
             self.corese_path = os.environ.get("CORESE_PATH", package_jar_path)
 
             if not os.path.exists(self.corese_path):
-                msg = f'given CORESE library is not found at {self.corese_path}.'
+                msg = f'Py4j: given CORESE library is not found at {self.corese_path}.'
                 logging.critical(msg)
                 raise FileNotFoundError('\n'+msg)
 
@@ -59,9 +59,18 @@ class Py4JBridge:
 
     def coreseVersion(self):
         """
-        TODO: call coreseVersion() from corese engine
+        get corese version from the loaded corese engine
         """
-        return corese_version
+        version = None
+        try:
+            version = corese.java_gateway.jvm.fr.inria.corese.core.util.CoreseInfo.getVersion()
+        except:
+            pass
+
+        if version is None:
+            logging.Warning(f"Py4j: the CORESE library is too old. coreseVersion() is available since 4.6.0 only.")
+
+        return version
 
     def unloadCorese(self):
         """
@@ -128,6 +137,6 @@ class Py4JBridge:
             logging.info('Py4J: CORESE is loaded')
 
         except Exception as e:
-            logging.error('Py4J: CORESE failed to load: %s', str(e))
+            logging.critical('Py4J: CORESE failed to load: %s', str(e))
 
         return self.java_gateway

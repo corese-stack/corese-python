@@ -3,9 +3,21 @@ channels:
   - conda-forge
   - defaults
 dependencies:
+  - python>=3.10
   - pandas
   - py4j
+  - sphinx>=7.1.2
+  - sphinx-multiversion>=0.2.4
+  - sphinx-design==0.5.0
   - pip
   - pip:
-       - maven-artifact
        - jpype1
+       - setuptools
+       - wheel
+       - build
+       - pytest
+       - pytest-cov
+       - pydata_sphinx_theme>=0.14.4
+       - sphinx-copybutton>=0.5.0
+       - myst-parser==2.0.0
+       - myst_nb==1.1.2
