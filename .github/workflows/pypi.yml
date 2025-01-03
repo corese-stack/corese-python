@@ -60,7 +60,7 @@ jobs:
 
       - name: Publish to pypi.org
         run: |
-          TWINE_USERNAME="__token__" TWINE_PASSWORD=${{ secrets.PYPI_TOKEN }} twine upload dist/* --verbose
+          TWINE_USERNAME="__token__" TWINE_PASSWORD=${{ secrets.PYPI_TOKEN }} twine upload dist/*
 
       - name: Final Step
         run: |
