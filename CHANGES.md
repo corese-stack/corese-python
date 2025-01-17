@@ -1,5 +1,12 @@
 # Changelog
 
+## Version 0.2.0
+
+- wrapped corese-core version 4.6.1
+- fixed broken code in CoreseAPI and Java bridge classes
+- refactored  CoreseAPI for usage simplification
+- updated example notebook
+
 ## Version 0.1.5
 
 - added corese-python/pycorese API documentation

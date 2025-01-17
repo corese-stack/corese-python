@@ -1,6 +1,6 @@
 #
-# corese lib dependancy package version
+# corese lib dependency package version
 #
 
 
-corese_version = "4.6.0"
+corese_version = "4.6.1"
