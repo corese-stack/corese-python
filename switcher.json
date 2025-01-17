@@ -1,9 +1,15 @@
 [
 {
-    "name": "v0.1.5 (latest)",
+    "name": "v0.2.0 (latest)",
+    "version": "stable",
+    "url": "https://corese-stack.github.io/corese-python/v0.2.0/",
+    "preferred": true
+},
+{
+    "name": "v0.1.5 (stable)",
     "version": "stable",
     "url": "https://corese-stack.github.io/corese-python/v0.1.5/",
-    "preferred": true
+    "preferred": false
 },
 {
     "name": "v0.0.0 (stable)",
