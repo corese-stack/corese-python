@@ -451,9 +451,9 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>openjdk version &quot;11.0.25&quot; 2024-10-15
-OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
-OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>openjdk version &quot;11.0.21&quot; 2023-10-17 LTS
+OpenJDK Runtime Environment Microsoft-8519785 (build 11.0.21+9-LTS)
+OpenJDK 64-Bit Server VM Microsoft-8519785 (build 11.0.21+9-LTS, mixed mode)
 </pre></div>
 </div>
 </div>
@@ -461,7 +461,7 @@ OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode,
 <p><strong>pycorese</strong> is available on PyPI and can be installed using pip:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>pycorese
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">pip</span> install pycorese
 </pre></div>
 </div>
 </div>
@@ -485,7 +485,8 @@ OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>beatles.rdf  beatles-validator.ttl
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>beatles-validator.ttl
+beatles.rdf
 </pre></div>
 </div>
 </div>
@@ -500,7 +501,25 @@ OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode,
 
 <span class="n">python_to_java_bridge</span> <span class="o">=</span> <span class="s1">&#39;py4j&#39;</span>
 <span class="n">corese</span> <span class="o">=</span> <span class="n">CoreseAPI</span><span class="p">(</span><span class="n">java_bridge</span><span class="o">=</span><span class="n">python_to_java_bridge</span><span class="p">)</span>
-<span class="n">corese</span><span class="o">.</span><span class="n">loadCorese</span><span class="p">()</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">corese</span><span class="o">.</span><span class="n">loadCorese</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-01-15 22:42:58,987 - INFO - Py4J: Loading CORESE...
+2025-01-15 22:43:02,334 - INFO - Py4J: CORESE is loaded
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corese</span><span class="o">.</span><span class="n">coreseVersion</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;4.6.1&#39;
 </pre></div>
 </div>
 </div>
@@ -527,9 +546,7 @@ OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html">
-  <div id="df-391a9389-9662-4f26-be4e-5de1f03397c4" class="colab-df-container">
-    <div>
+<div class="output text_html"><div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -585,272 +602,7 @@ OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode,
     </tr>
   </tbody>
 </table>
-</div>
-    <div class="colab-df-buttons">
-
-  <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-391a9389-9662-4f26-be4e-5de1f03397c4')"
-            title="Convert this dataframe to an interactive table."
-            style="display:none;">
-
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
-    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
-  </svg>
-    </button>
-
-  <style>
-    .colab-df-container {
-      display:flex;
-      gap: 12px;
-    }
-
-    .colab-df-convert {
-      background-color: #E8F0FE;
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-      display: none;
-      fill: #1967D2;
-      height: 32px;
-      padding: 0 0 0 0;
-      width: 32px;
-    }
-
-    .colab-df-convert:hover {
-      background-color: #E2EBFA;
-      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
-      fill: #174EA6;
-    }
-
-    .colab-df-buttons div {
-      margin-bottom: 4px;
-    }
-
-    [theme=dark] .colab-df-convert {
-      background-color: #3B4455;
-      fill: #D2E3FC;
-    }
-
-    [theme=dark] .colab-df-convert:hover {
-      background-color: #434B5C;
-      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
-      fill: #FFFFFF;
-    }
-  </style>
-
-    <script>
-      const buttonEl =
-        document.querySelector('#df-391a9389-9662-4f26-be4e-5de1f03397c4 button.colab-df-convert');
-      buttonEl.style.display =
-        google.colab.kernel.accessAllowed ? 'block' : 'none';
-
-      async function convertToInteractive(key) {
-        const element = document.querySelector('#df-391a9389-9662-4f26-be4e-5de1f03397c4');
-        const dataTable =
-          await google.colab.kernel.invokeFunction('convertToInteractive',
-                                                    [key], {});
-        if (!dataTable) return;
-
-        const docLinkHtml = 'Like what you see? Visit the ' +
-          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
-          + ' to learn more about interactive tables.';
-        element.innerHTML = '';
-        dataTable['output_type'] = 'display_data';
-        await google.colab.output.renderOutput(dataTable, element);
-        const docLink = document.createElement('div');
-        docLink.innerHTML = docLinkHtml;
-        element.appendChild(docLink);
-      }
-    </script>
-  </div>
-
-
-<div id="df-9821f6ea-fe6a-4ed9-8438-58ea5139893a">
-  <button class="colab-df-quickchart" onclick="quickchart('df-9821f6ea-fe6a-4ed9-8438-58ea5139893a')"
-            title="Suggest charts"
-            style="display:none;">
-
-<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
-     width="24px">
-    <g>
-        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
-    </g>
-</svg>
-  </button>
-
-<style>
-  .colab-df-quickchart {
-      --bg-color: #E8F0FE;
-      --fill-color: #1967D2;
-      --hover-bg-color: #E2EBFA;
-      --hover-fill-color: #174EA6;
-      --disabled-fill-color: #AAA;
-      --disabled-bg-color: #DDD;
-  }
-
-  [theme=dark] .colab-df-quickchart {
-      --bg-color: #3B4455;
-      --fill-color: #D2E3FC;
-      --hover-bg-color: #434B5C;
-      --hover-fill-color: #FFFFFF;
-      --disabled-bg-color: #3B4455;
-      --disabled-fill-color: #666;
-  }
-
-  .colab-df-quickchart {
-    background-color: var(--bg-color);
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    display: none;
-    fill: var(--fill-color);
-    height: 32px;
-    padding: 0;
-    width: 32px;
-  }
-
-  .colab-df-quickchart:hover {
-    background-color: var(--hover-bg-color);
-    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
-    fill: var(--button-hover-fill-color);
-  }
-
-  .colab-df-quickchart-complete:disabled,
-  .colab-df-quickchart-complete:disabled:hover {
-    background-color: var(--disabled-bg-color);
-    fill: var(--disabled-fill-color);
-    box-shadow: none;
-  }
-
-  .colab-df-spinner {
-    border: 2px solid var(--fill-color);
-    border-color: transparent;
-    border-bottom-color: var(--fill-color);
-    animation:
-      spin 1s steps(1) infinite;
-  }
-
-  @keyframes spin {
-    0% {
-      border-color: transparent;
-      border-bottom-color: var(--fill-color);
-      border-left-color: var(--fill-color);
-    }
-    20% {
-      border-color: transparent;
-      border-left-color: var(--fill-color);
-      border-top-color: var(--fill-color);
-    }
-    30% {
-      border-color: transparent;
-      border-left-color: var(--fill-color);
-      border-top-color: var(--fill-color);
-      border-right-color: var(--fill-color);
-    }
-    40% {
-      border-color: transparent;
-      border-right-color: var(--fill-color);
-      border-top-color: var(--fill-color);
-    }
-    60% {
-      border-color: transparent;
-      border-right-color: var(--fill-color);
-    }
-    80% {
-      border-color: transparent;
-      border-right-color: var(--fill-color);
-      border-bottom-color: var(--fill-color);
-    }
-    90% {
-      border-color: transparent;
-      border-bottom-color: var(--fill-color);
-    }
-  }
-</style>
-
-  <script>
-    async function quickchart(key) {
-      const quickchartButtonEl =
-        document.querySelector('#' + key + ' button');
-      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
-      quickchartButtonEl.classList.add('colab-df-spinner');
-      try {
-        const charts = await google.colab.kernel.invokeFunction(
-            'suggestCharts', [key], {});
-      } catch (error) {
-        console.error('Error during call to suggestCharts:', error);
-      }
-      quickchartButtonEl.classList.remove('colab-df-spinner');
-      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
-    }
-    (() => {
-      let quickchartButtonEl =
-        document.querySelector('#df-9821f6ea-fe6a-4ed9-8438-58ea5139893a button');
-      quickchartButtonEl.style.display =
-        google.colab.kernel.accessAllowed ? 'block' : 'none';
-    })();
-  </script>
-</div>
-
-  <div id="id_87ede403-8485-4501-b876-f91b9cc7f820">
-    <style>
-      .colab-df-generate {
-        background-color: #E8F0FE;
-        border: none;
-        border-radius: 50%;
-        cursor: pointer;
-        display: none;
-        fill: #1967D2;
-        height: 32px;
-        padding: 0 0 0 0;
-        width: 32px;
-      }
-
-      .colab-df-generate:hover {
-        background-color: #E2EBFA;
-        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
-        fill: #174EA6;
-      }
-
-      [theme=dark] .colab-df-generate {
-        background-color: #3B4455;
-        fill: #D2E3FC;
-      }
-
-      [theme=dark] .colab-df-generate:hover {
-        background-color: #434B5C;
-        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
-        fill: #FFFFFF;
-      }
-    </style>
-    <button class="colab-df-generate" onclick="generateWithVariable('results')"
-            title="Generate code using this dataframe."
-            style="display:none;">
-
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
-       width="24px">
-    <path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
-  </svg>
-    </button>
-    <script>
-      (() => {
-      const buttonEl =
-        document.querySelector('#id_87ede403-8485-4501-b876-f91b9cc7f820 button.colab-df-generate');
-      buttonEl.style.display =
-        google.colab.kernel.accessAllowed ? 'block' : 'none';
-
-      buttonEl.onclick = () => {
-        google.colab.notebook.generateWithVariable('results');
-      }
-      })();
-    </script>
-  </div>
-
-    </div>
-  </div>
-</div></div>
+</div></div></div>
 </div>
 </section>
 <section id="load-inference-rules">
@@ -860,7 +612,7 @@ OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode,
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corese</span><span class="o">.</span><span class="n">resetRuleEngine</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
 <span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;select * where {?s a ?type} order by ?type&quot;</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">corese</span><span class="o">.</span><span class="n">sparqlSelect</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="n">query</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Graph size: &quot;</span><span class="p">,</span> <span class="n">graph</span><span class="o">.</span><span class="n">graphSize</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Graph size: &quot;</span><span class="p">,</span> <span class="n">graph</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -883,8 +635,8 @@ Graph size:  29
 <p>Adding inference rules to the Corese engine should change the results of the query by adding new triples.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corese</span><span class="o">.</span><span class="n">loadRuleEngine</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">profile</span><span class="o">=</span><span class="n">corese</span><span class="o">.</span><span class="n">RuleEngine</span><span class="o">.</span><span class="n">Profile</span><span class="o">.</span><span class="n">RDFS</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Graph size: &quot;</span><span class="p">,</span> <span class="n">graph</span><span class="o">.</span><span class="n">graphSize</span><span class="p">())</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corese</span><span class="o">.</span><span class="n">loadRuleEngine</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">profile</span><span class="o">=</span><span class="s1">&#39;rdfs&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Graph size: &quot;</span><span class="p">,</span> <span class="n">graph</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -899,7 +651,7 @@ Graph size:  29
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;select * where {?s a ?type} order by ?type&quot;</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">corese</span><span class="o">.</span><span class="n">sparqlSelect</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="n">query</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Graph size: &quot;</span><span class="p">,</span> <span class="n">graph</span><span class="o">.</span><span class="n">graphSize</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Graph size: &quot;</span><span class="p">,</span> <span class="n">graph</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -929,11 +681,11 @@ Graph size:  33
 <h4>Run CONSTRUCT query<a class="headerlink" href="#run-construct-query" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prefixes</span> <span class="o">=</span> <span class="s1">&#39;@prefix ex: &lt;http://example.com/&gt;&#39;</span>
-<span class="n">contruct</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;CONSTRUCT {?A_Beatle a ex:BandMember }</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">construct</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;@prefix ex: &lt;http://example.com/&gt;</span>
+<span class="s1">              CONSTRUCT {?A_Beatle a ex:BandMember }</span>
 <span class="s1">              WHERE { ex:The_Beatles ex:member ?A_Beatle}&#39;&#39;&#39;</span>
 
-<span class="n">results</span> <span class="o">=</span> <span class="n">corese</span><span class="o">.</span><span class="n">sparqlConstruct</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">prefixes</span><span class="o">=</span><span class="n">prefixes</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="n">contruct</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">corese</span><span class="o">.</span><span class="n">sparqlConstruct</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="n">construct</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
 </pre></div>
@@ -1080,8 +832,7 @@ ex:SongShape a sh:NodeShape ;
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prefixes</span> <span class="o">=</span> <span class="s1">&#39;@prefix ex: &lt;http://example.com/&gt;&#39;</span>
-<span class="n">report</span> <span class="o">=</span> <span class="n">corese</span><span class="o">.</span><span class="n">shaclValidate</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">shacl_shape_ttl</span><span class="o">=</span><span class="n">data_shape_path</span><span class="p">,</span> <span class="n">prefixes</span><span class="o">=</span><span class="n">prefixes</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">report</span> <span class="o">=</span> <span class="n">corese</span><span class="o">.</span><span class="n">shaclValidate</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">shacl_shape_ttl</span><span class="o">=</span><span class="n">data_shape_path</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">report</span><span class="p">)</span>
 </pre></div>
@@ -1091,9 +842,9 @@ ex:SongShape a sh:NodeShape ;
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>@prefix xsh: &lt;http://www.w3.org/ns/shacl#&gt; .
 @prefix sh: &lt;http://www.w3.org/ns/shacl#&gt; .
 
-&lt;urn:uuid:66d7b5ea-0065-4f84-b0e4-d65ba0b16a11&gt; a sh:ValidationResult ;
+&lt;urn:uuid:71004e6a-a24c-42b7-a2a9-0ac60198714f&gt; a sh:ValidationResult ;
   sh:focusNode &lt;http://example.com/Love_Me_Do&gt; ;
-  sh:resultMessage &quot;Fail at: [sh:minCount 1 ;\n  sh:nodeKind sh:IRI ;\n  sh:path &lt;http://example.com/performer&gt;]&quot; ;
+  sh:resultMessage &quot;Fail at: [sh:minCount 1 ;\r\n  sh:nodeKind sh:IRI ;\r\n  sh:path &lt;http://example.com/performer&gt;]&quot; ;
   sh:resultPath &lt;http://example.com/performer&gt; ;
   sh:resultSeverity sh:Violation ;
   sh:sourceConstraintComponent sh:MinCountConstraintComponent ;
@@ -1102,7 +853,7 @@ ex:SongShape a sh:NodeShape ;
 
 [a sh:ValidationReport ;
   sh:conforms false ;
-  sh:result &lt;urn:uuid:66d7b5ea-0065-4f84-b0e4-d65ba0b16a11&gt;] .
+  sh:result &lt;urn:uuid:71004e6a-a24c-42b7-a2a9-0ac60198714f&gt;] .
 </pre></div>
 </div>
 </div>
@@ -1117,9 +868,7 @@ ex:SongShape a sh:NodeShape ;
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html">
-  <div id="df-0b56a05d-cd73-4eb1-bda8-5ee3b5c8f164" class="colab-df-container">
-    <div>
+<div class="output text_html"><div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -1146,25 +895,14 @@ ex:SongShape a sh:NodeShape ;
       <th>sourceShape</th>
       <th>value</th>
     </tr>
-    <tr>
-      <th>o</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
   </thead>
   <tbody>
     <tr>
-      <th>urn:uuid:66d7b5ea-0065-4f84-b0e4-d65ba0b16a11</th>
+      <th>0</th>
       <td>http://www.w3.org/ns/shacl#ValidationResult</td>
       <td>http://example.com/Love_Me_Do</td>
       <td>Fail at: [sh:minCount 1 ;
-  sh:nodeKind sh:IRI...</td>
+  sh:nodeKind sh:IR...</td>
       <td>http://example.com/performer</td>
       <td>http://www.w3.org/ns/shacl#Violation</td>
       <td>http://www.w3.org/ns/shacl#MinCountConstraintC...</td>
@@ -1173,145 +911,7 @@ ex:SongShape a sh:NodeShape ;
     </tr>
   </tbody>
 </table>
-</div>
-    <div class="colab-df-buttons">
-
-  <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-0b56a05d-cd73-4eb1-bda8-5ee3b5c8f164')"
-            title="Convert this dataframe to an interactive table."
-            style="display:none;">
-
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
-    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
-  </svg>
-    </button>
-
-  <style>
-    .colab-df-container {
-      display:flex;
-      gap: 12px;
-    }
-
-    .colab-df-convert {
-      background-color: #E8F0FE;
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-      display: none;
-      fill: #1967D2;
-      height: 32px;
-      padding: 0 0 0 0;
-      width: 32px;
-    }
-
-    .colab-df-convert:hover {
-      background-color: #E2EBFA;
-      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
-      fill: #174EA6;
-    }
-
-    .colab-df-buttons div {
-      margin-bottom: 4px;
-    }
-
-    [theme=dark] .colab-df-convert {
-      background-color: #3B4455;
-      fill: #D2E3FC;
-    }
-
-    [theme=dark] .colab-df-convert:hover {
-      background-color: #434B5C;
-      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
-      fill: #FFFFFF;
-    }
-  </style>
-
-    <script>
-      const buttonEl =
-        document.querySelector('#df-0b56a05d-cd73-4eb1-bda8-5ee3b5c8f164 button.colab-df-convert');
-      buttonEl.style.display =
-        google.colab.kernel.accessAllowed ? 'block' : 'none';
-
-      async function convertToInteractive(key) {
-        const element = document.querySelector('#df-0b56a05d-cd73-4eb1-bda8-5ee3b5c8f164');
-        const dataTable =
-          await google.colab.kernel.invokeFunction('convertToInteractive',
-                                                    [key], {});
-        if (!dataTable) return;
-
-        const docLinkHtml = 'Like what you see? Visit the ' +
-          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
-          + ' to learn more about interactive tables.';
-        element.innerHTML = '';
-        dataTable['output_type'] = 'display_data';
-        await google.colab.output.renderOutput(dataTable, element);
-        const docLink = document.createElement('div');
-        docLink.innerHTML = docLinkHtml;
-        element.appendChild(docLink);
-      }
-    </script>
-  </div>
-
-
-  <div id="id_1ae0ba18-28df-40fd-8caa-804d0ffc0ace">
-    <style>
-      .colab-df-generate {
-        background-color: #E8F0FE;
-        border: none;
-        border-radius: 50%;
-        cursor: pointer;
-        display: none;
-        fill: #1967D2;
-        height: 32px;
-        padding: 0 0 0 0;
-        width: 32px;
-      }
-
-      .colab-df-generate:hover {
-        background-color: #E2EBFA;
-        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
-        fill: #174EA6;
-      }
-
-      [theme=dark] .colab-df-generate {
-        background-color: #3B4455;
-        fill: #D2E3FC;
-      }
-
-      [theme=dark] .colab-df-generate:hover {
-        background-color: #434B5C;
-        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
-        fill: #FFFFFF;
-      }
-    </style>
-    <button class="colab-df-generate" onclick="generateWithVariable('report_dataframe')"
-            title="Generate code using this dataframe."
-            style="display:none;">
-
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
-       width="24px">
-    <path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
-  </svg>
-    </button>
-    <script>
-      (() => {
-      const buttonEl =
-        document.querySelector('#id_1ae0ba18-28df-40fd-8caa-804d0ffc0ace button.colab-df-generate');
-      buttonEl.style.display =
-        google.colab.kernel.accessAllowed ? 'block' : 'none';
-
-      buttonEl.onclick = () => {
-        google.colab.notebook.generateWithVariable('report_dataframe');
-      }
-      })();
-    </script>
-  </div>
-
-    </div>
-  </div>
-</div></div>
+</div></div></div>
 </div>
 <p>The report tells us that for the song <em>Love Me Do</em> a performer is not specified.</p>
 </section>
@@ -1339,7 +939,7 @@ ex:SongShape a sh:NodeShape ;
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>JavaObject id=o37
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>JavaObject id=o40
 </pre></div>
 </div>
 </div>
@@ -1369,7 +969,7 @@ ex:SongShape a sh:NodeShape ;
 </div>
 </div>
 <p>The new triple (album <em>Help</em>) was added to the graph.</p>
-<p>Wer can add some more detailes for the album <em>Help!</em> and see what was added.</p>
+<p>We can add some more detailes for the album <em>Help!</em> and see what was added.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create and add statement: The name of the album is actually Help!</span>
@@ -1394,7 +994,7 @@ ex:SongShape a sh:NodeShape ;
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>JavaObject id=o46
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>JavaObject id=o51
 </pre></div>
 </div>
 </div>
@@ -1411,7 +1011,7 @@ ex:SongShape a sh:NodeShape ;
 
 <span class="n">results</span> <span class="o">=</span> <span class="n">exec</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
 
-<span class="n">results_ttl</span> <span class="o">=</span> <span class="n">corese</span><span class="o">.</span><span class="n">ResultFormat</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">corese</span><span class="o">.</span><span class="n">ResultFormat</span><span class="o">.</span><span class="n">TURTLE_FORMAT</span><span class="p">)</span>
+<span class="n">results_ttl</span> <span class="o">=</span> <span class="n">corese</span><span class="o">.</span><span class="n">ResultFormat</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">corese</span><span class="o">.</span><span class="n">ResultFormat</span><span class="o">.</span><span class="n">TURTLE</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">results_ttl</span><span class="p">)</span>
 </pre></div>

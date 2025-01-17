@@ -57,12 +57,12 @@
    },
    "outputs": [
     {
-     "name": "stdout",
+     "name": "stderr",
      "output_type": "stream",
      "text": [
-      "openjdk version \"11.0.25\" 2024-10-15\n",
-      "OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)\n",
-      "OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)\n"
+      "openjdk version \"11.0.21\" 2023-10-17 LTS\n",
+      "OpenJDK Runtime Environment Microsoft-8519785 (build 11.0.21+9-LTS)\n",
+      "OpenJDK 64-Bit Server VM Microsoft-8519785 (build 11.0.21+9-LTS, mixed mode)\n"
      ]
     }
    ],
@@ -91,7 +91,7 @@
    },
    "outputs": [],
    "source": [
-    "!pip install pycorese"
+    "%pip install pycorese"
    ]
   },
   {
@@ -105,7 +105,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": 3,
    "metadata": {
     "colab": {
      "base_uri": "https://localhost:8080/"
@@ -118,7 +118,8 @@
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "beatles.rdf  beatles-validator.ttl\n"
+      "beatles-validator.ttl\n",
+      "beatles.rdf\n"
      ]
     }
    ],
@@ -150,18 +151,47 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 5,
+   "execution_count": 4,
    "metadata": {
     "id": "wN4TDhjXe64p"
    },
-   "outputs": [],
+   "outputs": [
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "2025-01-15 22:42:58,987 - INFO - Py4J: Loading CORESE...\n",
+      "2025-01-15 22:43:02,334 - INFO - Py4J: CORESE is loaded\n"
+     ]
+    }
+   ],
    "source": [
     "#%%timeit -n 1 -r 1\n",
     "from  pycorese.api import CoreseAPI\n",
     "\n",
     "python_to_java_bridge = 'py4j'\n",
     "corese = CoreseAPI(java_bridge=python_to_java_bridge)\n",
-    "corese.loadCorese()"
+    "_ = corese.loadCorese()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "'4.6.1'"
+      ]
+     },
+     "execution_count": 5,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "corese.coreseVersion()"
    ]
   },
   {
@@ -196,15 +226,8 @@
    "outputs": [
     {
      "data": {
-      "application/vnd.google.colaboratory.intrinsic+json": {
-       "summary": "{\n  \"name\": \"results\",\n  \"rows\": 5,\n  \"fields\": [\n    {\n      \"column\": \"subject\",\n      \"properties\": {\n        \"dtype\": \"string\",\n        \"num_unique_values\": 3,\n        \"samples\": [\n          \"http://example.com/Please_Please_Me\",\n          \"http://example.com/McCartney\",\n          \"http://example.com/Imagine\"\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    },\n    {\n      \"column\": \"p\",\n      \"properties\": {\n        \"dtype\": \"string\",\n        \"num_unique_values\": 2,\n        \"samples\": [\n          \"http://example.com/date\",\n          \"http://example.com/artist\"\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    },\n    {\n      \"column\": \"o\",\n      \"properties\": {\n        \"dtype\": \"string\",\n        \"num_unique_values\": 5,\n        \"samples\": [\n          \"http://example.com/Paul_McCartney\",\n          \"1970-04-17\"\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    }\n  ]\n}",
-       "type": "dataframe",
-       "variable_name": "results"
-      },
       "text/html": [
-       "\n",
-       "  <div id=\"df-391a9389-9662-4f26-be4e-5de1f03397c4\" class=\"colab-df-container\">\n",
-       "    <div>\n",
+       "<div>\n",
        "<style scoped>\n",
        "    .dataframe tbody tr th:only-of-type {\n",
        "        vertical-align: middle;\n",
@@ -260,271 +283,7 @@
        "    </tr>\n",
        "  </tbody>\n",
        "</table>\n",
-       "</div>\n",
-       "    <div class=\"colab-df-buttons\">\n",
-       "\n",
-       "  <div class=\"colab-df-container\">\n",
-       "    <button class=\"colab-df-convert\" onclick=\"convertToInteractive('df-391a9389-9662-4f26-be4e-5de1f03397c4')\"\n",
-       "            title=\"Convert this dataframe to an interactive table.\"\n",
-       "            style=\"display:none;\">\n",
-       "\n",
-       "  <svg xmlns=\"http://www.w3.org/2000/svg\" height=\"24px\" viewBox=\"0 -960 960 960\">\n",
-       "    <path d=\"M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z\"/>\n",
-       "  </svg>\n",
-       "    </button>\n",
-       "\n",
-       "  <style>\n",
-       "    .colab-df-container {\n",
-       "      display:flex;\n",
-       "      gap: 12px;\n",
-       "    }\n",
-       "\n",
-       "    .colab-df-convert {\n",
-       "      background-color: #E8F0FE;\n",
-       "      border: none;\n",
-       "      border-radius: 50%;\n",
-       "      cursor: pointer;\n",
-       "      display: none;\n",
-       "      fill: #1967D2;\n",
-       "      height: 32px;\n",
-       "      padding: 0 0 0 0;\n",
-       "      width: 32px;\n",
-       "    }\n",
-       "\n",
-       "    .colab-df-convert:hover {\n",
-       "      background-color: #E2EBFA;\n",
-       "      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);\n",
-       "      fill: #174EA6;\n",
-       "    }\n",
-       "\n",
-       "    .colab-df-buttons div {\n",
-       "      margin-bottom: 4px;\n",
-       "    }\n",
-       "\n",
-       "    [theme=dark] .colab-df-convert {\n",
-       "      background-color: #3B4455;\n",
-       "      fill: #D2E3FC;\n",
-       "    }\n",
-       "\n",
-       "    [theme=dark] .colab-df-convert:hover {\n",
-       "      background-color: #434B5C;\n",
-       "      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);\n",
-       "      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));\n",
-       "      fill: #FFFFFF;\n",
-       "    }\n",
-       "  </style>\n",
-       "\n",
-       "    <script>\n",
-       "      const buttonEl =\n",
-       "        document.querySelector('#df-391a9389-9662-4f26-be4e-5de1f03397c4 button.colab-df-convert');\n",
-       "      buttonEl.style.display =\n",
-       "        google.colab.kernel.accessAllowed ? 'block' : 'none';\n",
-       "\n",
-       "      async function convertToInteractive(key) {\n",
-       "        const element = document.querySelector('#df-391a9389-9662-4f26-be4e-5de1f03397c4');\n",
-       "        const dataTable =\n",
-       "          await google.colab.kernel.invokeFunction('convertToInteractive',\n",
-       "                                                    [key], {});\n",
-       "        if (!dataTable) return;\n",
-       "\n",
-       "        const docLinkHtml = 'Like what you see? Visit the ' +\n",
-       "          '<a target=\"_blank\" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'\n",
-       "          + ' to learn more about interactive tables.';\n",
-       "        element.innerHTML = '';\n",
-       "        dataTable['output_type'] = 'display_data';\n",
-       "        await google.colab.output.renderOutput(dataTable, element);\n",
-       "        const docLink = document.createElement('div');\n",
-       "        docLink.innerHTML = docLinkHtml;\n",
-       "        element.appendChild(docLink);\n",
-       "      }\n",
-       "    </script>\n",
-       "  </div>\n",
-       "\n",
-       "\n",
-       "<div id=\"df-9821f6ea-fe6a-4ed9-8438-58ea5139893a\">\n",
-       "  <button class=\"colab-df-quickchart\" onclick=\"quickchart('df-9821f6ea-fe6a-4ed9-8438-58ea5139893a')\"\n",
-       "            title=\"Suggest charts\"\n",
-       "            style=\"display:none;\">\n",
-       "\n",
-       "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"24px\"viewBox=\"0 0 24 24\"\n",
-       "     width=\"24px\">\n",
-       "    <g>\n",
-       "        <path d=\"M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z\"/>\n",
-       "    </g>\n",
-       "</svg>\n",
-       "  </button>\n",
-       "\n",
-       "<style>\n",
-       "  .colab-df-quickchart {\n",
-       "      --bg-color: #E8F0FE;\n",
-       "      --fill-color: #1967D2;\n",
-       "      --hover-bg-color: #E2EBFA;\n",
-       "      --hover-fill-color: #174EA6;\n",
-       "      --disabled-fill-color: #AAA;\n",
-       "      --disabled-bg-color: #DDD;\n",
-       "  }\n",
-       "\n",
-       "  [theme=dark] .colab-df-quickchart {\n",
-       "      --bg-color: #3B4455;\n",
-       "      --fill-color: #D2E3FC;\n",
-       "      --hover-bg-color: #434B5C;\n",
-       "      --hover-fill-color: #FFFFFF;\n",
-       "      --disabled-bg-color: #3B4455;\n",
-       "      --disabled-fill-color: #666;\n",
-       "  }\n",
-       "\n",
-       "  .colab-df-quickchart {\n",
-       "    background-color: var(--bg-color);\n",
-       "    border: none;\n",
-       "    border-radius: 50%;\n",
-       "    cursor: pointer;\n",
-       "    display: none;\n",
-       "    fill: var(--fill-color);\n",
-       "    height: 32px;\n",
-       "    padding: 0;\n",
-       "    width: 32px;\n",
-       "  }\n",
-       "\n",
-       "  .colab-df-quickchart:hover {\n",
-       "    background-color: var(--hover-bg-color);\n",
-       "    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);\n",
-       "    fill: var(--button-hover-fill-color);\n",
-       "  }\n",
-       "\n",
-       "  .colab-df-quickchart-complete:disabled,\n",
-       "  .colab-df-quickchart-complete:disabled:hover {\n",
-       "    background-color: var(--disabled-bg-color);\n",
-       "    fill: var(--disabled-fill-color);\n",
-       "    box-shadow: none;\n",
-       "  }\n",
-       "\n",
-       "  .colab-df-spinner {\n",
-       "    border: 2px solid var(--fill-color);\n",
-       "    border-color: transparent;\n",
-       "    border-bottom-color: var(--fill-color);\n",
-       "    animation:\n",
-       "      spin 1s steps(1) infinite;\n",
-       "  }\n",
-       "\n",
-       "  @keyframes spin {\n",
-       "    0% {\n",
-       "      border-color: transparent;\n",
-       "      border-bottom-color: var(--fill-color);\n",
-       "      border-left-color: var(--fill-color);\n",
-       "    }\n",
-       "    20% {\n",
-       "      border-color: transparent;\n",
-       "      border-left-color: var(--fill-color);\n",
-       "      border-top-color: var(--fill-color);\n",
-       "    }\n",
-       "    30% {\n",
-       "      border-color: transparent;\n",
-       "      border-left-color: var(--fill-color);\n",
-       "      border-top-color: var(--fill-color);\n",
-       "      border-right-color: var(--fill-color);\n",
-       "    }\n",
-       "    40% {\n",
-       "      border-color: transparent;\n",
-       "      border-right-color: var(--fill-color);\n",
-       "      border-top-color: var(--fill-color);\n",
-       "    }\n",
-       "    60% {\n",
-       "      border-color: transparent;\n",
-       "      border-right-color: var(--fill-color);\n",
-       "    }\n",
-       "    80% {\n",
-       "      border-color: transparent;\n",
-       "      border-right-color: var(--fill-color);\n",
-       "      border-bottom-color: var(--fill-color);\n",
-       "    }\n",
-       "    90% {\n",
-       "      border-color: transparent;\n",
-       "      border-bottom-color: var(--fill-color);\n",
-       "    }\n",
-       "  }\n",
-       "</style>\n",
-       "\n",
-       "  <script>\n",
-       "    async function quickchart(key) {\n",
-       "      const quickchartButtonEl =\n",
-       "        document.querySelector('#' + key + ' button');\n",
-       "      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.\n",
-       "      quickchartButtonEl.classList.add('colab-df-spinner');\n",
-       "      try {\n",
-       "        const charts = await google.colab.kernel.invokeFunction(\n",
-       "            'suggestCharts', [key], {});\n",
-       "      } catch (error) {\n",
-       "        console.error('Error during call to suggestCharts:', error);\n",
-       "      }\n",
-       "      quickchartButtonEl.classList.remove('colab-df-spinner');\n",
-       "      quickchartButtonEl.classList.add('colab-df-quickchart-complete');\n",
-       "    }\n",
-       "    (() => {\n",
-       "      let quickchartButtonEl =\n",
-       "        document.querySelector('#df-9821f6ea-fe6a-4ed9-8438-58ea5139893a button');\n",
-       "      quickchartButtonEl.style.display =\n",
-       "        google.colab.kernel.accessAllowed ? 'block' : 'none';\n",
-       "    })();\n",
-       "  </script>\n",
-       "</div>\n",
-       "\n",
-       "  <div id=\"id_87ede403-8485-4501-b876-f91b9cc7f820\">\n",
-       "    <style>\n",
-       "      .colab-df-generate {\n",
-       "        background-color: #E8F0FE;\n",
-       "        border: none;\n",
-       "        border-radius: 50%;\n",
-       "        cursor: pointer;\n",
-       "        display: none;\n",
-       "        fill: #1967D2;\n",
-       "        height: 32px;\n",
-       "        padding: 0 0 0 0;\n",
-       "        width: 32px;\n",
-       "      }\n",
-       "\n",
-       "      .colab-df-generate:hover {\n",
-       "        background-color: #E2EBFA;\n",
-       "        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);\n",
-       "        fill: #174EA6;\n",
-       "      }\n",
-       "\n",
-       "      [theme=dark] .colab-df-generate {\n",
-       "        background-color: #3B4455;\n",
-       "        fill: #D2E3FC;\n",
-       "      }\n",
-       "\n",
-       "      [theme=dark] .colab-df-generate:hover {\n",
-       "        background-color: #434B5C;\n",
-       "        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);\n",
-       "        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));\n",
-       "        fill: #FFFFFF;\n",
-       "      }\n",
-       "    </style>\n",
-       "    <button class=\"colab-df-generate\" onclick=\"generateWithVariable('results')\"\n",
-       "            title=\"Generate code using this dataframe.\"\n",
-       "            style=\"display:none;\">\n",
-       "\n",
-       "  <svg xmlns=\"http://www.w3.org/2000/svg\" height=\"24px\"viewBox=\"0 0 24 24\"\n",
-       "       width=\"24px\">\n",
-       "    <path d=\"M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z\"/>\n",
-       "  </svg>\n",
-       "    </button>\n",
-       "    <script>\n",
-       "      (() => {\n",
-       "      const buttonEl =\n",
-       "        document.querySelector('#id_87ede403-8485-4501-b876-f91b9cc7f820 button.colab-df-generate');\n",
-       "      buttonEl.style.display =\n",
-       "        google.colab.kernel.accessAllowed ? 'block' : 'none';\n",
-       "\n",
-       "      buttonEl.onclick = () => {\n",
-       "        google.colab.notebook.generateWithVariable('results');\n",
-       "      }\n",
-       "      })();\n",
-       "    </script>\n",
-       "  </div>\n",
-       "\n",
-       "    </div>\n",
-       "  </div>\n"
+       "</div>"
       ],
       "text/plain": [
        "                               subject                          p  \\\n",
@@ -572,7 +331,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": 7,
    "metadata": {
     "colab": {
      "base_uri": "https://localhost:8080/"
@@ -603,7 +362,7 @@
     "corese.resetRuleEngine(graph)\n",
     "query = \"select * where {?s a ?type} order by ?type\"\n",
     "print(corese.sparqlSelect(graph, query=query))\n",
-    "print(\"Graph size: \", graph.graphSize())\n"
+    "print(\"Graph size: \", graph.size())\n"
    ]
   },
   {
@@ -617,7 +376,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 7,
+   "execution_count": 8,
    "metadata": {
     "colab": {
      "base_uri": "https://localhost:8080/"
@@ -635,8 +394,8 @@
     }
    ],
    "source": [
-    "corese.loadRuleEngine(graph, profile=corese.RuleEngine.Profile.RDFS)\n",
-    "print(\"Graph size: \", graph.graphSize())"
+    "corese.loadRuleEngine(graph, profile='rdfs')\n",
+    "print(\"Graph size: \", graph.size())"
    ]
   },
   {
@@ -650,7 +409,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 8,
+   "execution_count": 9,
    "metadata": {
     "colab": {
      "base_uri": "https://localhost:8080/"
@@ -684,7 +443,7 @@
    "source": [
     "query = \"select * where {?s a ?type} order by ?type\"\n",
     "print(corese.sparqlSelect(graph, query=query))\n",
-    "print(\"Graph size: \", graph.graphSize())"
+    "print(\"Graph size: \", graph.size())"
    ]
   },
   {
@@ -707,7 +466,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 9,
+   "execution_count": 10,
    "metadata": {
     "colab": {
      "base_uri": "https://localhost:8080/"
@@ -742,11 +501,11 @@
     }
    ],
    "source": [
-    "prefixes = '@prefix ex: <http://example.com/>'\n",
-    "contruct = '''CONSTRUCT {?A_Beatle a ex:BandMember }\n",
+    "construct = '''@prefix ex: <http://example.com/>\n",
+    "              CONSTRUCT {?A_Beatle a ex:BandMember }\n",
     "              WHERE { ex:The_Beatles ex:member ?A_Beatle}'''\n",
     "\n",
-    "results = corese.sparqlConstruct(graph, prefixes=prefixes, query=contruct)\n",
+    "results = corese.sparqlConstruct(graph, query=construct)\n",
     "\n",
     "print(results)"
    ]
@@ -762,7 +521,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 10,
+   "execution_count": 11,
    "metadata": {
     "colab": {
      "base_uri": "https://localhost:8080/"
@@ -933,9 +692,9 @@
       "@prefix xsh: <http://www.w3.org/ns/shacl#> .\n",
       "@prefix sh: <http://www.w3.org/ns/shacl#> .\n",
       "\n",
-      "<urn:uuid:66d7b5ea-0065-4f84-b0e4-d65ba0b16a11> a sh:ValidationResult ;\n",
+      "<urn:uuid:71004e6a-a24c-42b7-a2a9-0ac60198714f> a sh:ValidationResult ;\n",
       "  sh:focusNode <http://example.com/Love_Me_Do> ;\n",
-      "  sh:resultMessage \"Fail at: [sh:minCount 1 ;\\n  sh:nodeKind sh:IRI ;\\n  sh:path <http://example.com/performer>]\" ;\n",
+      "  sh:resultMessage \"Fail at: [sh:minCount 1 ;\\r\\n  sh:nodeKind sh:IRI ;\\r\\n  sh:path <http://example.com/performer>]\" ;\n",
       "  sh:resultPath <http://example.com/performer> ;\n",
       "  sh:resultSeverity sh:Violation ;\n",
       "  sh:sourceConstraintComponent sh:MinCountConstraintComponent ;\n",
@@ -944,15 +703,14 @@
       "\n",
       "[a sh:ValidationReport ;\n",
       "  sh:conforms false ;\n",
-      "  sh:result <urn:uuid:66d7b5ea-0065-4f84-b0e4-d65ba0b16a11>] .\n",
+      "  sh:result <urn:uuid:71004e6a-a24c-42b7-a2a9-0ac60198714f>] .\n",
       "\n",
       "\n"
      ]
     }
    ],
    "source": [
-    "prefixes = '@prefix ex: <http://example.com/>'\n",
-    "report = corese.shaclValidate(graph, shacl_shape_ttl=data_shape_path, prefixes=prefixes)\n",
+    "report = corese.shaclValidate(graph, shacl_shape_ttl=data_shape_path)\n",
     "\n",
     "print(report)"
    ]
@@ -980,15 +738,8 @@
    "outputs": [
     {
      "data": {
-      "application/vnd.google.colaboratory.intrinsic+json": {
-       "summary": "{\n  \"name\": \"report_dataframe\",\n  \"rows\": 1,\n  \"fields\": [\n    {\n      \"column\": \"o\",\n      \"properties\": {\n        \"dtype\": \"string\",\n        \"num_unique_values\": 1,\n        \"samples\": [\n          \"urn:uuid:66d7b5ea-0065-4f84-b0e4-d65ba0b16a11\"\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    },\n    {\n      \"column\": \"type\",\n      \"properties\": {\n        \"dtype\": \"string\",\n        \"num_unique_values\": 1,\n        \"samples\": [\n          \"http://www.w3.org/ns/shacl#ValidationResult\"\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    },\n    {\n      \"column\": \"focusNode\",\n      \"properties\": {\n        \"dtype\": \"string\",\n        \"num_unique_values\": 1,\n        \"samples\": [\n          \"http://example.com/Love_Me_Do\"\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    },\n    {\n      \"column\": \"resultMessage\",\n      \"properties\": {\n        \"dtype\": \"string\",\n        \"num_unique_values\": 1,\n        \"samples\": [\n          \"Fail at: [sh:minCount 1 ;\\n  sh:nodeKind sh:IRI ;\\n  sh:path <http://example.com/performer>]\"\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    },\n    {\n      \"column\": \"resultPath\",\n      \"properties\": {\n        \"dtype\": \"string\",\n        \"num_unique_values\": 1,\n        \"samples\": [\n          \"http://example.com/performer\"\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    },\n    {\n      \"column\": \"resultSeverity\",\n      \"properties\": {\n        \"dtype\": \"string\",\n        \"num_unique_values\": 1,\n        \"samples\": [\n          \"http://www.w3.org/ns/shacl#Violation\"\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    },\n    {\n      \"column\": \"sourceConstraintComponent\",\n      \"properties\": {\n        \"dtype\": \"string\",\n        \"num_unique_values\": 1,\n        \"samples\": [\n          \"http://www.w3.org/ns/shacl#MinCountConstraintComponent\"\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    },\n    {\n      \"column\": \"sourceShape\",\n      \"properties\": {\n        \"dtype\": \"string\",\n        \"num_unique_values\": 1,\n        \"samples\": [\n          \"_:b9\"\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    },\n    {\n      \"column\": \"value\",\n      \"properties\": {\n        \"dtype\": \"string\",\n        \"num_unique_values\": 1,\n        \"samples\": [\n          \"0\"\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    }\n  ]\n}",
-       "type": "dataframe",
-       "variable_name": "report_dataframe"
-      },
       "text/html": [
-       "\n",
-       "  <div id=\"df-0b56a05d-cd73-4eb1-bda8-5ee3b5c8f164\" class=\"colab-df-container\">\n",
-       "    <div>\n",
+       "<div>\n",
        "<style scoped>\n",
        "    .dataframe tbody tr th:only-of-type {\n",
        "        vertical-align: middle;\n",
@@ -1015,25 +766,14 @@
        "      <th>sourceShape</th>\n",
        "      <th>value</th>\n",
        "    </tr>\n",
-       "    <tr>\n",
-       "      <th>o</th>\n",
-       "      <th></th>\n",
-       "      <th></th>\n",
-       "      <th></th>\n",
-       "      <th></th>\n",
-       "      <th></th>\n",
-       "      <th></th>\n",
-       "      <th></th>\n",
-       "      <th></th>\n",
-       "    </tr>\n",
        "  </thead>\n",
        "  <tbody>\n",
        "    <tr>\n",
-       "      <th>urn:uuid:66d7b5ea-0065-4f84-b0e4-d65ba0b16a11</th>\n",
+       "      <th>0</th>\n",
        "      <td>http://www.w3.org/ns/shacl#ValidationResult</td>\n",
        "      <td>http://example.com/Love_Me_Do</td>\n",
-       "      <td>Fail at: [sh:minCount 1 ;\n",
-       "  sh:nodeKind sh:IRI...</td>\n",
+       "      <td>Fail at: [sh:minCount 1 ;\r\n",
+       "  sh:nodeKind sh:IR...</td>\n",
        "      <td>http://example.com/performer</td>\n",
        "      <td>http://www.w3.org/ns/shacl#Violation</td>\n",
        "      <td>http://www.w3.org/ns/shacl#MinCountConstraintC...</td>\n",
@@ -1042,174 +782,21 @@
        "    </tr>\n",
        "  </tbody>\n",
        "</table>\n",
-       "</div>\n",
-       "    <div class=\"colab-df-buttons\">\n",
-       "\n",
-       "  <div class=\"colab-df-container\">\n",
-       "    <button class=\"colab-df-convert\" onclick=\"convertToInteractive('df-0b56a05d-cd73-4eb1-bda8-5ee3b5c8f164')\"\n",
-       "            title=\"Convert this dataframe to an interactive table.\"\n",
-       "            style=\"display:none;\">\n",
-       "\n",
-       "  <svg xmlns=\"http://www.w3.org/2000/svg\" height=\"24px\" viewBox=\"0 -960 960 960\">\n",
-       "    <path d=\"M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z\"/>\n",
-       "  </svg>\n",
-       "    </button>\n",
-       "\n",
-       "  <style>\n",
-       "    .colab-df-container {\n",
-       "      display:flex;\n",
-       "      gap: 12px;\n",
-       "    }\n",
-       "\n",
-       "    .colab-df-convert {\n",
-       "      background-color: #E8F0FE;\n",
-       "      border: none;\n",
-       "      border-radius: 50%;\n",
-       "      cursor: pointer;\n",
-       "      display: none;\n",
-       "      fill: #1967D2;\n",
-       "      height: 32px;\n",
-       "      padding: 0 0 0 0;\n",
-       "      width: 32px;\n",
-       "    }\n",
-       "\n",
-       "    .colab-df-convert:hover {\n",
-       "      background-color: #E2EBFA;\n",
-       "      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);\n",
-       "      fill: #174EA6;\n",
-       "    }\n",
-       "\n",
-       "    .colab-df-buttons div {\n",
-       "      margin-bottom: 4px;\n",
-       "    }\n",
-       "\n",
-       "    [theme=dark] .colab-df-convert {\n",
-       "      background-color: #3B4455;\n",
-       "      fill: #D2E3FC;\n",
-       "    }\n",
-       "\n",
-       "    [theme=dark] .colab-df-convert:hover {\n",
-       "      background-color: #434B5C;\n",
-       "      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);\n",
-       "      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));\n",
-       "      fill: #FFFFFF;\n",
-       "    }\n",
-       "  </style>\n",
-       "\n",
-       "    <script>\n",
-       "      const buttonEl =\n",
-       "        document.querySelector('#df-0b56a05d-cd73-4eb1-bda8-5ee3b5c8f164 button.colab-df-convert');\n",
-       "      buttonEl.style.display =\n",
-       "        google.colab.kernel.accessAllowed ? 'block' : 'none';\n",
-       "\n",
-       "      async function convertToInteractive(key) {\n",
-       "        const element = document.querySelector('#df-0b56a05d-cd73-4eb1-bda8-5ee3b5c8f164');\n",
-       "        const dataTable =\n",
-       "          await google.colab.kernel.invokeFunction('convertToInteractive',\n",
-       "                                                    [key], {});\n",
-       "        if (!dataTable) return;\n",
-       "\n",
-       "        const docLinkHtml = 'Like what you see? Visit the ' +\n",
-       "          '<a target=\"_blank\" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'\n",
-       "          + ' to learn more about interactive tables.';\n",
-       "        element.innerHTML = '';\n",
-       "        dataTable['output_type'] = 'display_data';\n",
-       "        await google.colab.output.renderOutput(dataTable, element);\n",
-       "        const docLink = document.createElement('div');\n",
-       "        docLink.innerHTML = docLinkHtml;\n",
-       "        element.appendChild(docLink);\n",
-       "      }\n",
-       "    </script>\n",
-       "  </div>\n",
-       "\n",
-       "\n",
-       "  <div id=\"id_1ae0ba18-28df-40fd-8caa-804d0ffc0ace\">\n",
-       "    <style>\n",
-       "      .colab-df-generate {\n",
-       "        background-color: #E8F0FE;\n",
-       "        border: none;\n",
-       "        border-radius: 50%;\n",
-       "        cursor: pointer;\n",
-       "        display: none;\n",
-       "        fill: #1967D2;\n",
-       "        height: 32px;\n",
-       "        padding: 0 0 0 0;\n",
-       "        width: 32px;\n",
-       "      }\n",
-       "\n",
-       "      .colab-df-generate:hover {\n",
-       "        background-color: #E2EBFA;\n",
-       "        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);\n",
-       "        fill: #174EA6;\n",
-       "      }\n",
-       "\n",
-       "      [theme=dark] .colab-df-generate {\n",
-       "        background-color: #3B4455;\n",
-       "        fill: #D2E3FC;\n",
-       "      }\n",
-       "\n",
-       "      [theme=dark] .colab-df-generate:hover {\n",
-       "        background-color: #434B5C;\n",
-       "        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);\n",
-       "        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));\n",
-       "        fill: #FFFFFF;\n",
-       "      }\n",
-       "    </style>\n",
-       "    <button class=\"colab-df-generate\" onclick=\"generateWithVariable('report_dataframe')\"\n",
-       "            title=\"Generate code using this dataframe.\"\n",
-       "            style=\"display:none;\">\n",
-       "\n",
-       "  <svg xmlns=\"http://www.w3.org/2000/svg\" height=\"24px\"viewBox=\"0 0 24 24\"\n",
-       "       width=\"24px\">\n",
-       "    <path d=\"M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z\"/>\n",
-       "  </svg>\n",
-       "    </button>\n",
-       "    <script>\n",
-       "      (() => {\n",
-       "      const buttonEl =\n",
-       "        document.querySelector('#id_1ae0ba18-28df-40fd-8caa-804d0ffc0ace button.colab-df-generate');\n",
-       "      buttonEl.style.display =\n",
-       "        google.colab.kernel.accessAllowed ? 'block' : 'none';\n",
-       "\n",
-       "      buttonEl.onclick = () => {\n",
-       "        google.colab.notebook.generateWithVariable('report_dataframe');\n",
-       "      }\n",
-       "      })();\n",
-       "    </script>\n",
-       "  </div>\n",
-       "\n",
-       "    </div>\n",
-       "  </div>\n"
+       "</div>"
       ],
       "text/plain": [
-       "                                                                                      type  \\\n",
-       "o                                                                                            \n",
-       "urn:uuid:66d7b5ea-0065-4f84-b0e4-d65ba0b16a11  http://www.w3.org/ns/shacl#ValidationResult   \n",
+       "                                          type                      focusNode  \\\n",
+       "0  http://www.w3.org/ns/shacl#ValidationResult  http://example.com/Love_Me_Do   \n",
        "\n",
-       "                                                                   focusNode  \\\n",
-       "o                                                                              \n",
-       "urn:uuid:66d7b5ea-0065-4f84-b0e4-d65ba0b16a11  http://example.com/Love_Me_Do   \n",
+       "                                       resultMessage  \\\n",
+       "0  Fail at: [sh:minCount 1 ;\n",
+       "  sh:nodeKind sh:IR...   \n",
        "\n",
-       "                                                                                   resultMessage  \\\n",
-       "o                                                                                                  \n",
-       "urn:uuid:66d7b5ea-0065-4f84-b0e4-d65ba0b16a11  Fail at: [sh:minCount 1 ;\n",
-       "  sh:nodeKind sh:IRI...   \n",
+       "                     resultPath                        resultSeverity  \\\n",
+       "0  http://example.com/performer  http://www.w3.org/ns/shacl#Violation   \n",
        "\n",
-       "                                                                 resultPath  \\\n",
-       "o                                                                             \n",
-       "urn:uuid:66d7b5ea-0065-4f84-b0e4-d65ba0b16a11  http://example.com/performer   \n",
-       "\n",
-       "                                                                     resultSeverity  \\\n",
-       "o                                                                                     \n",
-       "urn:uuid:66d7b5ea-0065-4f84-b0e4-d65ba0b16a11  http://www.w3.org/ns/shacl#Violation   \n",
-       "\n",
-       "                                                                       sourceConstraintComponent  \\\n",
-       "o                                                                                                  \n",
-       "urn:uuid:66d7b5ea-0065-4f84-b0e4-d65ba0b16a11  http://www.w3.org/ns/shacl#MinCountConstraintC...   \n",
-       "\n",
-       "                                              sourceShape value  \n",
-       "o                                                                \n",
-       "urn:uuid:66d7b5ea-0065-4f84-b0e4-d65ba0b16a11        _:b9     0  "
+       "                           sourceConstraintComponent sourceShape value  \n",
+       "0  http://www.w3.org/ns/shacl#MinCountConstraintC...        _:b9     0  "
       ]
      },
      "execution_count": 14,
@@ -1264,7 +851,7 @@
     {
      "data": {
       "text/plain": [
-       "JavaObject id=o37"
+       "JavaObject id=o40"
       ]
      },
      "execution_count": 15,
@@ -1298,7 +885,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": 16,
    "metadata": {
     "colab": {
      "base_uri": "https://localhost:8080/"
@@ -1346,12 +933,12 @@
     "id": "o41J9o5We64u"
    },
    "source": [
-    "Wer can add some more detailes for the album *Help!* and see what was added."
+    "We can add some more detailes for the album *Help!* and see what was added."
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 16,
+   "execution_count": 17,
    "metadata": {
     "colab": {
      "base_uri": "https://localhost:8080/"
@@ -1363,10 +950,10 @@
     {
      "data": {
       "text/plain": [
-       "JavaObject id=o46"
+       "JavaObject id=o51"
       ]
      },
-     "execution_count": 16,
+     "execution_count": 17,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -1394,7 +981,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 17,
+   "execution_count": 18,
    "metadata": {
     "colab": {
      "base_uri": "https://localhost:8080/"
@@ -1430,10 +1017,17 @@
     "\n",
     "results = exec.query(query)\n",
     "\n",
-    "results_ttl = corese.ResultFormat.create(results, corese.ResultFormat.TURTLE_FORMAT)\n",
+    "results_ttl = corese.ResultFormat.create(results, corese.ResultFormat.TURTLE)\n",
     "\n",
     "print(results_ttl)"
    ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
   }
  ],
  "metadata": {
@@ -1442,7 +1036,7 @@
    "toc_visible": true
   },
   "kernelspec": {
-   "display_name": "Python 3",
+   "display_name": "corese-python",
    "language": "python",
    "name": "python3"
   },
@@ -1456,7 +1050,7 @@
    "name": "python",
    "nbconvert_exporter": "python",
    "pygments_lexer": "ipython3",
-   "version": "3.10.14"
+   "version": "3.13.0"
   }
  },
  "nbformat": 4,
