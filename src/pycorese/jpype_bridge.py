@@ -76,7 +76,7 @@ class JPypeBridge:
             pass
 
         if version is None:
-            loggingWarning(f"JPype: the CORESE library is too old. coreseVersion() is available since 4.6.0 only.")
+            logging.warning(f"JPype: the CORESE library is too old. coreseVersion() is available since 4.6.0 only.")
 
         return version
 
@@ -132,6 +132,7 @@ class JPypeBridge:
             # Import of class
             from fr.inria.corese.core import Graph # type: ignore
             from fr.inria.corese.core.load import Load  # type: ignore
+            from fr.inria.corese.core.api import Loader  # type: ignore
             from fr.inria.corese.core.logic import RDF, RDFS  # type: ignore
             from fr.inria.corese.core.print import ResultFormat  # type: ignore
             from fr.inria.corese.core.query import QueryProcess  # type: ignore
@@ -151,6 +152,7 @@ class JPypeBridge:
 
             self.Graph = Graph
             self.Load = Load
+            self.Loader = Loader
             self.QueryProcess = QueryProcess
             self.ResultFormat = ResultFormat
             self.RDF = RDF

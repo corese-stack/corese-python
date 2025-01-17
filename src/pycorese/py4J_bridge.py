@@ -63,12 +63,13 @@ class Py4JBridge:
         """
         version = None
         try:
-            version = corese.java_gateway.jvm.fr.inria.corese.core.util.CoreseInfo.getVersion()
+            version = self.java_gateway.jvm.fr.inria.corese.core.util.CoreseInfo.getVersion()
+
         except:
             pass
 
         if version is None:
-            logging.Warning(f"Py4j: the CORESE library is too old. coreseVersion() is available since 4.6.0 only.")
+            logging.warning(f"Py4j: the CORESE library is too old. coreseVersion() is available since 4.6.0 only.")
 
         return version
 
@@ -119,6 +120,7 @@ class Py4JBridge:
 
             self.Graph = self.java_gateway.jvm.fr.inria.corese.core.Graph
             self.Load = self.java_gateway.jvm.fr.inria.corese.core.load.Load
+            self.Loader = self.java_gateway.jvm.fr.inria.corese.core.api.Loader
             self.QueryProcess = self.java_gateway.jvm.fr.inria.corese.core.query.QueryProcess
             self.ResultFormat = self.java_gateway.jvm.fr.inria.corese.core.print.ResultFormat
             self.RDF = self.java_gateway.jvm.fr.inria.corese.core.logic.RDF

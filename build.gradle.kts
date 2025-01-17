@@ -3,7 +3,7 @@
 
 */
 
-val coreseVersion = "4.6.0"
+val coreseVersion = "4.6.1"
 val corese_core= "corese-core-$coreseVersion-jar-with-dependencies.jar"
 val source="https://repo.maven.apache.org/maven2/fr/inria/corese/corese-core/$coreseVersion"
 val dest="./build/libs"
