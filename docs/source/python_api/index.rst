@@ -4,7 +4,7 @@
 Python API Reference
 ===================================
 
-**pycorese** is a Python wrapper for accessing and manipulating RDF data with Corese features connected by one of the java bridge packages: ``py4j`` or ``jpype``.
+**pycorese** is a Python wrapper for accessing and manipulating RDF data with Corese features connected by one of the Java bridge packages: ``py4j`` or ``jpype``.
 
 .. note::
 
@@ -21,6 +21,8 @@ HIgh-level API is a set of convenience methods to facilitate the common tasks of
 .. automodule:: pycorese.api
    :members:  CoreseAPI
    :undoc-members:
+   :member-order: bysource
+
 
 
 .. contents::
@@ -70,15 +72,6 @@ For the details of these classes and their methods, please refer to the `Corese 
 
    Corese ``fr.inria.corese.core.shacl.Shacl`` object.
 
-.. autoattribute:: pycorese.api.CoreseAPI.DataManager
-   :annotation:
-
-   Corese ``fr.inria.corese.core.storage.api.dataManager.DataManager`` object.
-
-.. autoattribute:: pycorese.api.CoreseAPI.CoreseGraphDataManager
-   :annotation:
-
-   Corese ``fr.inria.corese.core.storage.CoreseGraphDataManager`` object.
 
 .. toctree::
    :maxdepth: 2

@@ -3,6 +3,7 @@ from io import StringIO
 import os
 import re
 from collections import namedtuple
+from typing import Optional
 
 def _isFile(input: str):
     file_path_pattern = r'^(?:[a-zA-Z]:\\|\.{1,2}[\\\/]|\/)?(?:[\w\-\s]+[\\\/]?)+[\w\-\s]+\.[\w]+$'
@@ -15,6 +16,10 @@ def _isFile(input: str):
 
     return False
 
+def _is_url(input: str):
+    url_pattern = r'^https?://.*\.[\w]+$'
+    return re.match(url_pattern, input) is not None
+
 def _is_rdf_xml(content):
     rdf_xml_pattern = r'^\s*<\?xml.*\?>.*<rdf:RDF'
     return re.search(rdf_xml_pattern, content, re.DOTALL) is not None
@@ -26,12 +31,12 @@ def _is_turtle(content):
 
 class CoreseAPI:
     """
-    Simplified API to leverage functionality of Corese Java library (``corese-core``).
+    Simplified API to leverage functionality of Corese Java library ``corese-core``.
 
     Parameters
     ----------
     java_bridge : str, optional
-        Package name to use for Java integration. Options: 'py4j', 'jpype'. Default is 'py4j'.
+        Package name to use for Java integration. Options: ``py4j``, ``jpyp``. Default is ``py4j``.
     corese_path : str, optional
         Path to the corese-python library. If not specified (default), the jar
         file that was installed with the package is used.
@@ -39,7 +44,7 @@ class CoreseAPI:
 
     def __init__(self,
                  java_bridge: str = 'py4j',
-                 corese_path: str|None = None):
+                 corese_path: Optional[str] = None):
 
         if java_bridge.lower() not in ['py4j', 'jpype']:
             raise ValueError('Invalid java bridge. Only "py4j" and "jpype" are supported.')
@@ -57,9 +62,9 @@ class CoreseAPI:
         self.RuleEngine = None   # Corese ``fr.inria.corese.core.rule.RuleEngine`` object
         self.Transformer = None  # Corese ``fr.inria.corese.core.transform.Transformer`` object
         self.Shacl = None        # Corese ``fr.inria.corese.core.shacl.Shacl`` object
-        self.DataManager = None  # Corese ``fr.inria.corese.core.storage.api.dataManager.DataManager`` object
-        self.CoreseGraphDataManager = None # Corese ``fr.inria.corese.core.storage.CoreseGraphDataManager`` object
-        self.CoreseGraphDataManagerBuilder = None # Corese ``fr.inria.corese.core.storage.CoreseGraphDataManagerBuilder`` object
+        self._DataManager = None  # Corese ``fr.inria.corese.core.storage.api.dataManager.DataManager`` object
+        self._CoreseGraphDataManager = None # Corese ``fr.inria.corese.core.storage.CoreseGraphDataManager`` object
+        self._CoreseGraphDataManagerBuilder = None # Corese ``fr.inria.corese.core.storage.CoreseGraphDataManagerBuilder`` object
 
 
     def coreseVersion(self)-> str|None:
@@ -86,28 +91,14 @@ class CoreseAPI:
 
         return self._bridge.coreseVersion()
 
-    def unloadCorese(self):
+    def loadCorese(self) -> Optional[object]:
         """
-        Explicitly unload Corese library.
+        Load Corese library into JVM and expose the Corese classes.
 
-        It's not necessary to call this method, as the library is automatically
-        unloaded when the Python interpreter exits.
-
-        Warning
+        Returns
         -------
-        After unloading Corese bridged by ``JPype`` it is not possible to restart it.
-        """
-        self._bridge.unloadCorese()
-
-        self.java_gateway = None
-
-        self.Graph = None
-        self.QueryProcess = None
-        self.ResultFormat = None
-        self.Load = None
-
-    def loadCorese(self) -> None:
-        """Load Corese library into JVM and expose the Corese classes.
+        object
+            Java Gateway object if the library is loaded successfully. Otherwise, returns None.
         """
         #TODO: refactor
         if self.java_bridge == 'py4j':
@@ -128,15 +119,16 @@ class CoreseAPI:
         # them without listing every single one of them here
         self.Graph = self._bridge.Graph
         self.Load = self._bridge.Load
+        self.Loader = self._bridge.Loader
         self.QueryProcess = self._bridge.QueryProcess
         self.ResultFormat = self._bridge.ResultFormat
         self.RuleEngine = self._bridge.RuleEngine
         self.Transformer = self._bridge.Transformer
 
         # Classes to manage Graph(s) with different storage options
-        self.DataManager = self._bridge.DataManager
-        self.CoreseGraphDataManager = self._bridge.CoreseGraphDataManager
-        self.CoreseGraphDataManagerBuilder = self._bridge.CoreseGraphDataManagerBuilder
+        self._DataManager = self._bridge.DataManager
+        self._CoreseGraphDataManager = self._bridge.CoreseGraphDataManager
+        self._CoreseGraphDataManagerBuilder = self._bridge.CoreseGraphDataManagerBuilder
 
         # Classes to manage SHACL validation
         self.Shacl  = self._bridge.Shacl
@@ -149,57 +141,90 @@ class CoreseAPI:
             'http://www.w3.org/ns/shacl#'
         )
 
-        self.SHACL_REPORT_QUERY='''SELECT ?o ?p ?s
-                                   WHERE { ?o a sh:ValidationResult.
-                                           ?o ?p ?s. }'''
+        self.SHACL_REPORT_QUERY=f'''@prefix sh: <{self.Namespaces.SHACL}> .
+                                   SELECT ?o ?p ?s
+                                   WHERE {{ ?o a sh:ValidationResult.
+                                            ?o ?p ?s.}}'''
 
+        return self.java_gateway
+
+    def unloadCorese(self):
+        """
+        Explicitly unload Corese library.
+
+        It's not necessary to call this method, as the library is automatically
+        unloaded when the Python interpreter exits.
+
+        Warning
+        -------
+        After unloading Corese bridged by ``JPype`` it is not possible to restart it.
+        """
+        self._bridge.unloadCorese()
+
+        self.java_gateway = None
+
+        self.Graph = None
+        self.QueryProcess = None
+        self.ResultFormat = None
+        self.Load = None
 
     #TODO: Add support for the other RDF formats
-    def loadRDF(self, rdf: str, graph=None)-> object:
+    def loadRDF(self, rdf: str, graph: Optional[object] = None)-> object:
         """
         Load RDF file/string into Corese graph. Supported formats are RDF/XML and Turtle.
 
         Parameters
         ----------
         rdf : str
-            Path to the RDF file or a string with RDF content.
+            Path or URL of an RDF file or a string with RDF content.
         graph : object, optional
-            Corese object of either ``fr.inria.corese.core.Graph`` or ``fr.inria.core.storage.CoreseGraphDataManager`` type.
+            Corese ``fr.inria.corese.core.Graph`` object.
             If an object is not provided (default), new Graph and GraphManager will be created.
 
         Returns
         -------
         object
-            Corese ``fr.inria.core.storage.CoreseGraphDataManager`` object.
+            Corese ``fr.inria.core.Graph`` object.
         """
         if not self.java_gateway:
             self.loadCorese()
 
         assert self.Graph, 'Corese classes are not loaded properly.'
         assert self.Load, 'Corese classes are not loaded properly.'
-        assert self.CoreseGraphDataManagerBuilder, 'Corese classes are not loaded properly.'
 
-        if not graph:
-            graph = self.Graph()
+        #TODO: add support for DataManager(s) for different storage options
+        # the option has to come as a parameter
+        # if not graph:
+        #     graph = self.Graph()
+        #     graph_mgr = self.CoreseGraphDataManagerBuilder().build()
+        # else:
+        #     graph_mgr = self.CoreseGraphDataManagerBuilder().graph(graph).build()
+        #
+        # ld = self.Load.create(graph, graph_mgr)
+        # ...
+        # return graph_mgr.getGraph()
 
-        graph_mgr = self.CoreseGraphDataManagerBuilder().build()
+        graph = graph or self.Graph()
 
-        ld = self.Load().create(graph, graph_mgr)
+        ld = self.Load.create(graph)
 
+        #TODO: add support for a URL
         if _isFile(rdf):
+            ld.parse(rdf)
+        elif _is_url(rdf):
             ld.parse(rdf)
         else:
             if _is_rdf_xml(rdf):
-                ld.loadString(rdf, self.Load.RDFXML_FORMAT)
+                ld.loadString(rdf, self.Loader.format.RDFXML_FORMAT)
             elif _is_turtle(rdf):
-                ld.loadString(rdf, self.Load.TURTLE_FORMAT)
+                ld.loadString(rdf, self.Loader.format.TURTLE_FORMAT)
             else:
                 raise ValueError('Unsupported RDF format. Only RDF/XML and Turtle are supported by this version')
 
-        return graph_mgr
+        return graph.getGraph()
 
     def loadRuleEngine(self, graph: object,
-                             profile: object,
+                             profile: str,
                              replace:bool = False)-> object:
         """
         Load the rule engine for a given graph.
@@ -207,13 +232,9 @@ class CoreseAPI:
         Parameters
         ----------
         graph : object
-            Corese Graph or DataManager object
-        profile : object
-            Profile object for the rule engine. Accepted values:
-            ``RuleEngine.Profile.RDFS``,
-            ``RuleEngine.Profile.OWLRL``,
-            ``RuleEngine.Profile.OWLRL_LITE``,
-            ``RuleEngine.Profile.OWLRL_EXT``
+            Corese ``fr.inria.corese.core.Graph`` object
+        profile : str
+            Profile the rule engine. Accepted values: Accepted values: *rdfs*, *owlrl*, *owlrl_lite*, *owlrl_ext*
         replace : bool, optional
             Replace the existing rule engine. Default is False.
 
@@ -225,7 +246,17 @@ class CoreseAPI:
         assert self.RuleEngine, 'Corese classes are not loaded properly.'
         assert graph, 'Graph object is required.'
         assert profile, 'Profile object is required.'
-        #TODO: assert profile is valid
+
+        if profile == 'rdfs':
+            profile = self.RuleEngine.Profile.RDFS
+        elif profile == 'owlrl_lite':
+            profile = self.RuleEngine.Profile.OWLRL_LITE
+        elif profile == 'owlrl_ext':
+            profile = self.RuleEngine.Profile.OWLRL_EXT
+        elif profile == 'owlrl':
+            profile = self.RuleEngine.Profile.OWLRL
+        else:
+            raise ValueError('Invalid profile. Accepted values are: "rdfs", "owlrl_lite", "owlrl_ext", "owlrl"')
 
         if replace:
             self.resetRuleEngine(graph)
@@ -244,7 +275,7 @@ class CoreseAPI:
         Parameters
         ----------
         graph : object
-            Corese Graph or DataManager object
+            Corese ``fr.inria.corese.core.Graph`` object
         """
         assert self.RuleEngine, 'Corese classes are not loaded properly.'
         assert graph, 'Graph object is required.'
@@ -252,29 +283,89 @@ class CoreseAPI:
         rule_engine = self.RuleEngine.create(graph.getGraph())
         rule_engine.remove()
 
+    def parsePrefixes(self, query: str)-> dict:
+        """
+        Parse a query string to extract a dictionary of (prefix, namespace) pairs
+
+        Parameters
+        ----------
+        query : str
+            Query string that may contain PREFIX declarations
+
+        Returns
+        -------
+        dict
+            Dictionary of (prefix, namespace) pairs or an empty dictionary if no prefixes are found.
+        """
+        pattern = re.compile(r'PREFIX\s+(\w+):\s+<\s*(.*?)\s*>')
+        matches = pattern.findall(query)
+        prefixes = {prefix + ':' : url for prefix, url in matches}
+        return prefixes
+
+    def _applyPrefixes(self, query_result: object|pd.DataFrame, ns: dict|None)-> object|pd.DataFrame:
+        """
+        Substitute long namespace names in the URIs with  prefixes. This method can be applied either
+        to a Corese query result map or a DataFrame.
+
+        applying prefixes to a DataFrame is faster since it is done in python. Applying prefixes to a map
+        is slower since it is done in the Java process for each value.
+
+        Parameters
+        ----------
+        query_result : object or pd.DataFrame
+            Query result in Corese format or a DataFrame.
+        ns : dict, optional
+            Dictionary of (prefix, namespace) pairs. Default is None.
+
+        Returns
+        -------
+        object or pd.DataFrame
+            Query result with prefixes applied.
+        """
+
+        if not isinstance(ns, dict):
+            return query_result
+
+        if isinstance(query_result, pd.DataFrame):
+            # prefix in the DataFrame -fast
+            return query_result.fillna('')\
+                    .replace(ns.values(), ns.keys(), regex=True)\
+                    .replace('',pd.NA,regex = True)
+        else:
+            # assume it's a map output of the query -slow
+            for i, row in enumerate(query_result.getMappingList()):
+                for j, var in enumerate(row.getList()):
+                    if not var.isEmpty() and var.size() > 1 and var[1].isURI():
+                        for prefix, namespace in ns.items():
+                            if var[1].contains(namespace):
+                                new_uri = var[1].stringValue().replace(namespace, prefix)
+                                var[1].setValue(new_uri)
+
+            return query_result
+
     def sparqlSelect(self, graph: object,
-                    prefixes: str|list|None = None,
                     query: str ='SELECT * WHERE {?s ?p ?o} LIMIT 5',
-                    return_dataframe: bool =True)-> object|pd.DataFrame:
+                    return_dataframe: bool =True,
+                    post_apply_prefixes: bool = True)-> object|pd.DataFrame:
         """
         Execute SPARQL SELECT or ASK query on Corese graph. Optionally return the result as DataFrame.
 
         Parameters
         ----------
         graph : object
-            Corese Graph or DataManager object
-        prefixes : str or list, optional
-            namespace prefixes. Default is None.
+            Corese ``fr.inria.corese.core.Graph`` object
         query : str, optional
             SPARQL query. By default five first triples of the graph are returned.
         return_dataframe : bool, optional
             Return the result as a DataFrame. Default is True.
+        post_apply_prefixes : bool, optional
+            Substitute long namespaces with prefixes defined in the query . Default is True.
 
         Returns
         -------
         object or pd.DataFrame
             Result of the SPARQL query in CSV-formatted  ``fr.inria.core.print.ResultFormat``
-            object or a DataFrame.
+            object or a ``pandas.DataFrame``.
         """
         assert self.QueryProcess, 'Corese classes are not loaded properly.'
         assert self.ResultFormat, 'Corese classes are not loaded properly.'
@@ -282,20 +373,21 @@ class CoreseAPI:
         if not graph:
             raise ValueError('Graph object is required.')
 
-        #TODO: extract method to create a prefix string
-        if not prefixes:
-            prefixes = ''
-        if isinstance(prefixes, list):
-            prefixes = '\n'.join(prefixes)
+        # create a dictionary of (prefix, namespace) pairs
+        ns = self.parsePrefixes(query)
 
         exec = self.QueryProcess.create(graph)
-        map = exec.query('\n'.join([prefixes, query]) )
+        map = exec.query(query)
 
         # to keep it simple for now return the result in CSV format
         result = self.ResultFormat.create(map, self.ResultFormat.SPARQL_RESULTS_CSV)
 
+        # or return a DataFrame
         if return_dataframe:
-            return self.toDataFrame(result)
+            if post_apply_prefixes:
+                return self._applyPrefixes(self.toDataFrame(result), ns)
+            else:
+                return self.toDataFrame(result)
 
         return result
 
@@ -329,9 +421,8 @@ class CoreseAPI:
 
         return df
 
-    #TODO: add timeout
-    def sparqlConstruct(self, graph: object,
-                        prefixes: str|list|None = None,
+    #TODO: add timeout parameter
+    def sparqlConstruct(self, graph: Optional[object] = None,
                         query: str ='',
                         merge: bool=False)-> object:
         """
@@ -341,14 +432,12 @@ class CoreseAPI:
 
         Parameters
         ----------
-        graph : object
-            Corese Graph or DataManager object
-        prefixes : str or list, optional
-            namespace prefixes. Default is None.
+        graph : object, optional
+            Corese ``fr.inria.corese.core.Graph`` object. If not provided (default), a new graph is created.
         query : str, optional
-            SPARQL query. Default is empty string resulting in empty graph.
+            SPARQL query. Defaults to an empty string, resulting in an empty graph.
         merge : bool, optional
-            Option to merge the result with the existing graph. Default is False.
+            Option to merge the result with the existing graph passed in the parameters. Default is False.
 
         Returns
         -------
@@ -359,16 +448,10 @@ class CoreseAPI:
         assert self.ResultFormat, 'Corese classes are not loaded properly.'
 
         if not graph:
-            raise ValueError('Graph object is required.')
-
-        #todo: extract method to create a prefix string
-        if not prefixes:
-            prefixes = ''
-        if isinstance(prefixes, list):
-            prefixes = '\n'.join(prefixes)
+            graph = self.Graph()
 
         exec = self.QueryProcess.create(graph)
-        map = exec.query('\n'.join([prefixes, query]) )
+        map = exec.query(query)
 
         if merge:
             graph.getGraph().merge(map.getGraph())
@@ -376,6 +459,7 @@ class CoreseAPI:
         result = self.ResultFormat.create(map, self.ResultFormat.DEFAULT_CONSTRUCT_FORMAT)
 
         return result
+
 
     def toTurtle(self, rdf:object)-> str:
         """
@@ -401,9 +485,8 @@ class CoreseAPI:
 
     #TODO: ASk Remi what are the acceptable shacl formats
     def shaclValidate(self, graph: object,
-                            prefixes: str|list|None = None,
-                            shacl_shape_ttl: str ='',
-                            return_dataframe = False)-> object:
+                      shacl_shape_ttl: str ='',
+                      return_dataframe = False)-> str:
         """
         Validate RDF graph against SHACL shape.
 
@@ -412,9 +495,7 @@ class CoreseAPI:
         Parameters
         ----------
         graph : object
-            Corese Graph or DataManager object
-        prefixes : str or list, optional
-            namespace prefixes. Default is None.
+            Corese ``fr.inria.corese.core.Graph`` object
         shacl_shape_ttl : str, optional
             SHACL shape in Turtle format. If not provided, the validation will be skipped.
         return_dataframe : bool, optional
@@ -422,19 +503,10 @@ class CoreseAPI:
 
         Returns
         -------
-        object
+        str
             SHACL validation report in Turtle format.
         """
         assert self.Shacl, 'Corese classes are not loaded properly.'
-
-        prefix_shacl = f'@prefix sh: <{self.Namespaces.SHACL}> .'
-
-        if not prefixes:
-            prefixes = ''
-        if isinstance(prefixes, list):
-            prefixes = '\n'.join(prefixes)
-
-        prefixes = '\n'.join([prefixes, prefix_shacl])
 
         shapeGraph = self.Graph()
         ld = self.Load.create(shapeGraph)
@@ -444,8 +516,8 @@ class CoreseAPI:
             ld.parse(shacl_shape_ttl)
         else:
             # Load shape graph from string
-            ld.loadString('\n'.join([prefixes, shacl_shape_ttl]),
-                          self.Load.TURTLE_FORMAT)
+            ld.loadString(shacl_shape_ttl,
+                          self.Loader.format.TURTLE_FORMAT)
 
         # Evaluation
         shacl = self.Shacl(graph.getGraph(), shapeGraph)
@@ -473,18 +545,139 @@ class CoreseAPI:
         pd.DataFrame
             Validation report as a DataFrame.
         """
-        prefix_shacl = f'@prefix sh: <{self.Namespaces.SHACL}> .'
 
         validation_report_graph = self.loadRDF(validation_report)
 
-        report = self.sparqlSelect(validation_report_graph, prefix_shacl, self.SHACL_REPORT_QUERY)
+        report = self.sparqlSelect(validation_report_graph, self.SHACL_REPORT_QUERY)
 
         report = report.pivot(index='o', columns='p', values='s')
         report.columns = [uri.split('#')[-1] for uri in report.columns]
 
-        #TODO cleanup the report
+        report.reset_index(drop=True, inplace=True)
 
         return report
+
+    #TODO: add a named graph  parameter
+    def addTriple(self, graph: object, subject: str, predicate: str, obj: str)-> object:
+        """
+        Add a triple to the default Corese graph.
+
+        Parameters
+        ----------
+        graph : object
+            Corese ``fr.inria.corese.core.Graph`` object
+        subject : str
+            Subject of the triple. Must be a URI.
+        predicate : str
+            Predicate of the triple. Must be a URI.
+        obj : str
+            Object of the triple. Must be a URI or a literal.
+
+        Returns
+        -------
+        object
+            Corese ``fr.inria.corese.core.Graph`` object with the new triple.
+        """
+        subject = graph.addResource(subject)
+        predicate = graph.addProperty(predicate)
+
+        if obj.startswith('http'):
+            obj = graph.addResource(obj)
+        else:
+            obj = graph.addLiteral(obj)
+
+        graph.addEdge(subject, predicate, obj)
+
+        return graph
+
+    def removeTriple(self, graph: object, subject: str, predicate: str, obj: str)-> object:
+        """
+        Remove a triple from the default Corese graph.
+
+        Parameters
+        ----------
+        graph : object
+            Corese ``fr.inria.corese.core.Graph`` object
+        subject : str
+            Subject of the triple. Must be a URI.
+        predicate : str
+            Predicate of the triple. Must be a URI.
+        obj : str
+            Object of the triple. Must be a URI or a literal.
+
+        Returns
+        -------
+        object
+            Corese ``fr.inria.corese.core.Graph`` object without the triple.
+        """
+        subject = graph.getResource(subject)
+        predicate = graph.getResource(predicate)
+
+        if obj.startswith('http'):
+            obj = graph.getResource(obj)
+        else:
+            obj = graph.getLiteral(obj)
+
+        graph.delete(subject, predicate, obj)
+
+        return graph
+
+    def getTripleObject(self, graph, subject:str, predicate:str)->Optional[str]:
+        """
+        Get the object of a triple. It can be a URI or a literal.
+
+        Parameters
+        ----------
+
+        Return
+        ------
+        str
+            String representation of the object of the triple or None if the triple does not exist.
+        """
+        subject = graph.getResource(subject)
+        predicate = graph.getResource(predicate)
+
+        obj = graph.getEdgesRDF4J(subject, predicate, None, None)
+
+        if obj.iterator().hasNext():
+            return obj.iterator().next().getObjectNode().getLabel()
+
+        return None
+
+    def exportRDF(self, graph:object, path:str, format:str ='turtle', overwrite:bool=False)-> None:
+        """
+        Export Corese graph to an RDF file. Only RDF/XML and Turtle are supported by this version.
+
+        Parameters
+        ----------
+        graph : object
+            Corese ``fr.inria.corese.core.Graph`` object.
+        path : str
+            Path to the output RDF file.
+        format : str, optional
+            RDF format. Default is Turtle. Accepted values are
+            *turtle*, *ttl*, *xml*, and *rdfxml*.
+
+        overwrite : bool, optional
+            Overwrite the file if it exists. Default is False.
+        """
+
+        format = format.lower()
+
+        if 'xml' in format or 'rdf' in format:
+            format = self.Transformer.RDFXML
+        elif 'ttl' in format or 'turtle' in format:
+            format = self.Transformer.TURTLE
+        else:
+            raise ValueError('Unsupported RDF format. Only RDF/XML and Turtle are supported by this version')
+
+        if os.path.exists(path) and not overwrite:
+            raise FileExistsError(f'{path} already exists. Set overwrite=True to overwrite the file.')
+
+        transformer = self.Transformer.create(graph, format)
+        transformer.write(path)
+
+        #TODO: apply prefixes to the output file
 
 
 if __name__ == "__main__":
